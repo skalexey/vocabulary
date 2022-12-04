@@ -1,0 +1,4 @@
+build/
+out/
+Build-cmake/
+tmp/
