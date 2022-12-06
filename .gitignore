@@ -2,3 +2,5 @@ build/
 out/
 Build-cmake/
 tmp/
+imgui.ini
+
