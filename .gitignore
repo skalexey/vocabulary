@@ -3,4 +3,6 @@ out/
 Build-cmake/
 tmp/
 imgui.ini
-
+android-project/
+keystore.properties.put
+my-release-key.jks
