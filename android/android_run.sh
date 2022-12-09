@@ -8,7 +8,7 @@ job()
 	# Load common variables
 	source android_config.sh
 
-	adb shell am start "$app/$app.SDLActivity"
+	adb shell am start "$app/$app.$classname"
 }
 
 job $@

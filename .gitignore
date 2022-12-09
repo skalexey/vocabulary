@@ -4,5 +4,6 @@ Build-cmake/
 tmp/
 imgui.ini
 android-project/
+__pycache__/
 keystore.properties.put
 my-release-key.jks

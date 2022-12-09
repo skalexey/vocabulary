@@ -7,3 +7,5 @@ if is_windows; then
 else
 	export vocabulary_deps="${HOME}/Projects"
 fi
+
+[ ! -z vocabulary_deps ] && build_deps=$vocabulary_deps

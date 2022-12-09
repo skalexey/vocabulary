@@ -43,6 +43,10 @@ function file_search() {
 	#[[ $(cat $1) =~ .*$2* ]] && true || false
 }
 
+function file_regex() {
+	echo $(python -c "from file_utils import*; print(search(\"$1\", \"$2\", \"$3\"));")
+}
+
 function full_path() {
 	[ -z "$1" ] && return 1 # input path
 	[ -d "$1" ] && dir_full_path $1
