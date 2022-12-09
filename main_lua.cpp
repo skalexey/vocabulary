@@ -1,12 +1,7 @@
 ﻿// main.cpp : Defines the entry point for the application.
 //
 #include <iostream>
-extern "C"
-{
-	#include <lua.h>
-	#include <lauxlib.h>
-	#include <lualib.h>
-}
+#include <lua.hpp>
 
 bool CheckLua(lua_State *L, int r)
 {
