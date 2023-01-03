@@ -15,6 +15,7 @@ function update_scripts()
 	cp "$scripts_dir/include/file_utils.sh" .
 	cp "$scripts_dir/include/file_utils.py" .
 	cp "$scripts_dir/include/net_utils.sh" .
+	cp "$scripts_dir/include/ssh.sh" serverside/
 
 	source log.sh
 	local log_prefix="[update_scripts]: "
