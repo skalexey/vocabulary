@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-log()
+function log()
 {
 	[ -z "$1" ] && exit 0
 	[ ! -z "$2" ] && local local_prefix="$2$log_prefix" || local local_prefix="$log_prefix"
@@ -8,22 +8,38 @@ log()
 	echo -e "$local_prefix$1$local_postfix"
 }
 
-log_error()
+function log_error()
 {
 	log "$1" "\033[0;31m$2" "$3\033[0m"
 }
 
-log_warning()
+function log_warning()
 {
 	log "$1" "\033[0;33m$2" "$3\033[0m"
 }
 
-log_success()
+function log_success()
 {
 	log "$1" "\033[0;32m$2" "$3\033[0m"
 }
 
-log_info()
+function log_info()
 {
 	log "$1" "\033[0;36m$2" "$3\033[0m"
+}
+
+THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+[ -f $THIS_DIR/string_utils.sh ] && source $THIS_DIR/string_utils.sh
+
+function log_into_file()
+{
+	[ -z "$1" ] && exit 0
+	[ ! -z "$2" ] && local log_file=$2 || local log_file="$(fname_date_and_time).txt"
+	echo -e "$1" >> $log_file
+}
+
+function log_into_file_and_print()
+{
+	log_into_file "$1"
+	log "$1"
 }

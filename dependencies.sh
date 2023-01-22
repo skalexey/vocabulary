@@ -2,7 +2,8 @@
 
 function download_dependency()
 {
-	local folderName=${PWD##*/}
+	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+	local folderName=${THIS_DIR##*/}
 
 	source log.sh
 	local log_prefix="-- [${folderName} dependencies script]: "
