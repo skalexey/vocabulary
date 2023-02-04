@@ -8,4 +8,4 @@ else
 	export vocabulary_deps="${HOME}/Projects"
 fi
 
-[ ! -z vocabulary_deps ] && build_deps=$vocabulary_deps
+[ ! -z vocabulary_deps ] && export build_deps=$vocabulary_deps

@@ -16,7 +16,7 @@ else()
 endif()
 
 if ("${MODULE_NAME}" STREQUAL "")
-	message("MODULE_NAME is empty. Set to 'arkanoid'")
+	message("MODULE_NAME is empty. Set to 'vocabulary'")
 	set(MODULE_NAME vocabulary)
 else()
 	message("MODULE_NAME is set externally to '${MODULE_NAME}'")
@@ -64,15 +64,34 @@ else()
 endif()
 set(DEPS ${DEPS} PARENT_SCOPE)
 
+# Build directory name
+if (CMAKE_CXX_COMPILER EQUAL "g++")
+	set(BUILD_DIR_NAME "Build-g++")
+else ()
+	set(BUILD_DIR_NAME "Build-cmake")
+endif ()
+
 # Set and add includes
 if (NOT "${INCLUDES}" STREQUAL "")
 	message("Add extra includes: ${INCLUDES}")
 endif()
 
+# DMBCore dependency
+add_subdirectory(${DEPS}/DataModelBuilder/Core ${DEPS}/DataModelBuilder/Core/${BUILD_DIR_NAME})
+set(CUSTOM_INCLUDES ${CUSTOM_INCLUDES}
+	${DMBCORE_INCLUDES}
+)
+
+# Networking dependency
+add_subdirectory(${DEPS}/Networking/http ${DEPS}/Networking/http/${BUILD_DIR_NAME})
+set(CUSTOM_INCLUDES ${CUSTOM_INCLUDES}
+	${http_INCLUDES}
+)
+
 # Lua dependency
 set (LUA_DIR "${DEPS}/lua-5.4.4")
 message("${MODULE_NAME}: LUA_DIR: ${LUA_DIR}")
-set(CUSTOM_INCLUDES
+set(CUSTOM_INCLUDES ${CUSTOM_INCLUDES}
 	${LUA_DIR}/src
 )
 
@@ -194,13 +213,12 @@ if(TARGET SDL2::SDL2main)
 elseif(TARGET SDL2main)
 	target_link_libraries(${MODULE_NAME} PRIVATE SDL2main)
 else()
-	error("No SDL2main target found!")
+	message( SEND_ERROR "No SDL2main target found!")
 endif()
 # Link to the actual SDL2 library. SDL2::SDL2 is the shared SDL library, SDL2::SDL2-static is the static SDL libarary.
 target_link_libraries(${MODULE_NAME} PRIVATE SDL2)
 
-target_link_libraries(${MODULE_NAME} PRIVATE lualib)
-target_link_libraries(${MODULE_NAME} PRIVATE imgui)
+target_link_libraries(${MODULE_NAME} PRIVATE lualib imgui DMBCore http)
 
 set_target_properties(${MODULE_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
