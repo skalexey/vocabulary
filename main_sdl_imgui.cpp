@@ -13,16 +13,172 @@
 #include <imgui_impl_sdl.h>
 #include <imgui_impl_sdlrenderer.h>
 #include <utils/Log.h>
+#include <utils/file_utils.h>
 #include <utils/string_utils.h>
+#include <utils/io_utils.h>
 #include <utils/dmb/auth.h>
 #include <http/http_client.h>
+#include <http/uploader.h>
+#include <http/authenticator.h>
 
 LOG_POSTFIX("\n");
 LOG_PREFIX("[main]: ");
 
+#define COUT(msg1) std::cout << msg1
+#define MSG(msg1) COUT(msg1 << '\n')
+
 #if !SDL_VERSION_ATLEAST(2,0,17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
 #endif
+
+namespace
+{
+	fs::path g_words_fpath;
+	const fs::path identity_path = fs::temp_directory_path() / "vocabulary_identity.json";
+    const fs::path cfg_path = fs::temp_directory_path() / "vocabulary_config.json";
+    const fs::path def_cfg_path = fs::temp_directory_path() / "vocabulary_config_default.json";
+
+	std::unique_ptr<dmb::Model> identity_model_ptr;
+
+	std::ofstream words_fo;
+	std::ifstream words_fi;
+
+    std::string g_words;
+
+	const std::string host = "skalexey.ru";
+	const int port = 80;
+}
+
+int init_words()
+{
+	const std::string words_fname = "Words tmp.txt";
+
+    utils::input::register_command("~skip");
+
+	dmb::Model cfg_model;
+	if (!cfg_model.Load(cfg_path.string()))
+		cfg_model.Store(cfg_path.string(), { true });
+
+	LOG("init_words()");
+
+	const std::string words_location_field_name = "words_location";
+
+	auto update_words_dir = [&](const std::string& new_dir)
+	{
+		auto& data = cfg_model.GetContent().GetData();
+		if (fs::path(new_dir) == fs::temp_directory_path())
+			data.Set(words_location_field_name, "");
+		else
+		{
+			if (data.Get(words_location_field_name).AsString().Val() != new_dir)
+			{
+				data.Set(words_location_field_name, new_dir);
+				cfg_model.Store(cfg_path.string(), { true });
+			}
+		}
+	};
+
+    auto& words_location_var = cfg_model.GetContent().Get(words_location_field_name).AsString();
+	auto words_location = words_location_var.Val();
+	fs::path words_path = words_location.empty() ? fs::temp_directory_path() : fs::path(words_location);
+	if (!words_path.has_filename())
+		words_path /= words_fname;
+	bool already_created = utils::file::exists(words_path);
+	while (!already_created)
+	{
+		std::string msg1, msg2;
+		if (!words_location.empty())
+		{
+			msg1 = "Can't find words in the directory provided by you: '"
+				+ words_location + "'. Would you like to provide a custom path? "
+				"Otherwise an empty file will be created in the current directory.";
+			msg2 = "Enter words location directory or type 'skip' to use the "
+				"current directory or 'exit' to close the application";
+		}
+		else
+		{
+			msg1 = "Where are your words located?\nWould you like to specify a custom path? "
+				"Otherwise we will keep it in the app data directory located here:\n"
+				+ fs::temp_directory_path().string();
+			msg2 = "Enter words location directory or type 'skip' to use the "
+				"default folder or 'exit' to close the application";
+		}
+		if (utils::input::ask_user(msg1))
+		{
+			fs::path entered_path;
+			do
+			{
+				COUT(msg2 << "\n > ");
+				std::string words_dir;
+
+				while (words_dir.empty() && utils::input::last_getline_valid)
+				{
+					if (!utils::input::getline(std::cin, words_dir))
+					{
+						LOG_ERROR("Input stream failure");
+						return 4; // 4
+					}
+                    // words_dir = "C:\\English";
+				}
+
+				if (!utils::input::last_getline_valid)
+				{
+					if (utils::input::last_command == "~exit")
+						return 0;
+					else if (utils::input::last_command == "~skip")
+						break;
+				}
+				auto p = fs::path(words_dir);
+				if (!utils::file::dir_exists(p))
+				{
+					if (utils::input::ask_user("There is no directory in the provided path. "
+						"Would you use temporary directory instead? "
+						"It is located here:\n" + fs::temp_directory_path().string())
+						)
+					{
+						entered_path = fs::temp_directory_path();
+						words_dir = "";
+					}
+				}
+				else
+					words_dir = (entered_path = p).string();
+			} while (entered_path.empty());
+			words_path = entered_path / words_fname;
+            words_location_var = words_path.parent_path().string();
+            cfg_model.Store(cfg_path.string(), { true });
+			// Load or create DB
+				//MSG("Sorry, but without a spellbook you can't cast any spell. Come back when you are ready.");
+		}
+		update_words_dir(words_location);
+		if (!utils::file::exists(cfg_path))
+		{
+			if (auto erc = utils::file::copy_file(def_cfg_path, cfg_path))
+			{	// No default config found
+				if (erc == 3)
+				{
+					MSG("Can't create config in the location '" << cfg_path <<
+						"'. Reason: '" << utils::file::last_error() << "'"
+					);
+				}
+				else
+					MSG("Unexpected error (code " << (erc *= 10) << ")");
+				return erc;
+			}
+		}
+		already_created = true;
+		MSG("Your words file is created at the path '" << fs::absolute(words_path).string() << "'");
+	}
+    g_words_fpath = words_path;
+    return 0;
+}
+
+
+bool request_auth(const std::string& user_name, const std::string& token)
+{
+    using namespace anp;
+    authenticator a;
+    return a.auth({host, port}, "/v/a.php", {user_name, token}) == http_client::erc::no_error;
+}
 
 void ShowRandomWord()
 {
@@ -39,6 +195,19 @@ void ShowWrong()
     LOG("Answer is wrong");
 }
 
+bool UploadWords()
+{
+    LOG("UploadWords");
+    vl::Object& data = identity_model_ptr->GetContent().GetData();
+	std::string user_name, token;
+	if (!get_identity(&user_name, &token))
+		return false;
+    using namespace anp;
+    uploader u;
+    u.upload_file({host, port}, g_words_fpath.string(), {user_name, token}, "/v/h.php");
+    return true;
+}
+
 void Answer(const char* answer)
 {
     LOG("Answer: " << answer);
@@ -51,18 +220,19 @@ void Answer(const char* answer)
     int port = 80;
     auto name = get_user_name();
 	auto token = get_user_token();
-	c.query(host, port, "GET"
+	c.query({host, port}, "GET"
 		, utils::format_str("/v/play.php?u=%s&t=%s", name.c_str(), token.c_str()).c_str()
 		, [=, &success, &response, &c](
-			const std::vector<char>& data
+            const headers_t&
+			, const char* data
 			, std::size_t sz
 			, int code
 		) -> bool
 		{
 			LOG_VERBOSE("\nReceived " << sz << " bytes:");
-			std::string s(data.begin(), data.begin() + sz);
+			std::string s(data, data + sz);
 			LOG_VERBOSE(s);
-			response.insert(response.end(), data.begin(), data.end());
+			response.insert(response.end(), data, data + sz);
 			if (s.find("Correct") != std::string::npos)
 				success = true;
 			c.notify(http_client::erc::no_error);
@@ -81,6 +251,9 @@ int main(int, char**)
     // Setup SDL
     // (Some versions of SDL before <2.0.10 appears to have performance/stalling issues on a minority of Windows systems,
     // depending on whether SDL_INIT_GAMECONTROLLER is enabled or disabled.. updating to latest version of SDL is recommended!)
+    
+    init_words();
+    UploadWords();
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
     {
         printf("Error: %s\n", SDL_GetError());
@@ -159,6 +332,7 @@ int main(int, char**)
         // Start the Dear ImGui frame
         ImGui_ImplSDLRenderer_NewFrame();
         ImGui_ImplSDL2_NewFrame();
+
         ImGui::NewFrame();
 
         if (ImGui::Button("Random word"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
