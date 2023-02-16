@@ -14,7 +14,7 @@
 	function connect_to_db()
 	{
 		// define(PRINT_QUERIES, 1);
-		include 'include/db_mysql.php';
+		include '../include/db_mysql.php';
 		
 		$hostname = ini_get("mysqli.default_host");
 		$username = ini_get("mysqli.default_user");
@@ -23,7 +23,7 @@
 		$port = ini_get("mysqli.default_port");
 		$socket = ini_get("mysqli.default_socket");
 
-		$db = new Db('j70492510_v', $hostname, 'j70492510_tv', '34.+[8-(Wn.M', 'j70492510_vc');
+		$db = new Db('j70492510_vc', $hostname, 'j70492510_tv', '34.+[8-(Wn.M', 'j70492510_vc');
 
 		return $db;
 	}

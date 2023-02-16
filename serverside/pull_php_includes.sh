@@ -7,17 +7,14 @@ function pull_php_includes() {
 	log_info "Pull php includes"
 	
 	ssh $ssh_user@$ssh_host << HERE
-		echo "remote_dir: $remote_dir"
-		[ -z "$remote_dir" ] && echo "No data captured. Exit" && exit 1
-		if [ ! -d "$remote_dir" ]; then
-			echo "Directory '$remote_dir' does not exist. Let's create it."
-			mkdir "$remote_dir"
-			[ $? -ne 0 ] && echo "Error while creating the directory '$remote_dir'" && exit 1
+		echo "domain_dir: $domain_dir"
+		[ -z "$domain_dir" ] && echo "No data captured. Exit" && exit 1
+		if [ ! -d "$domain_dir" ]; then
+			echo "There is no domain directory '$domain_dir'" && exit 1
 		fi
-		cd "$remote_dir"
-		if [ ! -d "include" ]; then
+		cd "$domain_dir"
+		if [ ! -d "php_utils" ]; then
 			git clone https://github.com/skalexey/php_utils.git
-			mv php_utils/include include
 			ln -s php_utils/include include
 			[ ! -d "include" ] && echo "Error while cloning the repo" && exit 1
 		else
