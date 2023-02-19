@@ -7,7 +7,9 @@
 // because it provide a rather limited API to the end-user. We provide this backend for the sake of completeness.
 // For a multi-platform app consider using e.g. SDL+DirectX on Windows and SDL+OpenGL on Linux/OSX.
 
+#include <memory>
 #include <stdio.h>
+#include <csignal>
 #include <SDL.h>
 #include <imgui.h>
 #include <imgui_impl_sdl.h>
@@ -16,7 +18,10 @@
 #include <utils/file_utils.h>
 #include <utils/string_utils.h>
 #include <utils/io_utils.h>
+#include <utils/terminator.h>
+#include <utils/networking/uploader_with_auth.h>
 #include <utils/dmb/auth.h>
+#include <utils/networking/sync_resources.h>
 #include <http/http_client.h>
 #include <http/uploader.h>
 #include <http/authenticator.h>
@@ -24,8 +29,7 @@
 LOG_POSTFIX("\n");
 LOG_PREFIX("[main]: ");
 
-#define COUT(msg1) std::cout << msg1
-#define MSG(msg1) COUT(msg1 << '\n')
+#include <utils/print_defs.h>
 
 #if !SDL_VERSION_ATLEAST(2,0,17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
@@ -38,6 +42,7 @@ namespace
     const fs::path cfg_path = fs::temp_directory_path() / "vocabulary_config.json";
     const fs::path def_cfg_path = fs::temp_directory_path() / "vocabulary_config_default.json";
 
+	utils::networking::resources_list g_resources_list;
 	std::unique_ptr<dmb::Model> identity_model_ptr;
 
 	std::ofstream words_fo;
@@ -47,6 +52,13 @@ namespace
 
 	const std::string host = "skalexey.ru";
 	const int port = 80;
+	anp::endpoint_t g_ep = { host, port };
+}
+
+auto sync_resources()
+{
+	LOG("sync_resources()");
+	return utils::networking::sync_resources(g_ep, "/v/s.php", g_resources_list);
 }
 
 int init_words()
@@ -169,6 +181,9 @@ int init_words()
 		MSG("Your words file is created at the path '" << fs::absolute(words_path).string() << "'");
 	}
     g_words_fpath = words_path;
+	g_resources_list = {
+		{ "words.txt", g_words_fpath }
+	};
     return 0;
 }
 
@@ -203,8 +218,11 @@ bool UploadWords()
 	if (!get_identity(&user_name, &token))
 		return false;
     using namespace anp;
-    uploader u;
-    u.upload_file({host, port}, g_words_fpath.string(), {user_name, token}, "/v/h.php");
+    uploader u_base;
+	utils::networking::uploader_with_auth u(get_user_name(), get_user_token(), &u_base); 
+	query_t q;
+	q.path = "/v/h.php";
+    u.upload_file({host, port}, g_words_fpath.string(), q);
     return true;
 }
 
@@ -248,12 +266,48 @@ void Answer(const char* answer)
 // Main code
 int main(int, char**)
 {
-    // Setup SDL
+    init_words();
+	//UploadWords();
+	using namespace anp;
+
+	std::signal(SIGINT, [] (int sig) {
+		LOG_DEBUG("SIGINT raised");
+		sync_resources();
+	});
+
+	// Auto uploader on program finish
+	std::unique_ptr<utils::terminator> terminator_inst = std::make_unique<utils::terminator>([] {
+		LOG_DEBUG("Terminating...");
+		sync_resources();
+	});
+
+	if (!get_identity())
+	{
+		MSG("No login information has been provided. Exit.");
+		return 0;
+	}
+
+	if (!auth())
+	{
+		utils::file::remove_file(identity_path);
+		identity_model_ptr.reset(nullptr);
+		if (!utils::input::ask_user("Authentication error. Continue in offline mode?"))
+		{
+			MSG("Exit");
+			return 0;
+		}
+	}
+	else
+		MSG("\nHello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!\n");
+
+	auto ret = sync_resources();
+	if (ret != 0)
+		if (!utils::input::ask_user("Errors while syncing resources. Continue in offline mode?"))
+			return ret;
+
+	// Setup SDL
     // (Some versions of SDL before <2.0.10 appears to have performance/stalling issues on a minority of Windows systems,
     // depending on whether SDL_INIT_GAMECONTROLLER is enabled or disabled.. updating to latest version of SDL is recommended!)
-    
-    init_words();
-    UploadWords();
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
     {
         printf("Error: %s\n", SDL_GetError());
