@@ -71,6 +71,9 @@ else ()
 	set(BUILD_DIR_NAME "Build-cmake")
 endif ()
 
+# Utils dependency
+set(UTILS_DIR "${DEPS}/Utils")
+
 # Set and add includes
 if (NOT "${INCLUDES}" STREQUAL "")
 	message("Add extra includes: ${INCLUDES}")
@@ -171,38 +174,46 @@ if (NOT "${${MODULE_NAME}_INCLUDES}" STREQUAL "")
 	include_directories(${${MODULE_NAME}_INCLUDES})
 endif()
 
-file(GLOB SRC CONFIGURE_DEPENDS "src/*")
-set(SRC ${SRC})
-file(GLOB HEADERS ${HEADERS} "include/*")
-
 # Inherit parent sources logic
-
-set(PARENT_SRC ${PARENT_SRC} ${SRC})
-set(PARENT_SRC ${PARENT_SRC} PARENT_SCOPE)
-
 if (INHERIT_PARENT_SRC)
 	set(SRC ${PARENT_SRC})
 	message("'${MODULE_NAME}' project PARENT_SRC: ${PARENT_SRC}")
 endif()
-
 # End of Inherit parent sources logic
 
-message("'${MODULE_NAME}' project SRC: ${SRC}")
+message("${MODULE_NAME}: UTILS_DIR: ${UTILS_DIR}")
+
+file(GLOB THIS_SRC CONFIGURE_DEPENDS "src/*")
+set(SRC ${SRC}
+	${THIS_SRC}
+	${IMGUI_SRC}
+	${UTILS_DIR}/include/utils/networking/uploader_with_auth.cpp
+	${UTILS_DIR}/include/utils/networking/downloader_with_auth.cpp
+	${UTILS_DIR}/include/utils/networking/downloader_with_version_control.cpp
+	main_sdl_imgui.cpp
+	# uncomment if want to use lua scenario instead of SDL
+	# main_lua.cpp
+)
+
+# Set parent sources for further optional inheritance
+set(PARENT_SRC ${PARENT_SRC} ${SRC})
+set(PARENT_SRC ${PARENT_SRC} PARENT_SCOPE)
+
+# set headers
+file(GLOB HEADERS ${HEADERS} "include/*")
 message("'${MODULE_NAME}' project HEADERS: ${HEADERS}")
-# uncomment if want to use lua scenario instead of SDL
-# set(SRC_LIST main_lua.cpp ${SRC} ${HEADERS})
-set(SRC_LIST main_sdl_imgui.cpp ${SRC} ${HEADERS} ${IMGUI_SRC})
+message("'${MODULE_NAME}' project SRC: ${SRC}")
 
 # add executable
 if(BUILD_LIBRARY)
 	message("BUILD_LIBRARY")
-	add_library (${MODULE_NAME} ${SRC_LIST})
+	add_library (${MODULE_NAME} ${SRC})
 elseif(BUILD_SHARED_LIBRARY)
 	message("BUILD_SHARED_LIBRARY")
-	add_library (${MODULE_NAME} SHARED ${SRC_LIST})
+	add_library (${MODULE_NAME} SHARED ${SRC})
 else()
 	message("BUILD_EXECUTABLE")
-	add_executable (${MODULE_NAME} ${SRC_LIST})
+	add_executable (${MODULE_NAME} ${SRC})
 endif()
 
 # SDL2::SDL2main may or may not be available. It is e.g. required by Windows GUI applications  
