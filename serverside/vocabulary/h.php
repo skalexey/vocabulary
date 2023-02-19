@@ -31,7 +31,7 @@ function upload_file($u){
 	   if(in_array($fileType, $allowFileType)){
 		 // Upload file to server
 		 if(move_uploaded_file($tempPath,$originalPath)){
-			echo $fileName." was uploaded successfully";
+			echo $fileName." has been uploaded successfully";
 		   // write here sql query to store image name in database
 		  
 		  }else{
