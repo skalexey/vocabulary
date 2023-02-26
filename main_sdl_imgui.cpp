@@ -23,10 +23,12 @@
 #include <utils/dmb/auth.h>
 #include <utils/networking/sync_resources.h>
 #include <utils/imgui/Window.h>
+#include <utils/datetime.h>
 #include <http/http_client.h>
 #include <http/uploader.h>
 #include <http/authenticator.h>
 #include "words.h"
+#include "App.h"
 
 LOG_POSTFIX("\n");
 LOG_PREFIX("[main]: ");
@@ -36,6 +38,8 @@ LOG_PREFIX("[main]: ");
 #if !SDL_VERSION_ATLEAST(2,0,17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
 #endif
+
+words g_words;
 
 namespace
 {
@@ -50,15 +54,38 @@ namespace
 	std::ofstream words_fo;
 	std::ifstream words_fi;
 
-	words g_words;
-
 	const std::string host = "skalexey.ru";
 	const int port = 80;
 	anp::endpoint_t g_ep = { host, port };
 
-	utils::ImGui::Window g_window;
+	App g_app;
 }
 
+// Declarations
+int upload_words();
+int request_auth(const std::string& user_name, const std::string& token);
+int init_words();
+auto sync_resources();
+auto load_words();
+auto backup_words();
+int upload_file(const fs::path& fpath);
+
+
+// Definitions
+int upload_file(const fs::path& fpath)
+{
+	LOG_DEBUG("upload_file(" << fpath.string() << ")");
+	return upload_file(fpath.string(), g_ep, "/v/h.php");
+}
+
+auto backup_words()
+{
+	auto cur_dt = utils::current_datetime("%02i-%02i-%02i-%03li");
+	auto new_fpath = fs::path(g_words_fpath.parent_path() / fs::path(utils::format_str("words-%s.txt", cur_dt.c_str())));
+	utils::file::copy(g_words_fpath, new_fpath);
+	upload_file(new_fpath);
+	return false;
+};
 
 auto load_words()
 {
@@ -69,7 +96,7 @@ auto load_words()
 auto sync_resources()
 {
 	LOG("sync_resources()");
-	return utils::networking::sync_resources(g_ep, "/v/s.php", g_resources_list, [] {
+	return utils::networking::sync_resources(g_ep, "/v/s.php", "/v/h.php", g_resources_list, [] {
 		load_words();
 	}, [](int error_code) {
 		LOG_ERROR("sync_resources() failed with error code: " << error_code);
@@ -78,7 +105,7 @@ auto sync_resources()
 
 int init_words()
 {
-	const std::string words_fname = "Words tmp.txt";
+	const std::string words_fname_default = "Words tmp.txt";
 
     utils::input::register_command("~skip");
 
@@ -109,7 +136,7 @@ int init_words()
 	auto words_location = words_location_var.Val();
 	fs::path words_path = words_location.empty() ? fs::temp_directory_path() : fs::path(words_location);
 	if (!words_path.has_filename())
-		words_path /= words_fname;
+		words_path /= words_fname_default;
 	bool already_created = utils::file::exists(words_path);
 	while (!already_created)
 	{
@@ -172,7 +199,7 @@ int init_words()
 				words_path = words_dir;
 			} while (entered_path.empty());
 			if (!words_path.has_filename())
-				words_path = entered_path / words_fname;
+				words_path = entered_path / words_fname_default;
             words_location = words_path.string();
             cfg_model.Store(cfg_path.string(), { true });
 			// Load or create DB
@@ -181,7 +208,7 @@ int init_words()
 		update_words_dir(words_location);
 		if (!utils::file::exists(cfg_path))
 		{
-			if (auto erc = utils::file::copy_file(def_cfg_path, cfg_path))
+			if (auto erc = utils::file::copy(def_cfg_path, cfg_path))
 			{	// No default config found
 				if (erc == 3)
 				{
@@ -204,87 +231,23 @@ int init_words()
     return 0;
 }
 
-
-bool request_auth(const std::string& user_name, const std::string& token)
+int request_auth(const std::string& user_name, const std::string& token)
 {
     using namespace anp;
     authenticator a;
-    return a.auth({host, port}, "/v/a.php", {user_name, token}) == http_client::erc::no_error;
+    return a.auth({host, port}, "/v/a.php", {user_name, token});
 }
 
-void ShowRandomWord()
+int upload_words()
 {
-    LOG("ShowRandomWord");
-}
-
-void ShowCorrect()
-{
-    LOG("Answer is correct");
-}
-
-void ShowWrong()
-{
-    LOG("Answer is wrong");
-}
-
-bool UploadWords()
-{
-    LOG("UploadWords");
-    vl::Object& data = identity_model_ptr->GetContent().GetData();
-	std::string user_name, token;
-	if (!get_identity(&user_name, &token))
-		return false;
-    using namespace anp;
-    uploader u_base;
-	utils::networking::uploader_with_auth u(get_user_name(), get_user_token(), &u_base); 
-	query_t q;
-	q.path = "/v/h.php";
-    u.upload_file({host, port}, g_words_fpath.string(), q);
-    return true;
-}
-
-void Answer(const char* answer)
-{
-    LOG("Answer: " << answer);
-    // Send answer to server
-    using namespace anp;
-	http_client c;
-	bool success = false;
-	std::string response;
-    std::string host = "skalexey.ru";
-    int port = 80;
-    auto name = get_user_name();
-	auto token = get_user_token();
-	c.query({host, port}, "GET"
-		, utils::format_str("/v/play.php?u=%s&t=%s", name.c_str(), token.c_str()).c_str()
-		, [=, &success, &response, &c](
-            const headers_t&
-			, const char* data
-			, std::size_t sz
-			, int code
-		) -> bool
-		{
-			LOG_VERBOSE("\nReceived " << sz << " bytes:");
-			std::string s(data, data + sz);
-			LOG_VERBOSE(s);
-			response.insert(response.end(), data, data + sz);
-			if (s.find("Correct") != std::string::npos)
-				success = true;
-			c.notify(http_client::erc::no_error);
-			return true;
-		}
-	);
-    if (success)
-        ShowCorrect();
-    else
-        ShowWrong();
+    return upload_file(g_words_fpath);
 }
 
 // Main code
 int main(int, char**)
 {
     init_words();
-	//UploadWords();
+	//upload_words();
 	using namespace anp;
 
 	std::signal(SIGINT, [] (int sig) {
@@ -304,9 +267,9 @@ int main(int, char**)
 		return 0;
 	}
 
-	if (!auth())
+	if (auth() > 0)
 	{
-		utils::file::remove_file(identity_path);
+		utils::file::remove(identity_path);
 		identity_model_ptr.reset(nullptr);
 		if (!utils::input::ask_user("Authentication error. Continue in offline mode?"))
 		{
@@ -381,6 +344,9 @@ int main(int, char**)
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
+	// Setup window
+	g_app.Run();
+
     // Main loop
     bool done = false;
     while (!done)
@@ -406,14 +372,8 @@ int main(int, char**)
 
         ImGui::NewFrame();
 
-        if (ImGui::Button("Random word"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-            ShowRandomWord();
-
-        static char str0[128] = "";
-        ImGui::InputText("input_answer", str0, IM_ARRAYSIZE(str0));
-        if (ImGui::Button("Answer"))
-            Answer(str0);
-
+		g_app.Show();
+        
         // Rendering
         ImGui::Render();
         SDL_SetRenderDrawColor(renderer, (Uint8)(clear_color.x * 255), (Uint8)(clear_color.y * 255), (Uint8)(clear_color.z * 255), (Uint8)(clear_color.w * 255));
