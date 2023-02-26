@@ -22,9 +22,11 @@
 #include <utils/networking/uploader_with_auth.h>
 #include <utils/dmb/auth.h>
 #include <utils/networking/sync_resources.h>
+#include <utils/imgui/Window.h>
 #include <http/http_client.h>
 #include <http/uploader.h>
 #include <http/authenticator.h>
+#include "words.h"
 
 LOG_POSTFIX("\n");
 LOG_PREFIX("[main]: ");
@@ -48,17 +50,30 @@ namespace
 	std::ofstream words_fo;
 	std::ifstream words_fi;
 
-    std::string g_words;
+	words g_words;
 
 	const std::string host = "skalexey.ru";
 	const int port = 80;
 	anp::endpoint_t g_ep = { host, port };
+
+	utils::ImGui::Window g_window;
+}
+
+
+auto load_words()
+{
+	LOG("load_words()");
+	g_words.load(g_words_fpath);
 }
 
 auto sync_resources()
 {
 	LOG("sync_resources()");
-	return utils::networking::sync_resources(g_ep, "/v/s.php", g_resources_list);
+	return utils::networking::sync_resources(g_ep, "/v/s.php", g_resources_list, [] {
+		load_words();
+	}, [](int error_code) {
+		LOG_ERROR("sync_resources() failed with error code: " << error_code);
+	});
 }
 
 int init_words()
@@ -154,9 +169,11 @@ int init_words()
 				}
 				else
 					words_dir = (entered_path = p).string();
+				words_path = words_dir;
 			} while (entered_path.empty());
-			words_path = entered_path / words_fname;
-            words_location_var = words_path.parent_path().string();
+			if (!words_path.has_filename())
+				words_path = entered_path / words_fname;
+            words_location = words_path.string();
             cfg_model.Store(cfg_path.string(), { true });
 			// Load or create DB
 				//MSG("Sorry, but without a spellbook you can't cast any spell. Come back when you are ready.");

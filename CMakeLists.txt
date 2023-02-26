@@ -110,6 +110,13 @@ message("IMGUI_DIR: ${IMGUI_DIR}")
 # set(GLFW_DIR "${IMGUI_DIR}/libs/glfw-3.3.8.bin.WIN64")
 # set(GLFW_LIB_DIR "${IMGUI_DIR}/libs/glfw-3.3.8.bin.WIN64/lib-vc2022")
 
+# Boost dependency
+set (BOOST_DIR "${DEPS}/boost_1_81_0")
+message("${MODULE_NAME}: LUA_DIR: ${LUA_DIR}")
+set(CUSTOM_INCLUDES ${CUSTOM_INCLUDES}
+	${BOOST_DIR}
+)
+
 set(CUSTOM_INCLUDES ${CUSTOM_INCLUDES}
 	${IMGUI_DIR}
 	${IMGUI_DIR}/backends
@@ -165,6 +172,7 @@ add_library (lualib STATIC
 set(${MODULE_NAME}_INCLUDES ${${MODULE_NAME}_INCLUDES} 
 	${CUSTOM_INCLUDES}
 	${INCLUDES}
+	"include"
 )
 
 set(${MODULE_NAME}_INCLUDES ${${MODULE_NAME}_INCLUDES} PARENT_SCOPE)
