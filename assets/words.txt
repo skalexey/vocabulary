@@ -1,8 +1,7 @@
-lit up		you lit up like a child at Solstice time
-timid			робкий		A timid farmer.
-encroachment	This farmer tells the noble General of the encroachment by these whicked devilkin
-whicked		^^
-devilkin		^^
-cattle		they are the ones responsible for this cattle.
-avenged		cattle was returned or avenged.
-
+lit up		загореться			you lit up like a child at Solstice time
+timid			робкий			A timid farmer.			0
+encroachment	посягательство, вторжение			This farmer tells the noble General of the encroachment by these wicked devilkin
+wicked			злой			^^			127
+devilkin	чертенок	^^
+cattle			крупный рогатый скот			they are the ones responsible for this cattle.			127
+avenged			cattle was returned or avenged.			127

@@ -9,6 +9,7 @@ job()
 	source android_config.sh
 
 	adb shell am start "$app/$app.$classname"
+	adb logcat vocabulary *:S
 }
 
 job $@

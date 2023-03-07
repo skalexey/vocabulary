@@ -29,7 +29,7 @@ int words::load(const fs::path& fpath)
 
 int words::update_local_storage()
 {
-	std::ofstream ofs(m_fpath);
+	std::ofstream ofs(m_fpath, std::ios::binary);
 	if (!ofs.is_open())
 		return erc::cant_open;
 	std::for_each(list.begin(), list.end(), [&](auto entry) {

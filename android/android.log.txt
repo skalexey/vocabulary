@@ -1,0 +1,386 @@
+skoro@DESKTOP-GQSQRJV MINGW64 ~/Projects/vocabulary (dev)
+$ ./android/android_build.sh > ./android/android.log.txt
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:buildCMakeDebug'.
+> Build command failed.
+  Error while executing process C:\Users\skoro\bin\android\sdk\cmake\3.10.2.4988404\bin\ninja.exe with arguments {-C C:\Users\skoro\Projects\vocabulary\android-project\app\.cxx\Debug\42s3qk10\arm64-v8a SDL2 main}
+  ninja: Entering directory `C:\Users\skoro\Projects\vocabulary\android-project\app\.cxx\Debug\42s3qk10\arm64-v8a'
+  [1/9] Building CXX object ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/ui/imgui/widget_factory.cpp.o
+  FAILED: ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/ui/imgui/widget_factory.cpp.o
+  C:\Users\skoro\bin\android\sdk\ndk\21.4.7075529\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dmain_EXPORTS -IC:/Users/skoro/Projects/VL/include -IC:/Users/skoro/Projects/Utils/include -IC:/Users/skoro/Projects/rapidjson/include -IC:/Users/skoro/Projects/VL/JSONConverter/include -IC:/Users/skoro/Projects/DataModelBuilder/Core/include -IC:/Users/skoro/Projects/Networking/http -IC:/Users/skoro/Projects/asio-1.22.1/include -IC:/Users/skoro/Projects/Networking/netlib -IC:/Users/skoro/Projects/Networking/netlib/common -IC:/Users/skoro/Projects/Networking/http/../netlib/.. -IC:/Users/skoro/Projects/lua-5.4.4/src -IC:/Users/skoro/Projects/SDL/include -IC:/Users/skoro/Projects/boost_1_81_0 -IC:/Users/skoro/Projects/imgui -IC:/Users/skoro/Projects/imgui/backends -I/include -I../../../../../../include -IC:/Users/skoro/Projects/SDL/build/include -IC:/Users/skoro/Projects/SDL/build/include-config-debug -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -std=gnu++1z -MD -MT ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/ui/imgui/widget_factory.cpp.o -MF ..\..\..\build_android\CMakeFiles\main.dir\C_\Users\skoro\Projects\Utils\src\ui\imgui\widget_factory.cpp.o.d -o ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/ui/imgui/widget_factory.cpp.o -c C:/Users/skoro/Projects/Utils/src/ui/imgui/widget_factory.cpp
+  C:/Users/skoro/Projects/Utils/src/ui/imgui/widget_factory.cpp:1:9: warning: #pragma once in main file [-Wpragma-once-outside-header]
+  #pragma once
+          ^
+  In file included from C:/Users/skoro/Projects/Utils/src/ui/imgui/widget_factory.cpp:5:
+  C:/Users/skoro/Projects/Utils/include\utils/ui/imgui/widgets/text_input.h:33:18: error: format string is not a string literal (potentially insecure) [-Werror,-Wformat-security]
+                                          ImGui::Text("%s", m_label.c_str());
+                                                      ^~~~~~~~~~~~~~~
+  C:/Users/skoro/Projects/Utils/include\utils/ui/imgui/widgets/text_input.h:33:18: note: treat the string as an argument to avoid this
+                                          ImGui::Text("%s", m_label.c_str());
+                                                      ^
+                                                      "%s",
+  1 warning and 1 error generated.
+  [2/9] Building CXX object ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/file_utils.cpp.o
+  FAILED: ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/file_utils.cpp.o
+  C:\Users\skoro\bin\android\sdk\ndk\21.4.7075529\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dmain_EXPORTS -IC:/Users/skoro/Projects/VL/include -IC:/Users/skoro/Projects/Utils/include -IC:/Users/skoro/Projects/rapidjson/include -IC:/Users/skoro/Projects/VL/JSONConverter/include -IC:/Users/skoro/Projects/DataModelBuilder/Core/include -IC:/Users/skoro/Projects/Networking/http -IC:/Users/skoro/Projects/asio-1.22.1/include -IC:/Users/skoro/Projects/Networking/netlib -IC:/Users/skoro/Projects/Networking/netlib/common -IC:/Users/skoro/Projects/Networking/http/../netlib/.. -IC:/Users/skoro/Projects/lua-5.4.4/src -IC:/Users/skoro/Projects/SDL/include -IC:/Users/skoro/Projects/boost_1_81_0 -IC:/Users/skoro/Projects/imgui -IC:/Users/skoro/Projects/imgui/backends -I/include -I../../../../../../include -IC:/Users/skoro/Projects/SDL/build/include -IC:/Users/skoro/Projects/SDL/build/include-config-debug -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -std=gnu++1z -MD -MT ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/file_utils.cpp.o -MF ..\..\..\build_android\CMakeFiles\main.dir\C_\Users\skoro\Projects\Utils\src\file_utils.cpp.o.d -o ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/file_utils.cpp.o -c C:/Users/skoro/Projects/Utils/src/file_utils.cpp
+  C:/Users/skoro/Projects/Utils/src/file_utils.cpp:64:35: error: implicit instantiation of undefined template 'std::__ndk1::vector<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::allocator<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > > >'
+                  inline std::vector<std::string> lines_impl(const std::string& path)
+                                                  ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\iosfwd:216:28: note: template is declared here
+  class _LIBCPP_TEMPLATE_VIS vector;
+                             ^
+  C:/Users/skoro/Projects/Utils/src/file_utils.cpp:68:19: error: implicit instantiation of undefined template 'std::__ndk1::vector<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::allocator<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > > >'
+                          vector<string> o;
+                                         ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\iosfwd:216:28: note: template is declared here
+  class _LIBCPP_TEMPLATE_VIS vector;
+                             ^
+  C:/Users/skoro/Projects/Utils/src/file_utils.cpp:97:32: warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                  inline int create_impl(const const std::string& path)
+                                               ^~~~~~
+  C:/Users/skoro/Projects/Utils/src/file_utils.cpp:117:28: error: implicit instantiation of undefined template 'std::__ndk1::vector<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::allocator<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > > >'
+                  std::vector<std::string> lines(const std::filesystem::path &path)
+                                           ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\iosfwd:216:28: note: template is declared here
+  class _LIBCPP_TEMPLATE_VIS vector;
+                             ^
+  C:/Users/skoro/Projects/Utils/src/file_utils.cpp:264:73: error: no member named 'file_clock' in namespace 'std::__ndk1::chrono'
+                          auto sctp = ch::time_point_cast<ch::system_clock::duration>(tp - ch::file_clock::now() + ch::system_clock::now());
+                                                                                           ~~~~^
+  1 warning and 4 errors generated.
+  [3/9] Building CXX object ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/networking/downloader_with_auth.cpp.o
+  FAILED: ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/networking/downloader_with_auth.cpp.o
+  C:\Users\skoro\bin\android\sdk\ndk\21.4.7075529\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dmain_EXPORTS -IC:/Users/skoro/Projects/VL/include -IC:/Users/skoro/Projects/Utils/include -IC:/Users/skoro/Projects/rapidjson/include -IC:/Users/skoro/Projects/VL/JSONConverter/include -IC:/Users/skoro/Projects/DataModelBuilder/Core/include -IC:/Users/skoro/Projects/Networking/http -IC:/Users/skoro/Projects/asio-1.22.1/include -IC:/Users/skoro/Projects/Networking/netlib -IC:/Users/skoro/Projects/Networking/netlib/common -IC:/Users/skoro/Projects/Networking/http/../netlib/.. -IC:/Users/skoro/Projects/lua-5.4.4/src -IC:/Users/skoro/Projects/SDL/include -IC:/Users/skoro/Projects/boost_1_81_0 -IC:/Users/skoro/Projects/imgui -IC:/Users/skoro/Projects/imgui/backends -I/include -I../../../../../../include -IC:/Users/skoro/Projects/SDL/build/include -IC:/Users/skoro/Projects/SDL/build/include-config-debug -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -std=gnu++1z -MD -MT ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/networking/downloader_with_auth.cpp.o -MF ..\..\..\build_android\CMakeFiles\main.dir\C_\Users\skoro\Projects\Utils\src\networking\downloader_with_auth.cpp.o.d -o ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/networking/downloader_with_auth.cpp.o -c C:/Users/skoro/Projects/Utils/src/networking/downloader_with_auth.cpp
+  In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_auth.cpp:3:
+  In file included from C:/Users/skoro/Projects/Utils/include\utils/networking/downloader_with_auth.h:8:
+  In file included from C:/Users/skoro/Projects/Networking/http/../netlib/..\http/downloader_decorator.h:7:
+  C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:16:7: warning: 'request' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                  int request(
+                      ^
+  C:/Users/skoro/Projects/Networking/http/http_client_interface.h:41:15: note: overridden virtual function is here
+                  virtual int request(
+                              ^
+  In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_auth.cpp:3:
+  In file included from C:/Users/skoro/Projects/Utils/include\utils/networking/downloader_with_auth.h:8:
+  In file included from C:/Users/skoro/Projects/Networking/http/../netlib/..\http/downloader_decorator.h:7:
+  C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:25:8: warning: 'request_async' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                  void request_async(
+                       ^
+  C:/Users/skoro/Projects/Networking/http/http_client_interface.h:47:16: note: overridden virtual function is here
+                  virtual void request_async(
+                               ^
+  C:/Users/skoro/Projects/Utils/src/networking/downloader_with_auth.cpp:54:21: error: no matching constructor for initialization of 'std::string_view' (aka 'basic_string_view<char>')
+                          std::string_view s(data, data + sz);
+                                           ^ ~~~~~~~~~~~~~~~
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:228:5: note: candidate constructor not viable: no known conversion from 'const char *' to 'std::__ndk1::basic_string_view::size_type' (aka 'unsigned long') for 2nd argument; dereference the argument with *
+      basic_string_view(const _CharT* __s, size_type __len) _NOEXCEPT
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:222:5: note: candidate constructor not viable: requires 1 argument, but 2 were provided
+      basic_string_view(const basic_string_view&) _NOEXCEPT = default;
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:237:5: note: candidate constructor not viable: requires single argument '__s', but 2 arguments were provided
+      basic_string_view(const _CharT* __s)
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:219:5: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+      basic_string_view() _NOEXCEPT : __data (nullptr), __size(0) {}
+      ^
+  In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_auth.cpp:3:
+  In file included from C:/Users/skoro/Projects/Utils/include\utils/networking/downloader_with_auth.h:5:
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2338:5: warning: delete called on 'anp::downloader_interface' that is abstract but has non-virtual destructor [-Wdelete-abstract-non-virtual-dtor]
+      delete __ptr;
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2593:7: note: in instantiation of member function 'std::__ndk1::default_delete<anp::downloader_interface>::operator()' requested here
+        __ptr_.second()(__tmp);
+        ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2547:19: note: in instantiation of member function 'std::__ndk1::unique_ptr<anp::downloader_interface, std::__ndk1::default_delete<anp::downloader_interface> >::reset' requested here
+    ~unique_ptr() { reset(); }
+                    ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:3938:21: note: in instantiation of member function 'std::__ndk1::unique_ptr<anp::downloader_interface, std::__ndk1::default_delete<anp::downloader_interface> >::~unique_ptr' requested here
+      unique_ptr<_Yp> __hold(__p);
+                      ^
+  C:/Users/skoro/Projects/Networking/http/../netlib/..\http/downloader_decorator.h:22:16: note: in instantiation of function template specialization 'std::__ndk1::shared_ptr<anp::downloader_interface>::shared_ptr<anp::downloader_interface>' requested here
+                                  m_object = downloader_interface_ptr(object);
+                                             ^
+  3 warnings and 1 error generated.
+  [4/9] Building CXX object ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp.o
+  FAILED: ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp.o
+  C:\Users\skoro\bin\android\sdk\ndk\21.4.7075529\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dmain_EXPORTS -IC:/Users/skoro/Projects/VL/include -IC:/Users/skoro/Projects/Utils/include -IC:/Users/skoro/Projects/rapidjson/include -IC:/Users/skoro/Projects/VL/JSONConverter/include -IC:/Users/skoro/Projects/DataModelBuilder/Core/include -IC:/Users/skoro/Projects/Networking/http -IC:/Users/skoro/Projects/asio-1.22.1/include -IC:/Users/skoro/Projects/Networking/netlib -IC:/Users/skoro/Projects/Networking/netlib/common -IC:/Users/skoro/Projects/Networking/http/../netlib/.. -IC:/Users/skoro/Projects/lua-5.4.4/src -IC:/Users/skoro/Projects/SDL/include -IC:/Users/skoro/Projects/boost_1_81_0 -IC:/Users/skoro/Projects/imgui -IC:/Users/skoro/Projects/imgui/backends -I/include -I../../../../../../include -IC:/Users/skoro/Projects/SDL/build/include -IC:/Users/skoro/Projects/SDL/build/include-config-debug -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -std=gnu++1z -MD -MT ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp.o -MF ..\..\..\build_android\CMakeFiles\main.dir\C_\Users\skoro\Projects\Utils\src\networking\downloader_with_version_control.cpp.o.d -o ../../../build_android/CMakeFiles/main.dir/C_/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp.o -c C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp
+  In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+  In file included from C:/Users/skoro/Projects/Utils/include\utils/networking/downloader_with_version_control.h:9:
+  In file included from C:/Users/skoro/Projects/Networking/http/../netlib/..\http/downloader_decorator.h:7:
+  C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:16:7: warning: 'request' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                  int request(
+                      ^
+  C:/Users/skoro/Projects/Networking/http/http_client_interface.h:41:15: note: overridden virtual function is here
+                  virtual int request(
+                              ^
+  In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+  In file included from C:/Users/skoro/Projects/Utils/include\utils/networking/downloader_with_version_control.h:9:
+  In file included from C:/Users/skoro/Projects/Networking/http/../netlib/..\http/downloader_decorator.h:7:
+  C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:25:8: warning: 'request_async' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                  void request_async(
+                       ^
+  C:/Users/skoro/Projects/Networking/http/http_client_interface.h:47:16: note: overridden virtual function is here
+                  virtual void request_async(
+                               ^
+  C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:8:10: warning: non-portable path to file '<utils/Log.h>'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+  #include <utils/log.h>
+           ^~~~~~~~~~~~~
+           <utils/Log.h>
+  C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:69:21: error: no matching constructor for initialization of 'std::string_view' (aka 'basic_string_view<char>')
+                          std::string_view s(data, data + sz);
+                                           ^ ~~~~~~~~~~~~~~~
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:228:5: note: candidate constructor not viable: no known conversion from 'const char *' to 'std::__ndk1::basic_string_view::size_type' (aka 'unsigned long') for 2nd argument; dereference the argument with *
+      basic_string_view(const _CharT* __s, size_type __len) _NOEXCEPT
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:222:5: note: candidate constructor not viable: requires 1 argument, but 2 were provided
+      basic_string_view(const basic_string_view&) _NOEXCEPT = default;
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:237:5: note: candidate constructor not viable: requires single argument '__s', but 2 arguments were provided
+      basic_string_view(const _CharT* __s)
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:219:5: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+      basic_string_view() _NOEXCEPT : __data (nullptr), __size(0) {}
+      ^
+  In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:4:
+  In file included from C:/Users/skoro/Projects/Utils/include\utils/file_utils.h:4:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\fstream:183:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\ostream:138:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\ios:215:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\__locale:14:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string:504:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:175:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\__string:56:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\algorithm:643:
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2338:5: warning: delete called on 'anp::downloader_interface' that is abstract but has non-virtual destructor [-Wdelete-abstract-non-virtual-dtor]
+      delete __ptr;
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2593:7: note: in instantiation of member function 'std::__ndk1::default_delete<anp::downloader_interface>::operator()' requested here
+        __ptr_.second()(__tmp);
+        ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2547:19: note: in instantiation of member function 'std::__ndk1::unique_ptr<anp::downloader_interface, std::__ndk1::default_delete<anp::downloader_interface> >::reset' requested here
+    ~unique_ptr() { reset(); }
+                    ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:3938:21: note: in instantiation of member function 'std::__ndk1::unique_ptr<anp::downloader_interface, std::__ndk1::default_delete<anp::downloader_interface> >::~unique_ptr' requested here
+      unique_ptr<_Yp> __hold(__p);
+                      ^
+  C:/Users/skoro/Projects/Networking/http/../netlib/..\http/downloader_decorator.h:22:16: note: in instantiation of function template specialization 'std::__ndk1::shared_ptr<anp::downloader_interface>::shared_ptr<anp::downloader_interface>' requested here
+                                  m_object = downloader_interface_ptr(object);
+                                             ^
+  4 warnings and 1 error generated.
+  [5/9] Building CXX object C:/Users/skoro/Projects/Networking/http/Build-cmake/CMakeFiles/http.dir/src/http_client.cpp.o
+  FAILED: C:/Users/skoro/Projects/Networking/http/Build-cmake/CMakeFiles/http.dir/src/http_client.cpp.o
+  C:\Users\skoro\bin\android\sdk\ndk\21.4.7075529\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot   -IC:/Users/skoro/Projects/Networking/http -IC:/Users/skoro/Projects/asio-1.22.1/include -IC:/Users/skoro/Projects/Networking/netlib -IC:/Users/skoro/Projects/Networking/netlib/common -IC:/Users/skoro/Projects/Utils/include -IC:/Users/skoro/Projects/Networking/http/../netlib/.. -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -std=gnu++1z -MD -MT C:/Users/skoro/Projects/Networking/http/Build-cmake/CMakeFiles/http.dir/src/http_client.cpp.o -MF C:\Users\skoro\Projects\Networking\http\Build-cmake\CMakeFiles\http.dir\src\http_client.cpp.o.d -o C:/Users/skoro/Projects/Networking/http/Build-cmake/CMakeFiles/http.dir/src/http_client.cpp.o -c C:/Users/skoro/Projects/Networking/http/src/http_client.cpp
+  C:/Users/skoro/Projects/Networking/http/src/http_client.cpp:81:32: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                  m_client->set_on_connect([=, this](const std::error_code& ec) {
+                                               ^
+  C:/Users/skoro/Projects/Networking/http/src/http_client.cpp:104:22: error: no matching constructor for initialization of 'std::string_view' (aka 'basic_string_view<char>')
+                                  std::string_view s(data.begin(), data.begin() + sz);
+                                                   ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:228:5: note: candidate constructor not viable: no known conversion from 'std::__ndk1::vector<char, std::__ndk1::allocator<char> >::const_iterator' (aka '__wrap_iter<const char *>') to 'const char *' for 1st argument
+      basic_string_view(const _CharT* __s, size_type __len) _NOEXCEPT
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:222:5: note: candidate constructor not viable: requires 1 argument, but 2 were provided
+      basic_string_view(const basic_string_view&) _NOEXCEPT = default;
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:237:5: note: candidate constructor not viable: requires single argument '__s', but 2 arguments were provided
+      basic_string_view(const _CharT* __s)
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:219:5: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+      basic_string_view() _NOEXCEPT : __data (nullptr), __size(0) {}
+      ^
+  C:/Users/skoro/Projects/Networking/http/src/http_client.cpp:124:15: warning: enumeration value 'memory_tcp_packet' not handled in switch [-Wswitch]
+                                                  switch (m_receive_mode)
+                                                          ^
+  In file included from C:/Users/skoro/Projects/Networking/http/src/http_client.cpp:4:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:175:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\__string:56:
+  In file included from C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\algorithm:643:
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2338:5: warning: delete called on 'utils::data::receiver_base<char>' that is abstract but has non-virtual destructor [-Wdelete-abstract-non-virtual-dtor]
+      delete __ptr;
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2593:7: note: in instantiation of member function 'std::__ndk1::default_delete<utils::data::receiver_base<char> >::operator()' requested here
+        __ptr_.second()(__tmp);
+        ^
+  C:/Users/skoro/Projects/Networking/http/src/http_client.cpp:245:19: note: in instantiation of member function 'std::__ndk1::unique_ptr<utils::data::receiver_base<char>, std::__ndk1::default_delete<utils::data::receiver_base<char> > >::reset' requested here
+                  m_data_receiver.reset();
+                                  ^
+  3 warnings and 1 error generated.
+  [6/9] Building CXX object ../../../build_android/CMakeFiles/main.dir/src/word.cpp.o
+  FAILED: ../../../build_android/CMakeFiles/main.dir/src/word.cpp.o
+  C:\Users\skoro\bin\android\sdk\ndk\21.4.7075529\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dmain_EXPORTS -IC:/Users/skoro/Projects/VL/include -IC:/Users/skoro/Projects/Utils/include -IC:/Users/skoro/Projects/rapidjson/include -IC:/Users/skoro/Projects/VL/JSONConverter/include -IC:/Users/skoro/Projects/DataModelBuilder/Core/include -IC:/Users/skoro/Projects/Networking/http -IC:/Users/skoro/Projects/asio-1.22.1/include -IC:/Users/skoro/Projects/Networking/netlib -IC:/Users/skoro/Projects/Networking/netlib/common -IC:/Users/skoro/Projects/Networking/http/../netlib/.. -IC:/Users/skoro/Projects/lua-5.4.4/src -IC:/Users/skoro/Projects/SDL/include -IC:/Users/skoro/Projects/boost_1_81_0 -IC:/Users/skoro/Projects/imgui -IC:/Users/skoro/Projects/imgui/backends -I/include -I../../../../../../include -IC:/Users/skoro/Projects/SDL/build/include -IC:/Users/skoro/Projects/SDL/build/include-config-debug -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -std=gnu++1z -MD -MT ../../../build_android/CMakeFiles/main.dir/src/word.cpp.o -MF ..\..\..\build_android\CMakeFiles\main.dir\src\word.cpp.o.d -o ../../../build_android/CMakeFiles/main.dir/src/word.cpp.o -c C:/Users/skoro/Projects/vocabulary/src/word.cpp
+  C:/Users/skoro/Projects/vocabulary/src/word.cpp:23:26: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+          auto load_columns = [=, this](const std::vector<std::string_view>& columns)
+                                  ^
+  C:/Users/skoro/Projects/vocabulary/src/word.cpp:55:27: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                          commands.push_back([=, this](const std::string_view& column) {
+                                                 ^
+  C:/Users/skoro/Projects/vocabulary/src/word.cpp:60:27: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                          commands.push_back([=, this](const std::string_view& column) {
+                                                 ^
+  C:/Users/skoro/Projects/vocabulary/src/word.cpp:66:2: warning: control may reach end of non-void lambda [-Wreturn-type]
+          };
+          ^
+  C:/Users/skoro/Projects/vocabulary/src/word.cpp:105:12: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+                  while (w = w->previous())
+                         ~~^~~~~~~~~~~~~~~
+  C:/Users/skoro/Projects/vocabulary/src/word.cpp:105:12: note: place parentheses around the assignment to silence this warning
+                  while (w = w->previous())
+                           ^
+                         (                )
+  C:/Users/skoro/Projects/vocabulary/src/word.cpp:105:12: note: use '==' to turn this assignment into an equality comparison
+                  while (w = w->previous())
+                           ^
+                           ==
+  In file included from C:/Users/skoro/Projects/vocabulary/src/word.cpp:9:
+  In file included from C:/Users/skoro/Projects/boost_1_81_0\boost/algorithm/string/regex.hpp:17:
+  C:/Users/skoro/Projects/boost_1_81_0\boost/range/iterator_range_core.hpp:842:20: error: no matching constructor for initialization of 'std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >'
+              return SeqT( boost::begin( r ), boost::end( r ) );
+                     ^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  C:/Users/skoro/Projects/boost_1_81_0\boost/algorithm/string/detail/util.hpp:98:28: note: in instantiation of function template specialization 'boost::copy_range<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, boost::iterator_range<std::__ndk1::__wrap_iter<const char *> > >' requested here
+                      return copy_range<SeqT>(Range);
+                             ^
+  C:/Users/skoro/Projects/boost_1_81_0\boost/iterator/transform_iterator.hpp:130:14: note: in instantiation of member function 'boost::algorithm::detail::copy_iterator_rangeF<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, std::__ndk1::__wrap_iter<const char *> >::operator()' requested here
+      { return m_f(*this->base()); }
+               ^
+  C:/Users/skoro/Projects/boost_1_81_0\boost/iterator/iterator_facade.hpp:631:20: note: in instantiation of member function 'boost::iterators::transform_iterator<boost::algorithm::detail::copy_iterator_rangeF<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, std::__ndk1::__wrap_iter<const char *> >, boost::algorithm::split_iterator<std::__ndk1::__wrap_iter<const char *> >, boost::use_default, boost::use_default>::dereference' requested here
+            return f.dereference();
+                     ^
+  C:/Users/skoro/Projects/boost_1_81_0\boost/iterator/iterator_facade.hpp:737:42: note: in instantiation of function template specialization 'boost::iterators::iterator_core_access::dereference<boost::iterators::transform_iterator<boost::algorithm::detail::copy_iterator_rangeF<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, std::__ndk1::__wrap_iter<const char *> >, boost::algorithm::split_iterator<std::__ndk1::__wrap_iter<const char *> >, boost::use_default, boost::use_default> >' requested here
+              return iterator_core_access::dereference(this->derived());
+                                           ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\vector:1183:24: note: in instantiation of member function 'boost::iterators::detail::iterator_facade_base<boost::iterators::transform_iterator<boost::algorithm::detail::copy_iterator_rangeF<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, std::__ndk1::__wrap_iter<const char *> >, boost::algorithm::split_iterator<std::__ndk1::__wrap_iter<const char *> >, boost::use_default, boost::use_default>, std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, boost::iterators::forward_traversal_tag, std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, long, false, false>::operator*' requested here
+          __emplace_back(*__first);
+                         ^
+  C:/Users/skoro/Projects/boost_1_81_0\boost/algorithm/string/iter_find.hpp:186:31: note: in instantiation of function template specialization 'std::__ndk1::vector<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, std::__ndk1::allocator<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> > > >::vector<boost::iterators::transform_iterator<boost::algorithm::detail::copy_iterator_rangeF<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, std::__ndk1::__wrap_iter<const char *> >, boost::algorithm::split_iterator<std::__ndk1::__wrap_iter<const char *> >, boost::use_default, boost::use_default> >' requested here
+              SequenceSequenceT Tmp(itBegin, itEnd);
+                                ^
+  C:/Users/skoro/Projects/boost_1_81_0\boost/algorithm/string/regex.hpp:475:40: note: in instantiation of function template specialization 'boost::algorithm::iter_split<std::__ndk1::vector<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, std::__ndk1::allocator<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> > > >, const std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > &, boost::algorithm::detail::find_regexF<boost::basic_regex<char, boost::regex_traits<char, boost::cpp_regex_traits<char> > > > >' requested here
+              return ::boost::algorithm::iter_split(
+                                         ^
+  C:/Users/skoro/Projects/vocabulary/src/word.cpp:71:20: note: in instantiation of function template specialization 'boost::algorithm::split_regex<std::__ndk1::vector<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> >, std::__ndk1::allocator<std::__ndk1::basic_string_view<char, std::__ndk1::char_traits<char> > > >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, char, boost::regex_traits<char, boost::cpp_regex_traits<char> > >' requested here
+          boost::algorithm::split_regex(columns, m_data, boost::regex("\t+"));
+                            ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:228:5: note: candidate constructor not viable: no known conversion from 'typename range_iterator<const iterator_range<__wrap_iter<const char *> > >::type' (aka 'std::__ndk1::__wrap_iter<const char *>') to 'const char *' for 1st argument
+      basic_string_view(const _CharT* __s, size_type __len) _NOEXCEPT
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:222:5: note: candidate constructor not viable: requires 1 argument, but 2 were provided
+      basic_string_view(const basic_string_view&) _NOEXCEPT = default;
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:237:5: note: candidate constructor not viable: requires single argument '__s', but 2 arguments were provided
+      basic_string_view(const _CharT* __s)
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\string_view:219:5: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+      basic_string_view() _NOEXCEPT : __data (nullptr), __size(0) {}
+      ^
+  5 warnings and 1 error generated.
+  [7/9] Building CXX object ../../../build_android/CMakeFiles/main.dir/src/app.cpp.o
+  FAILED: ../../../build_android/CMakeFiles/main.dir/src/app.cpp.o
+  C:\Users\skoro\bin\android\sdk\ndk\21.4.7075529\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dmain_EXPORTS -IC:/Users/skoro/Projects/VL/include -IC:/Users/skoro/Projects/Utils/include -IC:/Users/skoro/Projects/rapidjson/include -IC:/Users/skoro/Projects/VL/JSONConverter/include -IC:/Users/skoro/Projects/DataModelBuilder/Core/include -IC:/Users/skoro/Projects/Networking/http -IC:/Users/skoro/Projects/asio-1.22.1/include -IC:/Users/skoro/Projects/Networking/netlib -IC:/Users/skoro/Projects/Networking/netlib/common -IC:/Users/skoro/Projects/Networking/http/../netlib/.. -IC:/Users/skoro/Projects/lua-5.4.4/src -IC:/Users/skoro/Projects/SDL/include -IC:/Users/skoro/Projects/boost_1_81_0 -IC:/Users/skoro/Projects/imgui -IC:/Users/skoro/Projects/imgui/backends -I/include -I../../../../../../include -IC:/Users/skoro/Projects/SDL/build/include -IC:/Users/skoro/Projects/SDL/build/include-config-debug -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -std=gnu++1z -MD -MT ../../../build_android/CMakeFiles/main.dir/src/app.cpp.o -MF ..\..\..\build_android\CMakeFiles\main.dir\src\app.cpp.o.d -o ../../../build_android/CMakeFiles/main.dir/src/app.cpp.o -c C:/Users/skoro/Projects/vocabulary/src/app.cpp
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:1:9: warning: #pragma once in main file [-Wpragma-once-outside-header]
+  #pragma once
+          ^
+  In file included from C:/Users/skoro/Projects/vocabulary/src/app.cpp:10:
+  In file included from C:/Users/skoro/Projects/Utils/include\utils/networking/uploader_with_auth.h:7:
+  In file included from C:/Users/skoro/Projects/Networking/http\uploader_decorator.h:6:
+  C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:16:7: warning: 'request' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                  int request(
+                      ^
+  C:/Users/skoro/Projects/Networking/http/http_client_interface.h:41:15: note: overridden virtual function is here
+                  virtual int request(
+                              ^
+  In file included from C:/Users/skoro/Projects/vocabulary/src/app.cpp:10:
+  In file included from C:/Users/skoro/Projects/Utils/include\utils/networking/uploader_with_auth.h:7:
+  In file included from C:/Users/skoro/Projects/Networking/http\uploader_decorator.h:6:
+  C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:25:8: warning: 'request_async' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                  void request_async(
+                       ^
+  C:/Users/skoro/Projects/Networking/http/http_client_interface.h:47:16: note: overridden virtual function is here
+                  virtual void request_async(
+                               ^
+  In file included from C:/Users/skoro/Projects/vocabulary/src/app.cpp:15:
+  In file included from C:/Users/skoro/Projects/Utils/include\utils/ui/imgui/widgets/dialogs/dialog_input_text.h:6:
+  C:/Users/skoro/Projects/Utils/include\utils/ui/imgui/widgets/text_input.h:33:18: error: format string is not a string literal (potentially insecure) [-Werror,-Wformat-security]
+                                          ImGui::Text("%s", m_label.c_str());
+                                                      ^~~~~~~~~~~~~~~
+  C:/Users/skoro/Projects/Utils/include\utils/ui/imgui/widgets/text_input.h:33:18: note: treat the string as an argument to avoid this
+                                          ImGui::Text("%s", m_label.c_str());
+                                                      ^
+                                                      "%s",
+  In file included from C:/Users/skoro/Projects/vocabulary/src/app.cpp:19:
+  C:/Users/skoro/Projects/Utils/include\utils/Log.h:83:10: warning: 'LOG_ERROR' macro redefined [-Wmacro-redefined]
+          #define LOG_ERROR(msg)
+                  ^
+  C:/Users/skoro/Projects/Utils/include\utils/print_defs.h:12:10: note: previous definition is here
+          #define LOG_ERROR(msg) MSG("ERROR: " << msg)
+                  ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:174:20: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+          add_on_update([=, this](float dt) {
+                            ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:200:13: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                                                  , [=, this](const opt_path_t& path) {
+                                                        ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:240:10: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                          , [=, this] (bool up) {
+                                ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:255:20: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+          add_on_update([=, this](float dt) {
+                            ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:266:10: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                          , [=, this](bool up) {
+                                ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:273:10: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                          , [=, this](bool up) {
+                                ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:280:10: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                          , [=, this](bool up) {
+                                ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:290:20: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+          add_on_update([=, this](float dt) {
+                            ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:302:32: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+          auto on_selected_result = [=, this](const opt_path_t& path) {
+                                        ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:369:18: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                  init_words([=, this](int result_code) {
+                                 ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:375:23: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                          sync_resources([=, this](int code) {
+                                             ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:379:13: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                                                  , [=, this](bool yes) {
+                                                        ^
+  C:/Users/skoro/Projects/vocabulary/src/app.cpp:394:67: warning: explicit capture of 'this' with a capture default of '=' is a C++2a extension [-Wc++2a-extensions]
+                  ask_user("Authentication error. Continue in offline mode?", [=, this](bool yes) {
+                                                                                  ^
+  In file included from C:/Users/skoro/Projects/vocabulary/src/app.cpp:3:
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2338:5: warning: delete called on 'anp::downloader_interface' that is abstract but has non-virtual destructor [-Wdelete-abstract-non-virtual-dtor]
+      delete __ptr;
+      ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2593:7: note: in instantiation of member function 'std::__ndk1::default_delete<anp::downloader_interface>::operator()' requested here
+        __ptr_.second()(__tmp);
+        ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:2547:19: note: in instantiation of member function 'std::__ndk1::unique_ptr<anp::downloader_interface, std::__ndk1::default_delete<anp::downloader_interface> >::reset' requested here
+    ~unique_ptr() { reset(); }
+                    ^
+  C:/Users/skoro/bin/android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1\memory:3938:21: note: in instantiation of member function 'std::__ndk1::unique_ptr<anp::downloader_interface, std::__ndk1::default_delete<anp::downloader_interface> >::~unique_ptr' requested here
+      unique_ptr<_Yp> __hold(__p);
+                      ^
+  C:/Users/skoro/Projects/Networking/http/../netlib/..\http/downloader_decorator.h:22:16: note: in instantiation of function template specialization 'std::__ndk1::shared_ptr<anp::downloader_interface>::shared_ptr<anp::downloader_interface>' requested here
+                                  m_object = downloader_interface_ptr(object);
+                                             ^
+  18 warnings and 1 error generated.
+  ninja: build stopped: subcommand failed.
+
+
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+

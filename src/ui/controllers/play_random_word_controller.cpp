@@ -3,34 +3,35 @@
 #include <algorithm>
 #include <utils/Log.h>
 #include "words.h"
-#include "ui/controllers/PlayRandomWordController.h"
+#include "ui/controllers/play_random_word_controller.h"
 
-LOG_PREFIX("[PlayRandomWordController]: ");
+LOG_PREFIX("[play_random_word_controller]: ");
 LOG_POSTFIX("\n");
 
 extern words g_words;
 
-PlayRandomWordController::PlayRandomWordController() {
-	m_view.ShowExampleButton().SetOnClick([this] {
+play_random_word_controller::play_random_word_controller() {
+	set_view(std::make_shared<play_random_word_window>());
+	view().show_example_button().set_on_click([this](bool up) {
 		LOG_DEBUG("ShowExampleButton");
 		if (m_current_word.empty())
 			return;
-		m_view.ExampleLabel().SetText(CurrentWord().get_example());
+		view().example_label().set_text(current_word().get_example());
 		m_example_shown = true;
 	});
-	m_view.ShowTranslationButton().SetOnClick([this] {
+	view().show_translation_button().set_on_click([this](bool up) {
 		LOG_DEBUG("ShowTranslationButton");
 		if (m_current_word.empty())
 			return;
-		auto& w = CurrentWord();
-		m_view.TranslationLabel().SetText(!w.get_translation().empty() ? std::string(w.get_translation().begin(), w.get_translation().end()) : "no translation");
+		auto& w = current_word();
+		view().translation_label().set_text(!w.get_translation().empty() ? std::string(w.get_translation().begin(), w.get_translation().end()) : "no translation");
 		m_translation_shown = true;
 	});
-	m_view.IKnowItButton().SetOnClick([this] {
+	view().i_know_it_button().set_on_click([this](bool up) {
 		LOG_DEBUG("IKnowItButton");
 		if (m_current_word.empty())
 			return;
-		auto& w = CurrentWord();
+		auto& w = current_word();
 		float example_cost = m_example_shown ? 0.5f : 0.0f;
 		float translation_cost = m_translation_shown ? 1.f : 0.f;
 		auto m = std::max(0.f, (1.0f - example_cost - translation_cost));
@@ -38,15 +39,14 @@ PlayRandomWordController::PlayRandomWordController() {
 		g_words.update_local_storage();
 		m_example_shown = false;
 		m_translation_shown = false;
-		ShowRandomWord();
+		show_random_word();
 	});
-	ShowRandomWord();
 }
 
-void PlayRandomWordController::ShowRandomWord()
+void play_random_word_controller::show_random_word()
 {
 	if (g_words.list.empty()) {
-		LOG_DEBUG("ShowRandomWord(): No words");
+		LOG_DEBUG("show_random_word(): No words");
 		return;
 	}
 	if (m_words_queue.empty()) {
@@ -56,24 +56,19 @@ void PlayRandomWordController::ShowRandomWord()
 		});
 		std::shuffle(m_words_queue.begin(), m_words_queue.end(), std::random_device());
 	}
-	m_view.TranslationLabel().SetText("");
-	m_view.ExampleLabel().SetText("");
+	view().translation_label().set_text("");
+	view().example_label().set_text("");
 	if (m_words_queue.empty())
 	{
-		m_view.ExampleLabel().SetText("Congratulations!!! You know all the words!");
+		view().example_label().set_text("Congratulations!!! You know all the words!");
 		return;
 	}
 	m_current_word = m_words_queue.back();
-	m_view.WordLabel().SetText(m_current_word);
+	view().word_label().set_text(m_current_word);
 	m_words_queue.pop_back();
 }
 
-word& PlayRandomWordController::CurrentWord()
+word& play_random_word_controller::current_word()
 {
 	return g_words.list.value(m_current_word);
-}
-
-void PlayRandomWordController::Show()
-{
-	m_view.Show();
 }

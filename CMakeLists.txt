@@ -5,15 +5,16 @@ cmake_minimum_required (VERSION 3.8)
 
 project (vocabulary C CXX)
 
+include(group.cmake)
+
 if(MSVC)
 	# fix __cplusplus macro for MSVC
 	add_compile_options(
 		"/Zc:__cplusplus"
-		"/std:c++latest"
+		# "/std:c++latest"
 	)
-else()
-	set(CMAKE_CXX_STANDARD 17)
 endif()
+set(CMAKE_CXX_STANDARD 17)
 
 if ("${MODULE_NAME}" STREQUAL "")
 	message("MODULE_NAME is empty. Set to 'vocabulary'")
@@ -73,6 +74,11 @@ endif ()
 
 # Utils dependency
 set(UTILS_DIR "${DEPS}/Utils")
+file(GLOB_RECURSE UTILS_HEADERS "${UTILS_DIR}/include/*")
+set(EXTERNAL_HEADERS ${EXTERNAL_HEADERS}
+	${UTILS_HEADERS}
+)
+GROUP_SRC("${UTILS_HEADERS}" "${UTILS_DIR}/include")
 
 # Set and add includes
 if (NOT "${INCLUDES}" STREQUAL "")
@@ -191,13 +197,30 @@ endif()
 
 message("${MODULE_NAME}: UTILS_DIR: ${UTILS_DIR}")
 
+# set headers
+file(GLOB_RECURSE HEADERS ${HEADERS} "include/*")
+message("'${MODULE_NAME}' project HEADERS: ${HEADERS}")
+message("'${MODULE_NAME}' project SRC: ${SRC}")
+
+# set sources
 file(GLOB_RECURSE THIS_SRC CONFIGURE_DEPENDS "src/*")
 set(SRC ${SRC}
 	${THIS_SRC}
 	${IMGUI_SRC}
-	${UTILS_DIR}/include/utils/networking/uploader_with_auth.cpp
-	${UTILS_DIR}/include/utils/networking/downloader_with_auth.cpp
-	${UTILS_DIR}/include/utils/networking/downloader_with_version_control.cpp
+	${UTILS_DIR}/src/networking/uploader_with_auth.cpp
+	${UTILS_DIR}/src/networking/downloader_with_auth.cpp
+	${UTILS_DIR}/src/networking/downloader_with_version_control.cpp
+	${UTILS_DIR}/src/ui/imgui/sdl_app.cpp
+	${UTILS_DIR}/src/ui/imgui/widgets/dialog.cpp
+	${UTILS_DIR}/src/ui/imgui/widget_factory.cpp
+	${UTILS_DIR}/src/ui/imgui/widgets/dialogs/dialog_yes_no.cpp
+	${UTILS_DIR}/src/ui/imgui/widgets/dialogs/dialog_message.cpp
+	${UTILS_DIR}/src/ui/helpers/user_input.cpp
+	${UTILS_DIR}/src/string_utils.cpp
+	${UTILS_DIR}/src/file_utils.cpp
+	${UTILS_DIR}/src/io_utils.cpp
+	${UTILS_DIR}/src/datetime.cpp
+	${HEADERS} # for IDE
 	main_sdl_imgui.cpp
 	# uncomment if want to use lua scenario instead of SDL
 	# main_lua.cpp
@@ -206,11 +229,6 @@ set(SRC ${SRC}
 # Set parent sources for further optional inheritance
 set(PARENT_SRC ${PARENT_SRC} ${SRC})
 set(PARENT_SRC ${PARENT_SRC} PARENT_SCOPE)
-
-# set headers
-file(GLOB HEADERS ${HEADERS} "include/*")
-message("'${MODULE_NAME}' project HEADERS: ${HEADERS}")
-message("'${MODULE_NAME}' project SRC: ${SRC}")
 
 # add executable
 if(BUILD_LIBRARY)
@@ -238,6 +256,13 @@ endif()
 target_link_libraries(${MODULE_NAME} PRIVATE SDL2)
 
 target_link_libraries(${MODULE_NAME} PRIVATE lualib imgui DMBCore http)
+
+# setup all sources target just for visibility of all the files used in IDE
+if (NOT "${EXTERNAL_HEADERS}" STREQUAL "")
+	message("EXTERNAL_HEADERS: ${EXTERNAL_HEADERS}")
+	message("Create a separate target for external headers called 'external_headers'")
+	add_library(external_headers ${EXTERNAL_HEADERS})
+endif()
 
 set_target_properties(${MODULE_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

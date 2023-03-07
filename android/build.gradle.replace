@@ -23,6 +23,7 @@ android {
         if (buildAsApplication) {
             applicationId "org.libsdl.app"
         }
+        ndkPath "${System.env.HOME}/bin/android/sdk/ndk/25.1.8937393"
         minSdkVersion 16
         targetSdkVersion 31
         versionCode 1

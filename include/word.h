@@ -30,14 +30,14 @@ public:
 	const std::string& get_data() const { return m_data; }
 	const std::string& get_value() const { return m_value; }
 	const std::string& get_example() const;
-	const std::string_view& get_translation() const { return m_translation; }
+	const std::string& get_translation() const { return m_translation; }
 	level_t get_level() const { return m_level; }
 	bool is_changed() const { return m_is_changed; }
 
 	void set_level(level_t level);
 	void set_value(const std::string& value);
 	void set_example(const std::string& example);
-	void set_translation(const std::string_view& translation);
+	void set_translation(const std::string& translation);
 
 protected:
 	word* previous() const;
@@ -47,7 +47,7 @@ private:
 	std::string& m_data;
 	std::string m_value = "";
 	std::string m_example = "";
-	std::string_view m_translation = "";
+	std::string m_translation = "";
 	level_t m_level = -1;
 	bool m_is_changed = false;
 };

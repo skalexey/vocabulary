@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 #include <utils/Log.h>
-#include <boost/algorithm/string/regex.hpp>
+#include <utils/string_utils.h>
 #include "words.h"
 #include "word.h"
 
@@ -17,12 +17,15 @@ const int max_column_count = 4;
 
 int word::load()
 {
-	auto load_columns = [=, this](const std::vector<std::string_view>& columns)
+	if (m_data.empty())
+		return erc::invalid_column_count;
+	//m_data.erase(std::remove(str.begin(), str.end(), '\n'), str.cend());
+	auto load_columns = [=, self = this](const std::vector<std::string_view>& columns)
 	{
 		bool level_is_present = true;
 		try
 		{
-			m_level = std::stoi(columns.back().data());
+			self->m_level = std::stoi(columns.back().data());
 		}
 		catch (std::invalid_argument const& ex)
 		{
@@ -33,15 +36,15 @@ int word::load()
 			return level_out_of_range;
 		}
 		if (!level_is_present)
-			m_level = 0;
-		else if (m_level < 0)
+			self->m_level = 0;
+		else if (self->m_level < 0)
 			return invalid_level;
 
 		const int local_max_column_count = level_is_present ? max_column_count : max_column_count - 1;
 
 		int sz = int(columns.size());
 		assert(sz > 0); // It is checked on the level above
-		m_value = columns[0];
+		self->m_value = columns[0];
 
 		// Columns after the value may vary
 		using cmd_t = std::function<void(const std::string_view&)>;
@@ -49,13 +52,13 @@ int word::load()
 		commands.reserve(max_column_count);
 
 		if (sz == local_max_column_count)
-			commands.push_back([=, this](const std::string_view& column) {
-				m_translation = column;
+			commands.push_back([=](const std::string_view& column) {
+				self->m_translation = column;
 			});
 			
 		if (sz >= local_max_column_count - 1)
-			commands.push_back([=, this](const std::string_view& column) {
-				m_example = column;
+			commands.push_back([=](const std::string_view& column) {
+				self->m_example = column;
 			});
 			
 		for (int i = 0; i < commands.size(); i++)
@@ -64,8 +67,9 @@ int word::load()
 
 	// Parse the line into columns array
 	std::vector<std::string_view> columns;
+	std::vector<std::string> columns2;
 	columns.reserve(max_column_count);
-	boost::algorithm::split_regex(columns, m_data, boost::regex("\t+"));
+	utils::split_repeated_delimeter(columns, m_data, '\t');
 	if (columns.size() == 1 && columns[0] == m_data)
 		return erc::invalid_column_count;
 	// Load the columns into the word
@@ -97,9 +101,12 @@ std::string word::serialize() const
 const std::string &word::get_example() const
 {
 	if (m_example == "^^")
-		while (auto prev = previous())
-			if (prev->m_example != "^^")
-				return prev->m_example;
+	{
+		auto w = this;
+		while (w = w->previous())
+			if (w->m_example != "^^")
+				return w->m_example;
+	}
 	return m_example;
 }
 
@@ -115,7 +122,7 @@ void word::set_example(const std::string &example)
 	m_is_changed = true;
 }
 
-void word::set_translation(const std::string_view &translation)
+void word::set_translation(const std::string &translation)
 {
 	m_translation = translation;
 	m_is_changed = true;
