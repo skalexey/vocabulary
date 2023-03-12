@@ -55,14 +55,16 @@ int word::load()
 			commands.push_back([=](const std::string_view& column) {
 				self->m_translation = column;
 			});
-			
+
 		if (sz >= local_max_column_count - 1)
 			commands.push_back([=](const std::string_view& column) {
 				self->m_example = column;
 			});
-			
+
 		for (int i = 0; i < commands.size(); i++)
 			commands[i](columns[i + 1]);
+
+		return erc::no_error;
 	};
 
 	// Parse the line into columns array
