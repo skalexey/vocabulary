@@ -1,7 +1,9 @@
 #pragma once
 
+#include <iostream>
 #include <memory>
 #include <optional>
+#include <sstream>
 #include <utils/terminator.h>
 #include <utils/ui/imgui/sdl_app.h>
 #include <utils/ui/helpers/user_input.h>
@@ -47,5 +49,23 @@ private:
 	dmb::Model m_cfg_model;
 	bool m_is_offline = false;
 	std::unique_ptr<utils::terminator> m_terminator;
+	
+	class log_stringstream : public std::ostringstream
+	{
+		public:
+			log_stringstream() = default;
+			void redirect() {
+				m_original_rdbuf = std::cout.rdbuf();
+				std::cout.rdbuf(rdbuf());
+			}
+			void out();
+			~log_stringstream() {
+				out();
+				std::cout.rdbuf(m_original_rdbuf);
+			}
+		private:
+			std::basic_streambuf<char, std::char_traits<char>> * m_original_rdbuf = nullptr;
+	};
+	log_stringstream m_log_stream;
 };
 

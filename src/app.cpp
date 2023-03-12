@@ -36,9 +36,11 @@ using utils::void_int_arg_cb;
 namespace
 {
 	fs::path g_words_fpath;
-	const fs::path identity_path = fs::temp_directory_path() / "vocabulary_identity.json";
-    const fs::path cfg_path = fs::temp_directory_path() / "vocabulary_config.json";
-    const fs::path def_cfg_path = fs::temp_directory_path() / "vocabulary_config_default.json";
+	fs::path identity_path;
+    fs::path cfg_path;
+    fs::path def_cfg_path;
+	
+	const std::string log_fname = "vocabulary_log.txt";
 
 	utils::networking::resources_list g_resources_list;
 	extern std::unique_ptr<dmb::Model> identity_model_ptr;
@@ -51,7 +53,7 @@ namespace
 	anp::endpoint_t g_ep = { host, port };
 
 	const std::string words_location_field_name = "words_location";
-	const std::string words_fname_default = "Words tmp.txt";
+	const std::string words_fname_default = "words.txt";
 
 	auto msg1_with_dir(const std::string& dir)
 	{
@@ -89,6 +91,9 @@ int upload_file(const fs::path& fpath);
 app::app() 
 	: utils::ui::user_input(this)
 {
+	set_resolution(1280, 720);
+	// Create a new log file
+	std::ofstream f(utils::file::temp_directory_path() / log_fname);
 }
 
 int upload_file(const fs::path& fpath)
@@ -120,9 +125,15 @@ int upload_words()
 
 auto get_words_path(const fs::path& path)
 {
-	fs::path words_path = path.empty() ? fs::temp_directory_path() : path;
-	if (!utils::file::is_file_path(words_path))
-		words_path /= words_fname_default;
+	fs::path words_path = path.empty() ? utils::file::temp_directory_path() : path;
+    if (utils::file::exists(words_path))
+	{
+		if (utils::file::is_directory(words_path))
+			words_path /= words_fname_default;
+	}
+	else
+		if (!utils::file::is_file_path(words_path))
+			words_path /= words_fname_default;
 	return words_path;
 };
 
@@ -134,8 +145,9 @@ auto get_words_path_by_string(const std::string& path_str)
 // App Definitions
 SDL_Window* app::create_window()
 {
+	auto& r = get_resolution();
 	SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-	return SDL_CreateWindow("Vocabulary", 30, 30, 600, 300, window_flags);
+	return SDL_CreateWindow("Vocabulary", 30, 30, r.x, r.y, window_flags);
 }
 
 void app::load_words()
@@ -148,7 +160,7 @@ void app::load_words()
 void app::update_words_dir(const std::string& new_dir)
 {
 	auto& content_data = m_cfg_model.GetContent().GetData();
-	if (fs::path(new_dir) == fs::temp_directory_path())
+	if (fs::path(new_dir) == utils::file::temp_directory_path())
 		content_data.Set(words_location_field_name, "");
 	else
 	{
@@ -245,7 +257,7 @@ void app::ask_directory(const std::string &msg, const fs::path &path, const on_p
 		, {
 			"Default (use system temporary directory)"
 			, [=] (bool up) {
-				callback(get_words_path(fs::temp_directory_path()));
+				callback(get_words_path(utils::file::temp_directory_path()));
 				d->close();
 			}
 		}
@@ -269,15 +281,16 @@ void app::ask_file(const std::string &msg, const fs::path& path, const on_path_s
 			}
 		}
 		, {
-			"Default (" + words_fname_default + ")"
+			"Default (create a file in temp directory)"
 			, [=](bool up) {
-				callback(get_words_path(fs::temp_directory_path() / words_fname_default));
+				callback(get_words_path(utils::file::temp_directory_path() / words_fname_default));
 				d->close();
 			}
 		}
 		, {
 			"Create"
 			, [=](bool up) {
+				utils::file::create(path);
 				callback(get_words_path(path));
 				d->close();
 			}
@@ -312,16 +325,8 @@ void app::init_words(const void_int_arg_cb& on_result)
     auto& words_location_var = m_cfg_model.GetContent().Get(words_location_field_name).AsString();
 
 	auto words_path = get_words_path_by_string(words_location_var.Val());
-	if (!utils::file::exists(words_path))
-		ask_directory(
-			(words_path.empty() ? "There is no path in your config for the words file provided. " : "") + std::string("Please, choose one of the following options.")
-			, words_path
-			, [=](const opt_path_t& path) {
-				on_path_selected(path, on_selected_result);
-			}
-	);
-	else
-		on_path_selected(words_path, on_selected_result);
+	
+	on_path_selected(words_path, on_selected_result);
 }
 
 void app::sync_resources(const void_int_arg_cb& cb)
@@ -340,6 +345,14 @@ void app::sync_resources(const void_int_arg_cb& cb)
 
 int app::init() {
 	using namespace anp;
+
+	std::cout.rdbuf(m_log_stream.rdbuf());
+	
+    LOG("init()");
+
+	identity_path = utils::file::temp_directory_path() / "vocabulary_identity.json";
+	cfg_path = utils::file::temp_directory_path() / "vocabulary_config.json";
+	def_cfg_path = utils::file::temp_directory_path() / "vocabulary_config_default.json";
 
 	std::signal(SIGINT, [] (int sig) {
 		LOG_DEBUG("SIGINT raised");
@@ -411,28 +424,21 @@ int app::init() {
 }
 
 bool app::on_update(float dt) {
+	if (!m_log_stream.str().empty())
+		m_log_stream.out();
 	m_window_ctrl->show();
 	auto& c = m_clear_color.z;
-	static bool trigger = false;
-	if (!trigger)
-	{
-		c = c + dt;
-		if (c > 1.0f)
-		{
-			c = 1.0f;
-			trigger = true;
-		}
-	}
-	else
-	{
-		c = c - dt;
-		if (c < 0.0f)
-		{
-			c = 0.0f;
-			trigger = false;
-		}
-	}
-	
 	return true;
 }
 
+void app::log_stringstream::out()
+{
+	if (str().empty())
+		return;
+	std::ofstream f(utils::file::temp_directory_path() / log_fname, std::ios::app);
+	assert(f.is_open());
+	//SDL_Log("%s", str().c_str());
+	f << str();
+	str("");
+	assert(str().empty());
+}
