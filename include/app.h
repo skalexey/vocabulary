@@ -17,14 +17,15 @@ class app : public utils::ui::imgui::sdl_app, public utils::ui::user_input
 public:
 	app();
 	bool on_update(float dt) override;
+	void request_auth(const std::string& user_name, const std::string& token, const utils::void_int_cb& on_result);
 
 protected:
 	int init() override;
 
 private:
-	void init_words(const utils::void_int_arg_cb& on_result);
+	void init_words(const utils::void_int_cb& on_result);
 	void load_words();
-	void sync_resources(const utils::void_int_arg_cb& cb = nullptr);
+	void sync_resources(const utils::void_int_cb& cb = nullptr);
 	void update_words_dir(const std::string& new_dir);
 	using opt_path_t = std::optional<fs::path>;
 	using on_path_selected_t = std::function<void(const opt_path_t&)>;

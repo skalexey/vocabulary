@@ -8,11 +8,10 @@
 #include <utils/string_utils.h>
 #include <utils/io_utils.h>
 #include <utils/networking/uploader_with_auth.h>
-#include <utils/dmb/auth.h>
+#include <utils/dmb/auth_async.h>
 #include <utils/networking/sync_resources.h>
 #include <utils/ui/imgui/widgets/dialogs/dialog_yes_no.h>
 #include <utils/ui/imgui/widgets/dialogs/dialog_with_buttons.h>
-#include <utils/ui/imgui/widgets/dialogs/dialog_input_text.h>
 #include <utils/datetime.h>
 #include <utils/print_defs.h>
 #include <utils/common.h>
@@ -31,7 +30,7 @@ words g_words;
 extern app* g_app;
 
 using utils::ui::imgui::dialog_with_buttons;
-using utils::void_int_arg_cb;
+using utils::void_int_cb;
 
 namespace
 {
@@ -79,7 +78,6 @@ namespace
 
 // Declarations
 int upload_words();
-int request_auth(const std::string& user_name, const std::string& token);
 int init_words();
 auto load_words();
 auto backup_words();
@@ -111,13 +109,6 @@ auto backup_words()
 	return false;
 };
 
-int request_auth(const std::string& user_name, const std::string& token)
-{
-    using namespace anp;
-    authenticator a;
-    return a.auth({host, port}, "/v/a.php", {user_name, token});
-}
-
 int upload_words()
 {
     return upload_file(g_words_fpath);
@@ -143,6 +134,15 @@ auto get_words_path_by_string(const std::string& path_str)
 }
 
 // App Definitions
+void app::request_auth(const std::string& user_name, const std::string& token, const utils::void_int_cb& on_result)
+{
+	using namespace anp;
+	authenticator_ptr a = std::make_shared<authenticator>();
+	a->auth_async({ host, port }, "/v/a.php", { user_name, token }, [a, on_result](int result) {
+		on_result(result);
+	});
+}
+
 SDL_Window* app::create_window()
 {
 	auto& r = get_resolution();
@@ -173,19 +173,13 @@ void app::update_words_dir(const std::string& new_dir)
 }
 void app::choose_directory(const on_path_selected_t &callback, const std::string& default_path)
 {
-	auto d = std::make_shared<utils::ui::imgui::dialog_input_text>(
+	ask_line(
 		"Enter words location directory or file path"
 		, [=](const std::string& path, bool cancelled) {
-			if (!cancelled)
-				callback(path);
-			else
-				callback({});
+			callback(cancelled ? opt_path_t(path) : opt_path_t{});
 		}
+		, default_path
 	);
-	d->text_input().set_value(default_path);
-	add_on_update([=](float dt) {
-		return d->show();
-	});
 }
 
 void app::on_path_selected(const opt_path_t& path, const on_path_selected_t& on_result)
@@ -305,7 +299,7 @@ void app::ask_file(const std::string &msg, const fs::path& path, const on_path_s
 	});
 }
 
-void app::init_words(const void_int_arg_cb& on_result)
+void app::init_words(const void_int_cb& on_result)
 {
 	LOG("init_words()");
 
@@ -329,7 +323,7 @@ void app::init_words(const void_int_arg_cb& on_result)
 	on_path_selected(words_path, on_selected_result);
 }
 
-void app::sync_resources(const void_int_arg_cb& cb)
+void app::sync_resources(const void_int_cb& cb)
 {
 	LOG("sync_resources()");
 	return utils::networking::sync_resources(g_ep, "/v/s.php", "/v/h.php", g_resources_list
@@ -372,12 +366,6 @@ int app::init() {
 	
 	m_window_ctrl = std::make_unique<play_random_word_controller>();
 
-	if (!get_identity())
-	{
-		MSG("No login information has been provided. Exit.");
-		return 0;
-	}
-
 	auto after_auth = [self = this] () {
 		self->init_words([=](int result_code) {
 			//upload_words();
@@ -400,25 +388,35 @@ int app::init() {
 		});
 	};
 
-	if (auth() > 0)
-	{
-		utils::file::remove(identity_path);
-		identity_model_ptr.reset(nullptr);
-		ask_user("Authentication error. Continue in offline mode?", [=, self = this](bool yes) {
-			if (yes)
+	get_identity([=, self = this](bool ok, std::string, std::string) {
+		if (!ok)
+		{
+			MSG("No login information has been provided. Exit.");
+			return;
+		}
+
+		auth([=](int result) {
+			if (result == 0)
 			{
-				self->set_offline_mode(true);
+				show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
 				after_auth();
 			}
 			else
-				self->exit(0);
+			{
+				utils::file::remove(identity_path);
+				identity_model_ptr.reset(nullptr);
+				ask_user("Authentication error. Continue in offline mode?", [=](bool yes) {
+					if (yes)
+					{
+						self->set_offline_mode(true);
+						after_auth();
+					}
+					else
+						self->exit(0);
+				});
+			}
 		});
-	}
-	else
-	{
-		MSG("\nHello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!\n");
-		after_auth();
-	}
+	});
 
 	return 0;
 }
@@ -437,8 +435,8 @@ void app::log_stringstream::out()
 		return;
 	std::ofstream f(utils::file::temp_directory_path() / log_fname, std::ios::app);
 	assert(f.is_open());
-	//SDL_Log("%s", str().c_str());
 	f << str();
+	SDL_Log("%s", str().c_str());
 	str("");
 	assert(str().empty());
 }
