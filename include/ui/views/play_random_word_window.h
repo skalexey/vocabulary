@@ -17,6 +17,9 @@ class play_random_word_window : public utils::ui::imgui::dialog
 			, m_show_translation_button("show Translation")
 			, m_i_know_it_button("I Know It")
 		{
+			// set_modal(false);
+			// set_auto_resize(true);
+			set_size({ 500, 700 });
 			set_title("Random Word Game");
 			set_on_show([this]() {
 				m_word_label.show();

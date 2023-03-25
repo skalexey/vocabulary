@@ -72,8 +72,6 @@ namespace
 
 	const auto msg2_current = "Enter words file location or a directory or type 'skip' to use the "
 				"current directory or 'exit' to close the application";
-
-	const ImVec4 m_clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 }
 
 // Declarations
@@ -90,6 +88,7 @@ app::app()
 	: utils::ui::user_input(this)
 {
 	set_resolution(1280, 720);
+	set_clear_color({0.05f, 0.05f, 0.07f, 1.00f});
 	// Create a new log file
 	std::ofstream f(utils::file::temp_directory_path() / log_fname);
 }
@@ -268,28 +267,34 @@ void app::ask_file(const std::string &msg, const fs::path& path, const on_path_s
 	auto d = std::make_shared<dialog_with_buttons>();
 	dialog_with_buttons::actions_t actions = {
 		{
-			"Choose another path"
-			, [=, self = this](bool up) {
-				self->choose_directory(callback, path.string());
-				d->close();
-			}
-		}
-		, {
-			"Default (create a file in temp directory)"
-			, [=](bool up) {
-				callback(get_words_path(utils::file::temp_directory_path() / words_fname_default));
-				d->close();
-			}
-		}
-		, {
 			"Create"
 			, [=](bool up) {
 				utils::file::create(path);
 				callback(get_words_path(path));
 				d->close();
 			}
+		},
+		{
+			"Choose another path"
+			, [=, self = this](bool up) {
+				self->choose_directory(callback, path.string());
+				d->close();
+			}
 		}
 	};
+
+	if (fs::canonical(path.parent_path()) != fs::canonical(utils::file::temp_directory_path().parent_path()))
+	{
+		actions.push_back({
+			"Default (create a file in temp directory)"
+			, [=](bool up) {
+				auto new_path = utils::file::temp_directory_path() / words_fname_default;
+				utils::file::create(new_path);
+				callback(get_words_path(new_path));
+				d->close();
+			}
+		});
+	}
 
 	d->set_message(msg);
 	d->setup_buttons(actions);
@@ -425,7 +430,6 @@ bool app::on_update(float dt) {
 	if (!m_log_stream.str().empty())
 		m_log_stream.out();
 	m_window_ctrl->show();
-	auto& c = m_clear_color.z;
 	return true;
 }
 
