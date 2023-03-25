@@ -1,11 +1,6 @@
 [app]: init()
 [DMB I] dmb::Model::Load(/data/user/0/com.skalexey.vocabulary/cache/vocabulary_identity.json)
+Warning: [JSONLoader] Seems like this is a non existent document
+[DMB I] dmb::Model::Load(/data/user/0/com.skalexey.vocabulary/cache/vocabulary_identity.json)
+[user_input]: ask_line: 'Enter your login name' ['nullptr'; 'nullptr']
 
-Hello, skalexey!
-
-[app]: init_words()
-[DMB I] dmb::Model::Load(/data/user/0/com.skalexey.vocabulary/cache/vocabulary_config.json)
-[app]: sync_resources()
-Download remote version of resource '"cache"'...
-Resource updated from the remote: '/data/user/0/com.skalexey.vocabulary/cache'
-[app]: load_words()
