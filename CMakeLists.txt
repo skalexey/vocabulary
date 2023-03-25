@@ -221,6 +221,8 @@ set(SRC ${SRC}
 	${UTILS_DIR}/src/networking/downloader_with_version_control.cpp
 	${UTILS_DIR}/src/ui/imgui/sdl_app.cpp
 	${UTILS_DIR}/src/ui/imgui/widgets/text_input.cpp
+	${UTILS_DIR}/src/ui/imgui/widgets/text.cpp
+	${UTILS_DIR}/src/ui/imgui/widgets/label.cpp
 	${UTILS_DIR}/src/ui/imgui/widgets/dialog.cpp
 	${UTILS_DIR}/src/ui/imgui/widget_factory.cpp
 	${UTILS_DIR}/src/ui/imgui/widgets/dialogs/dialog_yes_no.cpp

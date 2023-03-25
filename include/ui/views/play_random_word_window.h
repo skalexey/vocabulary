@@ -3,6 +3,7 @@
 #include <utils/ui/imgui/widgets/dialog.h>
 #include <utils/ui/imgui/widgets/button.h>
 #include <utils/ui/imgui/widgets/label.h>
+#include <utils/ui/imgui/widgets/text.h>
 #include <utils/ui/imgui/widget_factory.h>
 
 // TODO: bring some abstraction
@@ -27,8 +28,8 @@ class play_random_word_window : public utils::ui::imgui::dialog
 			});
 		}
 
-		utils::ui::imgui::label& example_label() { return m_example_label; }
-		utils::ui::imgui::label& translation_label() { return m_translation_label; }
+		utils::ui::imgui::text& example_label() { return m_example_label; }
+		utils::ui::imgui::text& translation_label() { return m_translation_label; }
 		utils::ui::imgui::label& word_label() { return m_word_label; }
 		utils::ui::imgui::button& show_example_button() { return m_show_example_button; }
 		utils::ui::imgui::button& show_translation_button() { return m_show_translation_button; }
@@ -41,8 +42,8 @@ class play_random_word_window : public utils::ui::imgui::dialog
 
 	private:
 		utils::ui::imgui::label m_word_label;
-		utils::ui::imgui::label m_example_label;
-		utils::ui::imgui::label m_translation_label;
+		utils::ui::imgui::text m_example_label;
+		utils::ui::imgui::text m_translation_label;
 		utils::ui::imgui::button m_show_example_button;
 		utils::ui::imgui::button m_show_translation_button;
 		utils::ui::imgui::button m_i_know_it_button;
