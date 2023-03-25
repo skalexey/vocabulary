@@ -28,8 +28,8 @@ function log_info()
 	log "$1" "\033[0;36m$2" "$3\033[0m"
 }
 
-THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-[ -f $THIS_DIR/string_utils.sh ] && source $THIS_DIR/string_utils.sh
+logsh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+[ -f $logsh_dir/string_utils.sh ] && source $logsh_dir/string_utils.sh
 
 function log_into_file()
 {
