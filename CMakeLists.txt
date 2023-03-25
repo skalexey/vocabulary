@@ -187,6 +187,7 @@ endif()
 set(${MODULE_NAME}_INCLUDES ${${MODULE_NAME}_INCLUDES} 
 	${CUSTOM_INCLUDES}
 	${INCLUDES}
+	${JNI_BRIDGE_DIR}/include
 	"include"
 )
 
