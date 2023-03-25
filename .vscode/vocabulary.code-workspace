@@ -14,6 +14,9 @@
 		},
 		{
 			"path": "../../Networking"
+		},
+		{
+			"path": "../../imgui"
 		}
 	],
 	"settings": {
@@ -129,6 +132,10 @@
 			"typeindex": "cpp",
 			"valarray": "cpp",
 			"variant": "cpp"
+		},
+		"search.exclude": {
+			"*.log": true,
+			"*.log.txt": true
 		}
 	}
 }
