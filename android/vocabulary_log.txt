@@ -1,0 +1,11 @@
+[app]: init()
+[DMB I] dmb::Model::Load(/data/user/0/com.skalexey.vocabulary/cache/vocabulary_identity.json)
+
+Hello, skalexey!
+
+[app]: init_words()
+[DMB I] dmb::Model::Load(/data/user/0/com.skalexey.vocabulary/cache/vocabulary_config.json)
+[app]: sync_resources()
+Download remote version of resource '"cache"'...
+Resource updated from the remote: '/data/user/0/com.skalexey.vocabulary/cache'
+[app]: load_words()

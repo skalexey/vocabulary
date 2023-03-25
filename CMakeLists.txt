@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : Top-level CMake project file, do global configuration
 # and include sub-projects here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.15)
 
 project (vocabulary C CXX)
 
@@ -118,7 +118,7 @@ message("IMGUI_DIR: ${IMGUI_DIR}")
 
 # Boost dependency
 set (BOOST_DIR "${DEPS}/boost_1_81_0")
-message("${MODULE_NAME}: LUA_DIR: ${LUA_DIR}")
+message("${MODULE_NAME}: BOOST_DIR: ${BOOST_DIR}")
 set(CUSTOM_INCLUDES ${CUSTOM_INCLUDES}
 	${BOOST_DIR}
 )
@@ -134,11 +134,11 @@ add_library(imgui STATIC
 	${IMGUI_DIR}/imgui_widgets.cpp
 	${IMGUI_DIR}/imgui_tables.cpp
 	${IMGUI_DIR}/imgui_demo.cpp
-	${IMGUI_DIR}/backends/imgui_impl_sdl.cpp
+	${IMGUI_DIR}/backends/imgui_impl_sdl2.cpp
 	${IMGUI_DIR}/backends/imgui_impl_sdlrenderer.cpp
 )
 
-#file(GLOB LUA_SRC "${LUA_DIR}/src/*.c")
+file(GLOB LUA_SRC "${LUA_DIR}/src/*.c")
 add_library (lualib STATIC
 	${LUA_DIR}/src/lapi.c
 	${LUA_DIR}/src/lcode.c
@@ -173,8 +173,17 @@ add_library (lualib STATIC
 	${LUA_DIR}/src/linit.c
 	${LUA_DIR}/src/lutf8lib.c
 )
-# message("${MODULE_NAME}: Lua src: '${LUA_SRC}'")
+message("${MODULE_NAME}: Lua src: '${LUA_SRC}'")
 
+# android special source dependencies
+if (DEFINED ANDROID)
+	set(ANDROID_PROJ_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/android-project)
+	set(ANDROID_PROJ_DIR ${ANDROID_PROJ_ROOT}/app/jni)
+	add_subdirectory(${ANDROID_PROJ_DIR}/jni_bridge)
+endif()
+
+
+# Set includes
 set(${MODULE_NAME}_INCLUDES ${${MODULE_NAME}_INCLUDES} 
 	${CUSTOM_INCLUDES}
 	${INCLUDES}
@@ -206,11 +215,11 @@ message("'${MODULE_NAME}' project SRC: ${SRC}")
 file(GLOB_RECURSE THIS_SRC CONFIGURE_DEPENDS "src/*")
 set(SRC ${SRC}
 	${THIS_SRC}
-	${IMGUI_SRC}
 	${UTILS_DIR}/src/networking/uploader_with_auth.cpp
 	${UTILS_DIR}/src/networking/downloader_with_auth.cpp
 	${UTILS_DIR}/src/networking/downloader_with_version_control.cpp
 	${UTILS_DIR}/src/ui/imgui/sdl_app.cpp
+	${UTILS_DIR}/src/ui/imgui/widgets/text_input.cpp
 	${UTILS_DIR}/src/ui/imgui/widgets/dialog.cpp
 	${UTILS_DIR}/src/ui/imgui/widget_factory.cpp
 	${UTILS_DIR}/src/ui/imgui/widgets/dialogs/dialog_yes_no.cpp
@@ -222,6 +231,7 @@ set(SRC ${SRC}
 	${UTILS_DIR}/src/datetime.cpp
 	${HEADERS} # for IDE
 	main_sdl_imgui.cpp
+	# main_imgui_test.cpp
 	# uncomment if want to use lua scenario instead of SDL
 	# main_lua.cpp
 )
@@ -264,13 +274,19 @@ if (NOT "${EXTERNAL_HEADERS}" STREQUAL "")
 	add_library(external_headers ${EXTERNAL_HEADERS})
 endif()
 
+
+# android jni library linkage
+if (DEFINED ANDROID)
+	target_link_libraries(${MODULE_NAME} PRIVATE jni_bridge)
+endif()
+
 set_target_properties(${MODULE_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
 configure_file(assets/random_words.lua ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
 if (WIN32)
 	add_custom_command(TARGET ${MODULE_NAME} POST_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:${MODULE_NAME}> $<TARGET_FILE_DIR:${MODULE_NAME}>
-	COMMAND_EXPAND_LISTS
+		COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:${MODULE_NAME}> $<TARGET_FILE_DIR:${MODULE_NAME}>
+		COMMAND_EXPAND_LISTS
 	)
 endif()
