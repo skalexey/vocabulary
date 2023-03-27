@@ -13,14 +13,14 @@ extern words g_words;
 play_random_word_controller::play_random_word_controller() {
 	set_view(std::make_shared<play_random_word_window>());
 	view().show_example_button().set_on_click([this](bool up) {
-		LOG_DEBUG("ShowExampleButton");
+		LOG_DEBUG("show_example_button");
 		if (m_current_word.empty())
 			return;
 		view().example_label().set_text(current_word().get_example());
 		m_example_shown = true;
 	});
 	view().show_translation_button().set_on_click([this](bool up) {
-		LOG_DEBUG("ShowTranslationButton");
+		LOG_DEBUG("show_translation_button");
 		if (m_current_word.empty())
 			return;
 		auto& w = current_word();
@@ -28,7 +28,7 @@ play_random_word_controller::play_random_word_controller() {
 		m_translation_shown = true;
 	});
 	view().i_know_it_button().set_on_click([this](bool up) {
-		LOG_DEBUG("IKnowItButton");
+		LOG_DEBUG("i_know_it_button");
 		if (m_current_word.empty())
 			return;
 		auto& w = current_word();
