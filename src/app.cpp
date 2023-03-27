@@ -445,5 +445,4 @@ void app::log_stringstream::out()
 	f << str();
 	SDL_Log("%s", str().c_str());
 	str("");
-	assert(str().empty());
 }
