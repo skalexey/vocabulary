@@ -186,9 +186,21 @@ void app::on_path_selected(const opt_path_t& path, const on_path_selected_t& on_
 	if (path.has_value())
 	{
 		auto& path_val = path.value();
-		if (utils::file::is_file_path(path_val))
+		if (utils::file::exists(path_val))
 		{
-			if (!utils::file::exists(path_val))
+			if (fs::is_directory(path_val))
+			{
+				auto words_path = get_words_path(path.value());
+				on_path_selected(words_path, on_result);
+				return;
+			}
+			// If the file exists
+			if (on_result)
+				on_result(path);
+		}
+		else
+		{
+			if (utils::file::is_file_path(path_val))
 			{
 				if (!utils::file::exists(path_val.parent_path()))
 					ask_directory(
@@ -197,7 +209,7 @@ void app::on_path_selected(const opt_path_t& path, const on_path_selected_t& on_
 						, [=](const opt_path_t& path) {
 							on_path_selected(path, on_result);
 						}
-					);
+				);
 				else
 					ask_file(
 						"Can't find words storage file '" + path_val.string() + "'. Please, enter the path or provide another directory."
@@ -208,10 +220,8 @@ void app::on_path_selected(const opt_path_t& path, const on_path_selected_t& on_
 					);
 				return;
 			}
-		}
-		else
-		{
-			if (!utils::file::exists(path_val))
+			else
+			{
 				ask_directory(
 					(path_val.empty() ? "There is no such directory '" + path_val.string() + "'. " : std::string()) + "Please, choose one of the following options."
 					, path_val
@@ -219,15 +229,8 @@ void app::on_path_selected(const opt_path_t& path, const on_path_selected_t& on_
 						on_path_selected(path, on_result);
 					}
 				);
-			else
-			{
-				auto words_path = get_words_path(path.value());
-				on_path_selected(words_path, on_result);
 			}
-			return;
 		}
-		if (on_result)
-			on_result(path);
 	}
 	else
 	{
