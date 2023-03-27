@@ -41,6 +41,10 @@ play_random_word_controller::play_random_word_controller() {
 		m_translation_shown = false;
 		show_random_word();
 	});
+	view().skip_button().set_on_click([this](bool up) {
+		LOG_DEBUG("skip_button");
+		show_random_word();
+	});
 }
 
 void play_random_word_controller::show_random_word()

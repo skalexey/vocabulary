@@ -16,6 +16,7 @@ class play_random_word_window : public utils::ui::imgui::dialog
 			: m_show_example_button("show Example")
 			, m_show_translation_button("show Translation")
 			, m_i_know_it_button("I Know It")
+			, m_skip_button("Skip")
 		{
 			// set_modal(false);
 			// set_auto_resize(true);
@@ -28,6 +29,7 @@ class play_random_word_window : public utils::ui::imgui::dialog
 				m_show_example_button.show();
 				m_show_translation_button.show();
 				m_i_know_it_button.show();
+				m_skip_button.show();
 			});
 		}
 
@@ -37,6 +39,7 @@ class play_random_word_window : public utils::ui::imgui::dialog
 		utils::ui::imgui::button& show_example_button() { return m_show_example_button; }
 		utils::ui::imgui::button& show_translation_button() { return m_show_translation_button; }
 		utils::ui::imgui::button& i_know_it_button() { return m_i_know_it_button;}
+		utils::ui::imgui::button& skip_button() { return m_skip_button; }
 
 	protected:
 		void on_show() override {
@@ -50,4 +53,5 @@ class play_random_word_window : public utils::ui::imgui::dialog
 		utils::ui::imgui::button m_show_example_button;
 		utils::ui::imgui::button m_show_translation_button;
 		utils::ui::imgui::button m_i_know_it_button;
+		utils::ui::imgui::button m_skip_button;
 };
