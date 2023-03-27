@@ -175,7 +175,7 @@ void app::choose_directory(const on_path_selected_t &callback, const std::string
 	ask_line(
 		"Enter words location directory or file path"
 		, [=](const std::string& path, bool cancelled) {
-			callback(cancelled ? opt_path_t(path) : opt_path_t{});
+			callback(cancelled ? opt_path_t{} : opt_path_t(path));
 		}
 		, default_path
 	);
