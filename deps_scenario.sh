@@ -2,7 +2,10 @@
 
 function deps_scenario()
 {
-	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    local log_prefix="-- [$(basename $THIS_DIR) $(basename "${BASH_SOURCE[0]}")]: "
+    log_info "Start deps_scenario" " -"
+	
     source $THIS_DIR/dependencies.sh
     source $THIS_DIR/deps_config.sh
 
@@ -11,13 +14,7 @@ function deps_scenario()
     download_dependency "Networking" "$depsLocation" "git@github.com:skalexey/Networking.git"
     source "$depsLocation/Networking/deps_scenario.sh"
     download_dependency "lua-5.4.4" "$depsLocation" "http://www.lua.org/ftp/lua-5.4.4.tar.gz"
-    download_dependency "imgui" "$depsLocation" "https://github.com/ocornut/imgui.git"
-    download_dependency "SDL" "$depsLocation" "https://github.com/libsdl-org/SDL.git"
     download_dependency "boost_1_81_0" "$depsLocation" "https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.bz2"
-
-    if [ ! -f "main_sdl_imgui.cpp" ]; then
-        cp "$depsLocation/imgui/examples/example_sdl_sdlrenderer/main.cpp" "main_sdl_imgui.cpp"
-    fi
 }
 
 deps_scenario $@

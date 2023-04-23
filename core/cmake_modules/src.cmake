@@ -1,0 +1,28 @@
+macro(add_src)
+	foreach(loop_var ${ARGV})
+		module_message("Adding source file: ${loop_var}")
+		set(SRC ${SRC} ${loop_var})
+	endforeach()
+endmacro(add_src)
+
+macro(set_parent_src)
+	set(PARENT_SRC ${PARENT_SRC} ${SRC})
+	set(PARENT_SRC ${PARENT_SRC} PARENT_SCOPE)
+endmacro(set_parent_src)
+
+macro(set_headers)
+	file(GLOB_RECURSE HEADERS ${HEADERS} "include/*")
+	module_message("'${MODULE_NAME}' project HEADERS: ${HEADERS}")
+	module_message("'${MODULE_NAME}' project SRC: ${SRC}")
+endmacro(set_headers)
+
+macro(set_sources)
+	file(GLOB_RECURSE THIS_SRC CONFIGURE_DEPENDS "src/*")
+endmacro(set_sources)
+
+macro(setup_src)
+	set_sources()
+	set(SRC ${SRC} ${THIS_SRC})
+	module_message("src: ${SRC}")
+	set_parent_src()
+endmacro(setup_src)

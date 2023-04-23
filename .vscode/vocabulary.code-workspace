@@ -17,6 +17,9 @@
 		},
 		{
 			"path": "../../imgui"
+		},
+		{
+			"path": "../../Templates/CMake/Modules"
 		}
 	],
 	"settings": {

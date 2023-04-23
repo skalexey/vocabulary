@@ -1,86 +1,97 @@
 #!/bin/bash
 
 function file_insert_before() {
-	[ -z "$1" ] && return 1 # file name
-	[ -z "$2" ] && return 2 # string before which to insert
-	[ -z "$3" ] && return 3 # what to insert
+	[ -z "$1" ] && return -10 # file name
+	[ -z "$2" ] && return -20 # string before which to insert
+	[ -z "$3" ] && return -30 # what to insert
 	#sed -i "" "s/$2/$3$2/" "$1"
 	# Use python due to platform independence
 	# use relative paths due to platform independence
-	fpath=$(realpath --relative-to="${PWD}" "$1")
-	return $(python -c "from file_utils import*; insert_before(\"$fpath\", \"$2\", \"$3\");")
+	local fpath=$(realpath --relative-to="${PWD}" "$1")
+	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+	local ret=$(python $THIS_DIR/file_utils.py insert_before "$fpath" "$2" "$3")
+	local res=$?
+	echo "$ret"
+	return $res
+}
+
+function file_insert_after() {
+	[ -z "$1" ] && return -10 # file name
+	[ -z "$2" ] && return -20 # string after which to insert
+	[ -z "$3" ] && return -30 # what to insert
+	file_replace "$1" "$2" "$2$3"
+	return $?
 }
 
 function file_append_line() {
-	[ -z "$1" ] && return 1 # file name
-	[ -z "$2" ] && return 2 # string to append at the end of the file
+	[ -z "$1" ] && return -10 # file name
+	[ -z "$2" ] && return -20 # string to append at the end of the file
 	echo "$2" >> "$1"
 }
 
 function file_replace() {
-	[ -z "$1" ] && return 1 # file name
-	[ -z "$2" ] && return 2 # regex to find
-	[ -z "$3" ] && return 3 # text to replace regex to
-	#echo "s/$2/$3/g$4"
-	sed -i.bac -E "s/$2/$3/g$4" $1
-	[ -f "$1.bac" ] && rm $1.bac
+	[ -z "$1" ] && return -10 # file name
+	[ -z "$2" ] && return -20 # regex to find
+	[ -z "$3" ] && return -30 # text to replace regex to
+	# Use sed
+	# sed -i.bac -E "s/$2/$3/g$4" $1
+	# [ -f "$1.bac" ] && rm $1.bac
 	# Use python due to platform independence
 	# use relative paths due to platform independence
-	# fpath=$(realpath --relative-to="${PWD}" "$1")
-	# return $(python -c "from file_utils import*; replace(\"$fpath\", \"$2\", \"$3\");")
+	local fpath=$(realpath --relative-to="${PWD}" "$1")
+	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+	local ret=$(python $THIS_DIR/file_utils.py replace "$fpath" "$2" "$3")
+	local res=$?
+	echo "$ret"
+	return $res
 }
 
 function file_search() {
-	[ -z "$1" ] && return 1 # file name
-	[ -z "$2" ] && return 2 # regex to find
+	[ -z "$1" ] && return -10 # file name
+	[ -z "$2" ] && return -20 # regex to find
 
 	#echo "in $1 find $2"
 	local contents=$(<$1)
 	local nl=$'\n'
 	local rest=${contents#*$2}
-	local res=$(( ${#contents} - ${#rest} - ${#2} ))
-	[ $res -ge 0 ] && echo $res || echo "-1"
+	local ret=$(( ${#contents} - ${#rest} - ${#2} ))
+	local res=$?
+	[ $ret -ge 0 ] && echo $ret || echo "-1"
+	return $res
 	#[[ $(cat $1) =~ .*$2* ]] && true || false
 }
 
 function file_regex() {
-	echo $(python -c "from file_utils import*; print(search(\"$1\", \"$2\", \"$3\"));")
+	fpath=$(realpath --relative-to="${PWD}" "$1")
+	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+	local ret=$(python $THIS_DIR/file_utils.py search "$fpath" "$2" "$3")
+	local res=$?
+	echo $ret
+	return $res
 }
 
 function full_path() {
 	[ -z "$1" ] && return 1 # input path
 	[ -d "$1" ] && dir_full_path $1
 	[ -f "$1" ] && file_full_path $1
+	return $?
 }
 
 function dir_full_path() {
 	[ -z "$1" ] && return 1 # directory path
-	[ ! -d "$1" ] && return 2
-	
-	local cur_dir="${PWD}"
-	cd "$1"
-	echo ${PWD}
-	cd "$cur_dir"
+	echo "$(cd "$1" && pwd)"
 }
 
 function dir_name() {
 	[ -z "$1" ] && return 1 # directory path
 	[ ! -d "$1" ] && return 2
-	
-	local dp="$(dir_full_path "$1")"
-	echo $(basename "$dp")
+	echo $(basename "$(dirname "$1")")
 }
 
 function file_full_path() {
 	[ -z "$1" ] && return 1 # file path
-	[ ! -f "$1" ] && return 2
-	
-	local file_dir=$(dirname "$1")
 	local file_name=$(basename "$1")
-	local cur_dir="${PWD}"
-	cd "$file_dir"
-	echo ${PWD}/$file_name
-	cd "$cur_dir"
+	echo "$(cd "$(dirname "$1")" && pwd)/$file_name"
 }
 
 function file_extension() {

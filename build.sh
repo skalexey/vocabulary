@@ -114,6 +114,11 @@ build()
 		local folderName=$rootDirectory
 	fi
 
+	if [ -f "pre_build.sh" ]; then
+		./pre_build.sh
+		[ $? -ne 0 ] && log_error "pre_build.sh error" " -" && return 6
+	fi
+
 	local build="$rootDirectory/${buildFolderPrefix}-cmake"
 
 	log "Output directory: '$build'" " -"

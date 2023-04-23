@@ -1,37 +1,41 @@
 #!/bin/bash
 
-get_dependencies()
+process_dependences()
 {
-	if [ ! -z "$1" ]; then 
-		local enterDirectory=${PWD}	
-		echo "Go to the source directory passed: '$1'"
-		cd "$1" # go to the source directory passed
-	fi
+	[ -z $1 ] && log_error "No directory provided" && return 1
+	[ ! -d $1 ] && log_error "Non-existent directory provided" && return 2 || local dir=$1
 
-	source log.sh
+	log_info "Check for dependencies in '$dir'" " -"
+	# local enterDirectory=${PWD}
+	# cd $dir
 
-	local folderName=${PWD##*/}
-
-	local log_prefix="-- [$folderName get_dependencies script]: "
-
-	log "Check for dependencies" " -"
-
-	if [ ! -f "deps_config.sh" ]; then
-		log "No dependencies" " -"
-		cd "${enterDirectory}"
+	if [ ! -f "$dir/deps_scenario.sh" ]; then
+		log_success "No deps_scenario.sh found in '$dir'" " -"
+		# [ ! -z "$enterDirectory" ] && cd "$enterDirectory"
 		return 0
 	fi
-	source deps_config.sh
-
-	source deps_scenario.sh $@
+	source $dir/deps_scenario.sh $@
 	local retval=$?
 	if [ $retval -ne 0 ]; then
-		log_error "Error occured during the deps_scenario.sh execution " " -"
-		[ ! -z "$enterDirectory" ] && cd "$enterDirectory"
+		log_error "Error occured during $dir/deps_scenario.sh execution " " -"
+		# [ ! -z "$enterDirectory" ] && cd "$enterDirectory"
 		return 1
 	fi
+}
 
-	[ ! -z "$enterDirectory" ] && cd "$enterDirectory"
+get_dependencies()
+{
+	source log.sh
+	
+	local log_prefix="-- [${PWD##*/} ${BASH_SOURCE[0]}]: "
+	
+	source file_utils.sh
+	if [ "$(full_path .)" != "$(full_path "$1")" ]; then
+		log_info "Go to the directory passed: '$1'"
+		process_dependences $1
+	else
+		process_dependences .
+	fi
 }
 
 get_dependencies $@

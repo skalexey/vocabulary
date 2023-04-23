@@ -5,7 +5,7 @@ function download_dependency()
 	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 	local folderName=${THIS_DIR##*/}
 
-	source log.sh
+	source $THIS_DIR/log.sh
 	local log_prefix="-- [${folderName} dependencies script]: "
 
 	local dep_dir_name=$1
@@ -28,7 +28,7 @@ function download_dependency()
 
 	if [[ ! -d "$deps_path/$dep_dir_name" ]]; then
 		log "Dependency directory '$dep_dir_name' does not exist. Download..." " ---"
-		source net_utils.sh
+		source $THIS_DIR/net_utils.sh
 		local cur_path=$(pwd)
 		cd "$deps_path"
 		download ${@:3}
