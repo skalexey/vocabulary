@@ -35,6 +35,8 @@ function update_cmake_modules()
 	[ $? -ne 0 ] && log_error "Error while delivering cmake modules" && return 5
 
 	log_success "Done"
+
+	return 0
 }
 
 update_cmake_modules $@

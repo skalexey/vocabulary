@@ -14,8 +14,10 @@ namespace vocabulary_core
 {
 	class app : public virtual utils::ui::app, public utils::ui::user_input
 	{
+		using base = utils::ui::app;
+
 	public:
-		app();
+		app(int argc, char* argv[]);
 		virtual bool on_update(float dt);
 		void request_auth(const std::string& user_name, const std::string& token, const utils::void_int_cb& on_result);
 

@@ -2,10 +2,10 @@
 
 #include <iostream>
 #include <sstream>
-#include <utils/ui/imgui/sdl_app.h>
+#include <utils/ui/qt/app.h>
 #include <core/include/app.h>
 
-class app : public utils::ui::imgui::sdl_app, public vocabulary_core::app
+class app : public utils::ui::qt::app, public vocabulary_core::app
 {
 public:
 	app(int argc, char* argv[]);
@@ -13,9 +13,6 @@ public:
 
 protected:
 	int init() override;
-
-protected:
-	SDL_Window* create_window() override;
 
 private:
 	class log_stringstream : public std::ostringstream

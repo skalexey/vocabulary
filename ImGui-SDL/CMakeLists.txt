@@ -6,8 +6,6 @@ cmake_minimum_required (VERSION 3.15)
 project(vocabulary_imgui_sdl C CXX)
 
 macro(setup_module)
-	module_message("Setting up module: ${MODULE_NAME}")
-
 	# Utils dependency
 	set(UTILS_DIR "${DEPS}/Utils")
 
@@ -59,8 +57,11 @@ macro(setup_module)
 	set_headers()
 	add_src(
 		${HEADERS} # for IDE
+		${UTILS_DIR}/src/ui/imgui/node.cpp
+		${UTILS_DIR}/src/ui/imgui/app.cpp
 		${UTILS_DIR}/src/ui/imgui/sdl_app.cpp
 		${UTILS_DIR}/src/ui/imgui/widget.cpp
+		${UTILS_DIR}/src/ui/imgui/window.cpp
 		${UTILS_DIR}/src/ui/imgui/widgets/text_input.cpp
 		${UTILS_DIR}/src/ui/imgui/widgets/text.cpp
 		${UTILS_DIR}/src/ui/imgui/widgets/label.cpp
@@ -71,7 +72,6 @@ macro(setup_module)
 		${UTILS_DIR}/src/ui/imgui/widgets/dialogs/dialog_yes_no.cpp
 		${UTILS_DIR}/src/ui/imgui/widgets/dialogs/dialog_message.cpp
 		${UTILS_DIR}/src/ui/imgui/widgets/dialogs/dialog_input_text.cpp
-		${UTILS_DIR}/src/ui/helpers/user_input.cpp
 		main_sdl_imgui.cpp
 		# main_imgui_test.cpp
 		# uncomment if want to use lua scenario instead of SDL

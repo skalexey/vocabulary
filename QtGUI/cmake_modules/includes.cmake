@@ -1,0 +1,11 @@
+macro(check_extra_includes)
+	if(NOT "${INCLUDES}" STREQUAL "")
+		message("Add extra includes: ${INCLUDES}")
+	endif()
+endmacro(check_extra_includes)
+
+macro(module_add_includes)
+	foreach(loop_var ${ARGV})
+		set(CUSTOM_INCLUDES ${CUSTOM_INCLUDES} ${loop_var})
+	endforeach()
+endmacro(module_add_includes)
