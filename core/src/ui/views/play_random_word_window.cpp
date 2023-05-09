@@ -8,7 +8,8 @@
 
 namespace vocabulary_core
 {
-	play_random_word_window::play_random_word_window()
+	play_random_word_window::play_random_word_window(node* parent)
+		: base(parent)
 	{
 		using namespace utils::ui;
 		m_show_example_button = get_factory().create<button>(this);

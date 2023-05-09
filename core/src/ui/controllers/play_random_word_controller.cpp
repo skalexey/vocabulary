@@ -5,9 +5,9 @@
 #include <utils/ui/widget_factory.h>
 #include <utils/ui/widgets/button.h>
 #include <utils/ui/widgets/label.h>
+#include <utils/ui/app.h>
 #include "words.h"
 #include "ui/controllers/play_random_word_controller.h"
-
 LOG_PREFIX("[play_random_word_controller]: ");
 LOG_POSTFIX("\n");
 
@@ -15,10 +15,10 @@ extern words g_words;
 
 namespace vocabulary_core
 {
-	play_random_word_controller::play_random_word_controller(const utils::ui::app& app)
+	play_random_word_controller::play_random_word_controller(utils::ui::app& app)
 		: base(app)
 	{
-		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create<play_random_word_window>(&app)));
+		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create<vocabulary_core::play_random_word_window>(&app)));
 		view().show_example_button().set_on_click([this](bool up) {
 			LOG_DEBUG("show_example_button");
 			if (m_current_word.empty())

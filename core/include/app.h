@@ -18,7 +18,7 @@ namespace vocabulary_core
 
 	public:
 		app(int argc, char* argv[]);
-		virtual bool on_update(float dt);
+		virtual bool on_update(float dt) override;
 		void request_auth(const std::string& user_name, const std::string& token, const utils::void_int_cb& on_result);
 
 	protected:
