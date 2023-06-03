@@ -394,7 +394,18 @@ namespace vocabulary_core
 			// TODO: pause?
 		});
 		
-		m_window_ctrl = std::make_unique<play_random_word_controller>(*this);
+		try
+		{
+			m_window_ctrl = std::make_unique<play_random_word_controller>(*this);
+		}
+		catch (std::exception& ex)
+		{
+			LOG("Creating controller exception: " << ex.what());
+		}
+		catch (...)
+		{
+			LOG("Creating controller exception!");
+		}
 
 		auto after_auth = [self = this] () {
 			self->init_words([=](int result_code) {
@@ -428,8 +439,11 @@ namespace vocabulary_core
 			auth([=](int result) {
 				if (result == 0)
 				{
-					show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
-					after_auth();
+					add_on_update([=](float dt) {
+						show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
+						after_auth();
+						return false;
+					});
 				}
 				else
 				{
