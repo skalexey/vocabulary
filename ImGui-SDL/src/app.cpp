@@ -23,9 +23,10 @@ namespace
 }
 
 app::app(int argc, char* argv[])
-	: vocabulary_core::app(argc, argv)
-	, utils::ui::imgui::sdl_app(argc, argv)
+	: utils::ui::node(nullptr)
 	, utils::ui::app(argc, argv)
+	, vocabulary_core::app(argc, argv)
+	, utils::ui::imgui::sdl_app(argc, argv)
 {
 	// Default resolution
 	set_resolution(1280, 720);

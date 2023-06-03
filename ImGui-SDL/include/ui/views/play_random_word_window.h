@@ -10,8 +10,9 @@ public:
 	using base = vocabulary_core::play_random_word_window;
 
 	play_random_word_window(utils::ui::node* parent)
-		: utils::ui::imgui::dialog(parent)
+		: utils::ui::node(parent)
 		, base(parent)
+		, utils::ui::imgui::dialog(parent)
 	{}
 
 private:

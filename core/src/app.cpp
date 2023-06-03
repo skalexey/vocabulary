@@ -154,8 +154,9 @@ auto get_words_path_by_string(const std::string& path_str)
 namespace vocabulary_core
 {
 // App Definitions
-	app::app(int argc, char* argv[]) 
-		: base(argc, argv)
+	app::app(int argc, char* argv[])
+		: utils::ui::node(nullptr)
+		, base(argc, argv)
 		, utils::ui::user_input(this)
 	{}
 

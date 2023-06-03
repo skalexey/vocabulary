@@ -25,7 +25,8 @@ namespace
 }
 
 app::app(int argc, char* argv[])
-	: utils::ui::app(argc, argv)
+	: utils::ui::node(nullptr)
+	, utils::ui::app(argc, argv)
 	, utils::ui::qt::app(argc, argv)
 	, vocabulary_core::app(argc, argv)
 {
