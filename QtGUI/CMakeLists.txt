@@ -11,7 +11,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_PREFIX_PATH "i:/Dev/Qt/6.5.0/msvc2019_64")
 
 find_package(QT NAMES Qt6 COMPONENTS Gui Qml Quick)
-find_package(Qt6 REQUIRED COMPONENTS Core Qml Quick)
+find_package(Qt6 REQUIRED COMPONENTS Core Qml Quick Widgets)
 
 # To build this application you need Qt 6.2.0 or higher
 if (Qt6_VERSION VERSION_LESS 6.2.0)
@@ -72,6 +72,7 @@ macro(setup_module)
         Qt${QT_VERSION_MAJOR}::Gui
         Qt${QT_VERSION_MAJOR}::Quick
         Qt${QT_VERSION_MAJOR}::Qml
+        Qt${QT_VERSION_MAJOR}::Widgets
     )
 
     if (${BUILD_QDS_COMPONENTS})

@@ -37,7 +37,9 @@ macro(module_add_library_or_executable)
 	setup_src()
 	if(BUILD_LIBRARY)
 		module_message("BUILD_LIBRARY")
-		add_library(${MODULE_NAME} ${SRC})
+		# TODO: parameterize.
+		# If don't pass STATIC then it uses STATIC by default, but SHARED if the parent is SHARED.
+		add_library(${MODULE_NAME} STATIC ${SRC})
 	elseif(BUILD_SHARED_LIBRARY)
 		module_message("BUILD_SHARED_LIBRARY")
 		add_library(${MODULE_NAME} SHARED ${SRC})
