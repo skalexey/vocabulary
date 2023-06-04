@@ -15,7 +15,7 @@
 #include "QtGUI/include/app.h"
 
 LOG_POSTFIX("\n");
-LOG_PREFIX("[app]: ");
+LOG_PREFIX("[qtgui-app]: ");
 
 using utils::void_int_cb;
 
@@ -37,6 +37,9 @@ app::app(int argc, char* argv[])
 int app::init()
 {
     LOG("app::init");
+	auto r = utils::ui::qt::app::init();
+	if (r != 0)
+		return r;
 	return vocabulary_core::app::init();
 }
 

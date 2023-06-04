@@ -21,8 +21,12 @@ namespace vocabulary_core
 		virtual bool on_update(float dt) override;
 		void request_auth(const std::string& user_name, const std::string& token, const utils::void_int_cb& on_result);
 
+		play_random_word_controller& get_play_random_word_controller() {
+			return *m_window_ctrl;
+		}
+		
 	protected:
-		virtual int init();
+		int init() override;
 
 	private:
 		void init_words(const utils::void_int_cb& on_result);
@@ -35,7 +39,7 @@ namespace vocabulary_core
 		void ask_file(const std::string& msg, const fs::path& path, const on_path_selected_t& callback);
 		void choose_directory(const on_path_selected_t& callback, const std::string& default_path);
 		void on_path_selected(const opt_path_t& path, const on_path_selected_t& on_result);
-		
+
 	protected:
 		void set_offline_mode(bool offline) {
 			m_is_offline = offline;

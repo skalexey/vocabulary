@@ -46,6 +46,7 @@ macro(setup_module)
 		${UTILS_DIR}/src/ui/qt/widgets/dialogs/dialog_yes_no.cpp
 		${UTILS_DIR}/src/ui/qt/widgets/dialogs/dialog_message.cpp
 		${UTILS_DIR}/src/ui/qt/widgets/dialogs/dialog_input_text.cpp
+        ${UTILS_DIR}/include/utils/ui/qt/widgets/button.h
         ${HEADERS} # for IDE
     )
     setup_src()

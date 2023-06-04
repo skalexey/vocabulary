@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 
 Dialog {
 	id: dialog
@@ -10,14 +11,6 @@ Dialog {
 	property var show: function() {
 		visible = true;
 		onShow();
-	}
-	property string buttonOkText: qsTr("Ok")
-	property string buttonCancelText: qsTr("Cancel")
-	property var onOk: function() {
-        console.log("Dialog.onOk default handler");
-	}
-	property var onCancel: function() {
-        console.log("Dialog.onCancel default handler");
 	}
 
 	onClosed: function() {
@@ -30,31 +23,10 @@ Dialog {
 	width: 300
 	height: 220
 
-	Item {
-		id: row
-		width: parent.width;
-		height: cancelButton.height
-		anchors.bottom: parent.bottom
-		Button {
-			id: okButton
-			text: buttonOkText
-			width: parent.width / 2 - 20;
-			anchors.left: parent.left
-			onClicked: function(mouse) {
-				onOk();
-				dialog.close();
-			}
-		}
-		Button {
-			id: cancelButton
-			text: buttonCancelText
-			anchors.right: parent.right
-			width: parent.width / 2 - 20;
-			onClicked: function(mouse) {
-				onCancel();
-				dialog.close();
-			}
-		}
+    ColumnLayout {
+        id: contentItem
+        width: parent.width;
+        height: parent.height
 	}
 }
 

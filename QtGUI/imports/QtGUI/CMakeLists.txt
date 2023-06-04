@@ -15,6 +15,12 @@ set_source_files_properties(Constants.qml
     )
 
 
+file(GLOB QML_FILES_LIST "*.qml")
+foreach(fpath ${QML_FILES_LIST})
+	get_filename_component(fname ${fpath} NAME)
+	message("Register QML file: ${fname}")
+	set(QML_FNAME_LIST ${QML_FNAME_LIST} ${fname})
+endforeach()
 
 qt6_add_qml_module(QtGUI
 
@@ -24,14 +30,6 @@ qt6_add_qml_module(QtGUI
 
 	QML_FILES
 
-		Constants.qml
-
-		DirectoryFontLoader.qml
-
-		EventListModel.qml
-
-		EventListSimulator.qml
-		
-		Dialog.qml
+		${QML_FNAME_LIST}
 )
 
