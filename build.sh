@@ -115,7 +115,7 @@ build()
 	fi
 
 	if [ -f "pre_build.sh" ]; then
-		./pre_build.sh
+		./pre_build.sh $@
 		[ $? -ne 0 ] && log_error "pre_build.sh error" " -" && return 6
 	fi
 

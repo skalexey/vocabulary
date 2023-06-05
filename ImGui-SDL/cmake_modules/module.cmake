@@ -11,7 +11,7 @@ macro(setup_module_includes)
 	set(${MODULE_NAME}_INCLUDES
 		${CUSTOM_INCLUDES}
 		${INCLUDES}
-		"include"
+		"${CMAKE_CURRENT_SOURCE_DIR}/include"
 	)
 	set(${MODULE_NAME}_INCLUDES ${${MODULE_NAME}_INCLUDES} PARENT_SCOPE)
 	message("Set ${MODULE_NAME}_INCLUDES: ${${MODULE_NAME}_INCLUDES}")
@@ -45,7 +45,7 @@ macro(module_add_library_or_executable)
 		module_message("BUILD_EXECUTABLE")
 		add_executable(${MODULE_NAME} ${SRC})
 	endif()
-	target_link_libraries(${MODULE_NAME} PRIVATE ${DEPENDENCY_LIBRARIES})
+	target_link_libraries(${MODULE_NAME} PUBLIC ${DEPENDENCY_LIBRARIES})
 	if(BUILD_SHARED_LIBRARY OR NOT BUILD_LIBRARY)
 		copy_runtime_deps()
 	endif()
