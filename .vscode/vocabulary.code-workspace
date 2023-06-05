@@ -134,7 +134,8 @@
 			"syncstream": "cpp",
 			"typeindex": "cpp",
 			"valarray": "cpp",
-			"variant": "cpp"
+			"variant": "cpp",
+			"*.moc": "cpp"
 		},
 		"search.exclude": {
 			"*.log": true,

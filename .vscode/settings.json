@@ -120,5 +120,6 @@
         "LOG_ON": "ON",
         "LOG_LEVEL_DEBUG": "ON",
         "LOG_LEVEL_VERBOSE": "ON"
-    }
+    },
+    "cmake.sourceDirectory": "C:/Users/skoro/Projects/vocabulary/QtGUI"
 }
