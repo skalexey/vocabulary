@@ -15,7 +15,7 @@ namespace vocabulary_core
 		using base = utils::ui::window_controller;
 
 	public:
-		play_random_word_controller(const utils::ui::app& app);
+		play_random_word_controller(utils::ui::app& app);
 		play_random_word_window& view() {
 			return *std::dynamic_pointer_cast<play_random_word_window>(get_view());
 		}

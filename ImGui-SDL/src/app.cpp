@@ -10,7 +10,7 @@
 #include <utils/print_defs.h>
 #include <utils/common.h>
 #include <utils/Log.h>
-#include "app.h"
+#include "ImGui-SDL/include/app.h"
 
 LOG_POSTFIX("\n");
 LOG_PREFIX("[app]: ");
@@ -22,7 +22,11 @@ namespace
 	const std::string log_fname = "vocabulary_log.txt";
 }
 
-app::app()
+app::app(int argc, char* argv[])
+	: utils::ui::node(nullptr)
+	, utils::ui::app(argc, argv)
+	, vocabulary_core::app(argc, argv)
+	, utils::ui::imgui::sdl_app(argc, argv)
 {
 	// Default resolution
 	set_resolution(1280, 720);
@@ -33,7 +37,7 @@ app::app()
 
 int app::init()
 {
-	return base::init();
+	return vocabulary_core::app::init();
 }
 
 SDL_Window* app::create_window()

@@ -9,6 +9,12 @@ class play_random_word_window : public utils::ui::imgui::dialog, public vocabula
 public:
 	using base = vocabulary_core::play_random_word_window;
 
+	play_random_word_window(utils::ui::node* parent)
+		: utils::ui::node(parent)
+		, base(parent)
+		, utils::ui::imgui::dialog(parent)
+	{}
+
 private:
 	WIDGET_REGISTRATOR(utils::ui::imgui::widget_factory, play_random_word_window);
 

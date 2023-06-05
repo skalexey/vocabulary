@@ -7,10 +7,8 @@
 
 class app : public utils::ui::imgui::sdl_app, public vocabulary_core::app
 {
-	using base = vocabulary_core::app;
-
 public:
-	app();
+	app(int argc, char* argv[]);
 	bool on_update(float dt) override;
 
 protected:

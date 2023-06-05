@@ -26,9 +26,43 @@ LOG_POSTFIX("\n");
 LOG_PREFIX("[vocabulary_core::app]: ");
 
 words g_words;
-vocabulary_core::app* g_app;
+vocabulary_core::app* g_app = nullptr;
 
 using utils::void_int_cb;
+
+// Used in utils/networking/sync_resources.h
+void ask_user(
+    const std::string& question
+    , const utils::void_bool_cb& on_answer
+    , const char* yes_btn_text
+    , const char* no_btn_text
+)
+{
+	if (g_app)
+		g_app->ask_user(question, on_answer, yes_btn_text, no_btn_text);
+}
+
+void ask_line(
+	const std::string& msg
+	, const utils::void_string_bool_cb& on_answer
+	, const std::string& default_value
+	, const char* ok_btn_text
+	, const char* cancel_btn_text
+)
+{
+    if (g_app)
+        g_app->ask_line(msg, on_answer, default_value, ok_btn_text, cancel_btn_text);
+}
+
+void request_auth(
+	const std::string& user_name
+	, const std::string& token
+	, const utils::void_int_cb& on_result
+)
+{
+	if (g_app)
+		g_app->request_auth(user_name, token, on_result);
+}
 
 namespace
 {
@@ -120,8 +154,10 @@ auto get_words_path_by_string(const std::string& path_str)
 namespace vocabulary_core
 {
 // App Definitions
-	app::app() 
-		: utils::ui::user_input(this)
+	app::app(int argc, char* argv[])
+		: utils::ui::node(nullptr)
+		, base(argc, argv)
+		, utils::ui::user_input(this)
 	{}
 
 	void app::request_auth(const std::string& user_name, const std::string& token, const utils::void_int_cb& on_result)
@@ -156,7 +192,7 @@ namespace vocabulary_core
 	}
 	void app::choose_directory(const on_path_selected_t &callback, const std::string& default_path)
 	{
-		ask_line(
+		app::ask_line(
 			"Enter words location directory or file path"
 			, [=](const std::string& path, bool cancelled) {
 				callback(cancelled ? opt_path_t{} : opt_path_t(path));
@@ -225,7 +261,7 @@ namespace vocabulary_core
 
 	void app::ask_directory(const std::string &msg, const fs::path &path, const on_path_selected_t& callback)
 	{
-		auto d = get_factory().create<utils::ui::dialog_with_buttons>();
+		auto d = get_factory().create<utils::ui::dialog_with_buttons>(this);
 		utils::ui::dialog_with_buttons::actions_t actions = {
 			{
 				"Choose another path"
@@ -251,7 +287,7 @@ namespace vocabulary_core
 
 	void app::ask_file(const std::string &msg, const fs::path& path, const on_path_selected_t& callback)
 	{
-		auto d = get_factory().create<utils::ui::dialog_with_buttons>();
+		auto d = get_factory().create<utils::ui::dialog_with_buttons>(this);
 		utils::ui::dialog_with_buttons::actions_t actions = {
 			{
 				"Create"
@@ -358,7 +394,18 @@ namespace vocabulary_core
 			// TODO: pause?
 		});
 		
-		m_window_ctrl = std::make_unique<play_random_word_controller>(*this);
+		try
+		{
+			m_window_ctrl = std::make_unique<play_random_word_controller>(*this);
+		}
+		catch (std::exception& ex)
+		{
+			LOG("Creating controller exception: " << ex.what());
+		}
+		catch (...)
+		{
+			LOG("Creating controller exception!");
+		}
 
 		auto after_auth = [self = this] () {
 			self->init_words([=](int result_code) {
@@ -392,14 +439,17 @@ namespace vocabulary_core
 			auth([=](int result) {
 				if (result == 0)
 				{
-					show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
-					after_auth();
+					add_on_update([=](float dt) {
+						show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
+						after_auth();
+						return false;
+					});
 				}
 				else
 				{
 					utils::file::remove(identity_path);
 					identity_model_ptr.reset(nullptr);
-					ask_user("Authentication error. Continue in offline mode?", [=](bool yes) {
+					app::ask_user("Authentication error. Continue in offline mode?", [=](bool yes) {
 						if (yes)
 						{
 							self->set_offline_mode(true);

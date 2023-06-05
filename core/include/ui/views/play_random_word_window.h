@@ -10,7 +10,8 @@ namespace vocabulary_core
 		using base = utils::ui::dialog;
 
 		public:
-			play_random_word_window();
+			play_random_word_window(node* parent);
+			int post_construct() override;
 
 			utils::ui::text& example_label() { return *m_example_label; }
 			utils::ui::text& translation_label() { return *m_translation_label; }
