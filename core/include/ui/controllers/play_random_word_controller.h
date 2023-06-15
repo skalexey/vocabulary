@@ -6,7 +6,8 @@
 #include <memory>
 #include <utils/ui/window_controller.h>
 #include "ui/views/play_random_word_window.h"
-#include "word.h"
+
+class word;
 
 namespace vocabulary_core
 {

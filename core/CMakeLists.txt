@@ -84,6 +84,8 @@ macro(setup_module)
 		${UTILS_DIR}/src/file_utils.cpp
 		${UTILS_DIR}/src/io_utils.cpp
 		${UTILS_DIR}/src/datetime.cpp
+		# TODO: remove this and fix dmg::~Model() unresolved symbol error
+		${DEPS}/DataModelBuilder/Core/src/DMBCore.cpp
 		${HEADERS} # for IDE
 		# uncomment if want to use lua scenario
 		# main_lua.cpp

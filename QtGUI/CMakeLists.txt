@@ -6,9 +6,15 @@ project(QtGUIApp LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# Enable generating debug information for Qt libraries
+# set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
-# include(i:/Dev/Qt/6.5.0/msvc2019_64/lib/cmake/Qt6/Qt6Config.cmake)
-set(CMAKE_PREFIX_PATH "i:/Dev/Qt/6.5.0/msvc2019_64")
+# Enable generating debug information for Qt libraries in Release mode as well
+# set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -g")
 
 find_package(QT NAMES Qt6 COMPONENTS Gui Qml Quick)
 find_package(Qt6 REQUIRED COMPONENTS Core Qml Quick Widgets)
@@ -18,12 +24,12 @@ if (Qt6_VERSION VERSION_LESS 6.2.0)
     message(FATAL_ERROR "You need Qt 6.2.0 or newer to build the application.")
 endif()
 
+option(LOG_ON "Turn on logging" ON)
 
 macro(setup_module)
     # Utils dependency
 	set(UTILS_DIR "${DEPS}/Utils")
 
-	option(LOG_ON "Turn on logging" ON)
 	# Core dependency
 	add_dependency_module(${CMAKE_SOURCE_DIR}/../core vocabulary_core)
 	module_message("vocabulary_core_INCLUDES: ${vocabulary_core_INCLUDES}")
@@ -46,7 +52,8 @@ macro(setup_module)
 		${UTILS_DIR}/src/ui/qt/widgets/dialogs/dialog_yes_no.cpp
 		${UTILS_DIR}/src/ui/qt/widgets/dialogs/dialog_message.cpp
 		${UTILS_DIR}/src/ui/qt/widgets/dialogs/dialog_input_text.cpp
-        ${UTILS_DIR}/include/utils/ui/qt/widgets/button.h
+        # ${UTILS_DIR}/include/utils/ui/qt/widgets/button_model.h
+        ${UTILS_DIR}/src/ui/qt/widgets/button_model.cpp
         ${HEADERS} # for IDE
     )
     setup_src()
@@ -54,7 +61,6 @@ macro(setup_module)
     module_message("DEPENDENCY_LIBRARIES: ${DEPENDENCY_LIBRARIES}")
     target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${DEPENDENCY_LIBRARIES})
 	# copy_runtime_deps()
-    # qt_standard_project_setup() requires Qt 6.3 or higher. See https://doc.qt.io/qt-6/qt-standard-project-setup.html for details.
 
     if (${QT_VERSION_MINOR} GREATER_EQUAL 3)
 
@@ -81,6 +87,11 @@ macro(setup_module)
     endif ()
 
     include(${CMAKE_CURRENT_SOURCE_DIR}/qmlmodules)
+
+    if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+		target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE QT_QML_DEBUG)
+	endif()
+    
 endmacro(setup_module)
 
 include(cmake_modules/modules.cmake)
