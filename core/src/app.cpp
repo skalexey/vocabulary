@@ -40,16 +40,7 @@ void ask_user(
 )
 {
 	if (g_app)
-		// Redirect it to the main thread due to some implementations restrictions
-		// (ex. Qt doesn't allow instantiating QML objects 
-		//g_app->add_on_update([=, 
-		//	yes_btn_text = std::string(yes_btn_text_ptr ? yes_btn_text_ptr : "")
-		//	, no_btn_text = std::string(no_btn_text_ptr ? no_btn_text_ptr : "")
-		//](float dt) {
-			g_app->ask_user(question, on_answer, yes_btn_text_ptr, no_btn_text_ptr);
-			//g_app->ask_user(question, on_answer, yes_btn_text.c_str(), no_btn_text.c_str());
-			//return false;
-		//});
+		g_app->ask_user(question, on_answer, yes_btn_text_ptr, no_btn_text_ptr);
 }
 
 void ask_line(
