@@ -24,7 +24,7 @@ Dialog {
 	height: 220
 
     ColumnLayout {
-        id: contentItem
+        objectName: "content"
         width: parent.width;
         height: parent.height
 	}

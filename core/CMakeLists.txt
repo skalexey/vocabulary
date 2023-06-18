@@ -74,6 +74,7 @@ macro(setup_module)
 	# Assign all the headers to ${HEADERS} variable and use it in add_src() macro
 	set_headers()
 	add_src(
+		${UTILS_DIR}/src/ui/app.cpp
 		${UTILS_DIR}/src/ui/node.cpp
 		${UTILS_DIR}/src/ui/helpers/user_input.cpp
 		${UTILS_DIR}/src/ui/window_controller.cpp

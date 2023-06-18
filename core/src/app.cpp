@@ -3,6 +3,7 @@
 #include <memory>
 #include <stdio.h>
 #include <csignal>
+#include <string>
 #include <utils/file_utils.h>
 #include <utils/string_utils.h>
 #include <utils/io_utils.h>
@@ -34,12 +35,21 @@ using utils::void_int_cb;
 void ask_user(
     const std::string& question
     , const utils::void_bool_cb& on_answer
-    , const char* yes_btn_text
-    , const char* no_btn_text
+    , const char* yes_btn_text_ptr
+    , const char* no_btn_text_ptr
 )
 {
 	if (g_app)
-		g_app->ask_user(question, on_answer, yes_btn_text, no_btn_text);
+		// Redirect it to the main thread due to some implementations restrictions
+		// (ex. Qt doesn't allow instantiating QML objects 
+		//g_app->add_on_update([=, 
+		//	yes_btn_text = std::string(yes_btn_text_ptr ? yes_btn_text_ptr : "")
+		//	, no_btn_text = std::string(no_btn_text_ptr ? no_btn_text_ptr : "")
+		//](float dt) {
+			g_app->ask_user(question, on_answer, yes_btn_text_ptr, no_btn_text_ptr);
+			//g_app->ask_user(question, on_answer, yes_btn_text.c_str(), no_btn_text.c_str());
+			//return false;
+		//});
 }
 
 void ask_line(
@@ -234,7 +244,7 @@ namespace vocabulary_core
 						ask_file(
 							"Can't find words storage file '" + path_val.string() + "'. Please, enter the path or provide another directory."
 							, path_val
-							, [=, self = this](const opt_path_t& path) {
+							, [self = this, on_result](const opt_path_t& path) {
 								self->on_path_selected(path, on_result);
 							}
 						);
@@ -265,7 +275,7 @@ namespace vocabulary_core
 		utils::ui::dialog_with_buttons::actions_t actions = {
 			{
 				"Choose another path"
-				, [=, self = this] (bool up) {
+				, [self = this, callback, path, d] (bool up) {
 					self->choose_directory(callback, path.string());
 					d->close();
 				}
@@ -299,7 +309,7 @@ namespace vocabulary_core
 			},
 			{
 				"Choose another path"
-				, [=, self = this](bool up) {
+				, [self = this, callback, path, d](bool up) {
 					self->choose_directory(callback, path.string());
 					d->close();
 				}
@@ -334,7 +344,7 @@ namespace vocabulary_core
 		if (!m_cfg_model.Load(cfg_path.string()))
 			m_cfg_model.Store(cfg_path.string(), { true });
 
-		auto on_selected_result = [=, self = this](const opt_path_t& path) {
+		auto on_selected_result = [self = this, on_result](const opt_path_t& path) {
 			auto path_val = path.value();
 			self->update_words_dir(path_val.string());
 			g_words_fpath = path_val;
@@ -429,7 +439,7 @@ namespace vocabulary_core
 			});
 		};
 
-		get_identity([=, self = this](bool ok, std::string, std::string) {
+		get_identity([self = this, after_auth](bool ok, std::string, std::string) {
 			if (!ok)
 			{
 				MSG("No login information has been provided. Exit.");
@@ -439,8 +449,8 @@ namespace vocabulary_core
 			auth([=](int result) {
 				if (result == 0)
 				{
-					add_on_update([=](float dt) {
-						show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
+					self->add_on_update([=](float dt) {
+						self->show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
 						after_auth();
 						return false;
 					});
@@ -449,7 +459,7 @@ namespace vocabulary_core
 				{
 					utils::file::remove(identity_path);
 					identity_model_ptr.reset(nullptr);
-					app::ask_user("Authentication error. Continue in offline mode?", [=](bool yes) {
+					self->app::ask_user("Authentication error. Continue in offline mode?", [=](bool yes) {
 						if (yes)
 						{
 							self->set_offline_mode(true);

@@ -20,7 +20,7 @@ int word::load()
 	if (m_data.empty())
 		return erc::invalid_column_count;
 	//m_data.erase(std::remove(str.begin(), str.end(), '\n'), str.cend());
-	auto load_columns = [=, self = this](const std::vector<std::string_view>& columns)
+	auto load_columns = [self = this](const std::vector<std::string_view>& columns)
 	{
 		bool level_is_present = true;
 		try
