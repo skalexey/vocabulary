@@ -11,9 +11,12 @@ namespace vocabulary_core
 	play_random_word_window::play_random_word_window(node* parent)
 		: base(parent)
 	{}
-
-	int play_random_word_window::post_construct()
+	
+	int play_random_word_window::on_post_construct()
 	{
+		auto retcode = base::on_post_construct();
+		if (retcode != 0)
+			return retcode;
 		using namespace utils::ui;
 		m_show_example_button = get_factory().create<button>(this);
 		m_show_example_button->set_text("show Example");
