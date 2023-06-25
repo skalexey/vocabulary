@@ -23,8 +23,7 @@ namespace
 }
 
 app::app(int argc, char* argv[])
-	: utils::ui::node(nullptr)
-	, utils::ui::app(argc, argv)
+	: utils::ui::app(argc, argv)
 	, vocabulary_core::app(argc, argv)
 	, utils::ui::imgui::sdl_app(argc, argv)
 {
@@ -50,7 +49,9 @@ SDL_Window* app::create_window()
 bool app::on_update(float dt) {
 	if (!m_log_stream.str().empty())
 		m_log_stream.out();
-	return vocabulary_core::app::on_update(dt);
+	if (!vocabulary_core::app::on_update(dt))
+		return false;
+	return utils::ui::imgui::sdl_app::on_update(dt);
 }
 
 void app::log_stringstream::out()

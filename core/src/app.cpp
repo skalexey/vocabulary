@@ -156,8 +156,7 @@ namespace vocabulary_core
 {
 // App Definitions
 	app::app(int argc, char* argv[])
-		: utils::ui::node(nullptr)
-		, base(argc, argv)
+		: base(argc, argv)
 		, utils::ui::user_input(this)
 	{}
 
@@ -281,9 +280,7 @@ namespace vocabulary_core
 		};
 		d->setup_buttons(actions);
 		d->set_message(msg);
-		add_on_update([=](float dt) {
-			return d->show();
-		});
+		d->show();
 	}
 
 	void app::ask_file(const std::string &msg, const fs::path& path, const on_path_selected_t& callback)
@@ -322,10 +319,7 @@ namespace vocabulary_core
 
 		d->set_message(msg);
 		d->setup_buttons(actions);
-		
-		add_on_update([=](float dt) {
-			return d->show();
-		});
+		d->show();	
 	}
 
 	void app::init_words(const void_int_cb& on_result)
@@ -441,10 +435,10 @@ namespace vocabulary_core
 			auth([=](int result) {
 				if (result == 0)
 				{
-					self->add_on_update([=](float dt) {
+					self->do_in_main_thread([=] {
 						self->show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
 						after_auth();
-						return false;
+						return 0;
 					});
 				}
 				else

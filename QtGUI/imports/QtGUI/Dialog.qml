@@ -13,6 +13,10 @@ Dialog {
 		onShow();
 	}
 
+    property var onDestroy: function() {
+        console.log("Dialog.onDestroy default handler");
+    }
+
 	onClosed: function() {
         console.log("Dialog.onClosed default handler");
 	}

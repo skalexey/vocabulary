@@ -25,8 +25,7 @@ namespace
 }
 
 app::app(int argc, char* argv[])
-	: utils::ui::node(nullptr)
-	, utils::ui::app(argc, argv)
+	: utils::ui::app(argc, argv)
 	, utils::ui::qt::app(argc, argv)
 	, vocabulary_core::app(argc, argv)
 {
@@ -46,7 +45,9 @@ int app::init()
 bool app::on_update(float dt) {
 	if (!m_log_stream.str().empty())
 		m_log_stream.out();
-	return vocabulary_core::app::on_update(dt);
+	if (!vocabulary_core::app::on_update(dt))
+		return false;
+	return utils::ui::qt::app::on_update(dt);
 }
 
 void app::log_stringstream::out()

@@ -8,10 +8,6 @@
 
 namespace vocabulary_core
 {
-	play_random_word_window::play_random_word_window(node* parent)
-		: base(parent)
-	{}
-	
 	int play_random_word_window::on_post_construct()
 	{
 		auto retcode = base::on_post_construct();

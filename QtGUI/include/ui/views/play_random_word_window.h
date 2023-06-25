@@ -1,25 +1,30 @@
 #pragma once
 
+#include <memory>
 #include <utils/ui/qt/fwd.h>
 #include <utils/ui/qt/widgets/dialog.h>
 #include <core/include/ui/views/play_random_word_window.h>
 
-class play_random_word_window : public utils::ui::qt::dialog, public vocabulary_core::play_random_word_window
+class play_random_word_window : public utils::ui::qt::dialog, public vocabulary_core::play_random_word_window, public std::enable_shared_from_this<play_random_word_window>
 {
 public:
 	using base = vocabulary_core::play_random_word_window;
 
-	play_random_word_window(utils::ui::node* parent)
-		: utils::ui::node(parent)
-		, base(parent)
-		, utils::ui::qt::dialog(parent)
-	{}
-	
-private:
-	WIDGET_REGISTRATOR(utils::ui::qt::widget_factory, play_random_word_window);
-
 protected:
+	int on_post_construct() override {
+		auto retcode = utils::ui::qt::dialog::on_post_construct();
+		if (retcode != 0)
+			return retcode;
+		return base::on_post_construct();
+	}
+
 	void on_show() override {
 		utils::ui::qt::dialog::on_show();
 	}
+
+private:
+	WIDGET_REGISTRATOR(utils::ui::qt::widget_factory, play_random_word_window);
+
+private:
+	std::shared_ptr<play_random_word_window> m_ptr;
 };
