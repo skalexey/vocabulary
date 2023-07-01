@@ -45,7 +45,7 @@ int app::init()
 bool app::on_update(float dt) {
 	if (!m_log_stream.str().empty())
 		m_log_stream.out();
-	if (!vocabulary_core::app::on_update(dt))
+	if (!vocabulary_core::app::on_core_update(dt))
 		return false;
 	return utils::ui::qt::app::on_update(dt);
 }

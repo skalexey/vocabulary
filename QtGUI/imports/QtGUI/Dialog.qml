@@ -5,6 +5,9 @@ import QtQuick.Layouts
 Dialog {
 	id: dialog
 	title: qsTr("Title")
+    property int originalWidth
+    property int originalHeight
+
 	property var onShow: function() {
 		console.log("Dialog.onShow default handler");
 	}
@@ -21,17 +24,26 @@ Dialog {
         console.log("Dialog.onClosed default handler");
 	}
 
-	modal: true
-	x: 200 // parent.width / 2 - width / 2
-	y: 200 // parent.height / 2 - height / 2
-	width: 300
-	height: 220
+    Component.onCompleted : {
+        originalWidth = width;
+        originalHeight = height;
+    }
+
+    closePolicy: Popup.NoAutoClose
+    modal: true
+    anchors.centerIn: parent
 
     ColumnLayout {
+        id: mainLayout
         objectName: "content"
-        width: parent.width;
-        height: parent.height
-	}
+        onWidthChanged: function() {
+            dialog.width = originalWidth.width + width;
+        }
+
+        onHeightChanged: function() {
+            dialog.height = originalWidth.height + height
+        }
+    }
 }
 
 /*##^##

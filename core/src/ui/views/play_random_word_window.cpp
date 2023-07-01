@@ -8,24 +8,8 @@
 
 namespace vocabulary_core
 {
-	int play_random_word_window::on_post_construct()
+	play_random_word_window::play_random_word_window()
 	{
-		auto retcode = base::on_post_construct();
-		if (retcode != 0)
-			return retcode;
-		using namespace utils::ui;
-		m_show_example_button = get_factory().create<button>(this);
-		m_show_example_button->set_text("show Example");
-		m_show_translation_button = get_factory().create<button>(this);
-		m_show_translation_button->set_text("show Translation");
-		m_i_know_it_button = get_factory().create<button>(this);
-		m_i_know_it_button->set_text("I Know It");
-		m_skip_button = get_factory().create<button>(this);
-		m_skip_button->set_text("Skip");
-		m_word_label = get_factory().create<label>(this);
-		m_example_label = get_factory().create<text>(this);
-		m_translation_label = get_factory().create<text>(this);
-		// set_modal(false);
 		// set_auto_resize(true);
 		set_size({ 500, 700 });
 		set_title("Random Word Game");
@@ -38,6 +22,25 @@ namespace vocabulary_core
 			m_i_know_it_button->show();
 			m_skip_button->show();
 		});
+		do_on_post_construct([self = this]() {
+			return self->this_on_post_construct();
+		});
+	}
+
+	int play_random_word_window::this_on_post_construct()
+	{
+		using namespace utils::ui;
+		m_show_example_button = get_factory().create<button>(this);
+		m_show_example_button->set_text("show Example");
+		m_show_translation_button = get_factory().create<button>(this);
+		m_show_translation_button->set_text("show Translation");
+		m_i_know_it_button = get_factory().create<button>(this);
+		m_i_know_it_button->set_text("I Know It");
+		m_skip_button = get_factory().create<button>(this);
+		m_skip_button->set_text("Skip");
+		m_word_label = get_factory().create<label>(this);
+		m_example_label = get_factory().create<text>(this);
+		m_translation_label = get_factory().create<text>(this);
 		return 0;
 	}
 }

@@ -10,14 +10,6 @@ class play_random_word_window : public utils::ui::qt::dialog, public vocabulary_
 public:
 	using base = vocabulary_core::play_random_word_window;
 
-protected:
-	int on_post_construct() override {
-		auto retcode = utils::ui::qt::dialog::on_post_construct();
-		if (retcode != 0)
-			return retcode;
-		return base::on_post_construct();
-	}
-
 	void on_show() override {
 		utils::ui::qt::dialog::on_show();
 	}

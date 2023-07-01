@@ -435,11 +435,8 @@ namespace vocabulary_core
 			auth([=](int result) {
 				if (result == 0)
 				{
-					self->do_in_main_thread([=] {
-						self->show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
-						after_auth();
-						return 0;
-					});
+					self->show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
+					after_auth();
 				}
 				else
 				{
@@ -461,8 +458,16 @@ namespace vocabulary_core
 		return 0;
 	}
 
+	bool app::core_update(float dt)
+	{
+		if (!m_window_ctrl->update(dt))
+			return false;
+		return on_core_update(dt);
+	}
+
 	bool app::on_update(float dt) {
-		m_window_ctrl->update(dt);
-		return true;
+		if (!base::update(dt))
+			return false;
+		return core_update(dt);
 	}
 }

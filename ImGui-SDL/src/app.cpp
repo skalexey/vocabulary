@@ -49,7 +49,7 @@ SDL_Window* app::create_window()
 bool app::on_update(float dt) {
 	if (!m_log_stream.str().empty())
 		m_log_stream.out();
-	if (!vocabulary_core::app::on_update(dt))
+	if (!vocabulary_core::app::on_core_update(dt))
 		return false;
 	return utils::ui::imgui::sdl_app::on_update(dt);
 }
