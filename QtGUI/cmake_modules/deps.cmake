@@ -8,8 +8,8 @@ macro(setup_deps)
 	endif()
 
 	if("${DEPS}" STREQUAL "")
-		module_message("Try to set DEPS to build_deps. Read value: '$ENV{build_deps}'")
 		file(TO_CMAKE_PATH "$ENV{build_deps}" DEPS)
+		module_message("Try to set DEPS to build_deps. Read value: '${DEPS}'")
 	endif()
 
 	if("${DEPS}" STREQUAL "")
