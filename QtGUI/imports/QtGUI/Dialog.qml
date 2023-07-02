@@ -22,13 +22,8 @@ Dialog {
         console.log("Dialog.onClosed default handler");
 	}
 
-    Component.onCompleted : {
-        originalWidth = width;
-        originalHeight = height;
-    }
-
     closePolicy: Popup.NoAutoClose
-    modal: true
+    modal: true // Default value. Overridden from C++.
     anchors.centerIn: parent
 
     height: childrenRect.height
@@ -37,6 +32,7 @@ Dialog {
     ColumnLayout {
         id: mainLayout
         objectName: "content"
+        Layout.maximumWidth: 400
     }
 }
 
