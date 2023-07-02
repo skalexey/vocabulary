@@ -2,7 +2,13 @@ cmake_minimum_required(VERSION 3.21.1)
 
 set(BUILD_QDS_COMPONENTS ON CACHE BOOL "Build design studio components")
 
+set(CMAKE_PREFIX_PATH "I:/Dev/Qt/6.5.0/android_arm64_v8a")
+set(QT_HOST_PATH "I:/Dev/Qt/6.5.0/msvc2019_64")
+# message("CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
+
 project(QtGUIApp LANGUAGES CXX)
+
+#find_package(Threads REQUIRED)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
@@ -15,6 +21,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Enable generating debug information for Qt libraries in Release mode as well
 # set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -g")
+
+# include(D:/Content/Dev/Qt/6.5.1/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake)
+# set(CMAKE_PREFIX_PATH "i:/Dev/Qt/6.5.0/msvc2019_64")
+
 
 find_package(QT NAMES Qt6 COMPONENTS Gui Qml Quick)
 find_package(Qt6 REQUIRED COMPONENTS Core Qml Quick Widgets)
