@@ -9,7 +9,7 @@ class app : public utils::ui::qt::app, public vocabulary_core::app
 {
 public:
 	app(int argc, char* argv[]);
-	bool on_update(float dt) override;
+	bool on_update(float dt) override final;
 
 protected:
 	int init() override;

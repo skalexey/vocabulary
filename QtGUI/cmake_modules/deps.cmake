@@ -9,6 +9,7 @@ macro(setup_deps)
 
 	if("${DEPS}" STREQUAL "")
 		file(TO_CMAKE_PATH "$ENV{build_deps}" DEPS)
+		module_message("Try to set DEPS to build_deps. Read value: '${DEPS}'")
 	endif()
 
 	if("${DEPS}" STREQUAL "")
@@ -25,5 +26,7 @@ macro(add_dependency_module dir name)
 	add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME})
 	module_add_includes(${${name}_INCLUDES})
 	set(DEPENDENCY_LIBRARIES ${DEPENDENCY_LIBRARIES} ${name})
+	module_message("add_dependency_module: ${name} located in ${dir}")
+	module_message("dependency includes: ${${name}_INCLUDES}")
 endmacro(add_dependency_module)
 

@@ -17,9 +17,5 @@ public:
 
 private:
 	WIDGET_REGISTRATOR(utils::ui::imgui::widget_factory, play_random_word_window);
-
-protected:
-	void on_show() override {
-		utils::ui::imgui::dialog::on_show();
-	}
+	std::shared_ptr<play_random_word_window> m_ptr;
 };

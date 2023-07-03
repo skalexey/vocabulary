@@ -5,6 +5,7 @@ import QtQuick.Layouts
 Dialog {
 	id: dialog
 	title: qsTr("Title")
+
 	property var onShow: function() {
 		console.log("Dialog.onShow default handler");
 	}
@@ -13,21 +14,26 @@ Dialog {
 		onShow();
 	}
 
+    property var onDestroy: function() {
+        console.log("Dialog.onDestroy default handler");
+    }
+
 	onClosed: function() {
         console.log("Dialog.onClosed default handler");
 	}
 
-	modal: true
-	x: 200 // parent.width / 2 - width / 2
-	y: 200 // parent.height / 2 - height / 2
-	width: 300
-	height: 220
+    closePolicy: Popup.NoAutoClose
+    modal: true // Default value. Overridden from C++.
+    anchors.centerIn: parent
+
+    height: childrenRect.height
+    width: childrenRect.width
 
     ColumnLayout {
-        id: contentItem
-        width: parent.width;
-        height: parent.height
-	}
+        id: mainLayout
+        objectName: "content"
+        Layout.maximumWidth: 400
+    }
 }
 
 /*##^##

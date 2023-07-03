@@ -9,7 +9,6 @@ class app : public utils::ui::imgui::sdl_app, public vocabulary_core::app
 {
 public:
 	app(int argc, char* argv[]);
-	bool on_update(float dt) override;
 
 protected:
 	int init() override;
@@ -18,6 +17,8 @@ protected:
 	SDL_Window* create_window() override;
 
 private:
+	bool on_update(float dt) override final;
+
 	class log_stringstream : public std::ostringstream
 	{
 		public:

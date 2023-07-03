@@ -18,7 +18,6 @@ namespace vocabulary_core
 
 	public:
 		app(int argc, char* argv[]);
-		virtual bool on_update(float dt) override;
 		void request_auth(const std::string& user_name, const std::string& token, const utils::void_int_cb& on_result);
 
 		play_random_word_controller& get_play_random_word_controller() {
@@ -27,8 +26,15 @@ namespace vocabulary_core
 		
 	protected:
 		int init() override;
+		bool core_update(float dt);
+
+	protected:
+		virtual bool on_core_update(float dt) {
+			return true;
+		}
 
 	private:
+		bool on_update(float dt) override; // Not final for virtual inheritance
 		void init_words(const utils::void_int_cb& on_result);
 		void load_words();
 		void sync_resources(const utils::void_int_cb& cb = nullptr);

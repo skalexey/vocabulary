@@ -7,6 +7,7 @@
 #include <utils/ui/widgets/label.h>
 #include <utils/ui/app.h>
 #include "words.h"
+#include "word.h"
 #include "ui/controllers/play_random_word_controller.h"
 LOG_PREFIX("[play_random_word_controller]: ");
 LOG_POSTFIX("\n");

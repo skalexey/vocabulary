@@ -8,3 +8,5 @@ android-project/
 __pycache__/
 keystore.properties.put
 my-release-key.jks
+.cache/
+

@@ -3,6 +3,7 @@
 #include <memory>
 #include <stdio.h>
 #include <csignal>
+#include <string>
 #include <utils/file_utils.h>
 #include <utils/string_utils.h>
 #include <utils/io_utils.h>
@@ -34,12 +35,12 @@ using utils::void_int_cb;
 void ask_user(
     const std::string& question
     , const utils::void_bool_cb& on_answer
-    , const char* yes_btn_text
-    , const char* no_btn_text
+    , const char* yes_btn_text_ptr
+    , const char* no_btn_text_ptr
 )
 {
 	if (g_app)
-		g_app->ask_user(question, on_answer, yes_btn_text, no_btn_text);
+		g_app->ask_user(question, on_answer, yes_btn_text_ptr, no_btn_text_ptr);
 }
 
 void ask_line(
@@ -155,8 +156,7 @@ namespace vocabulary_core
 {
 // App Definitions
 	app::app(int argc, char* argv[])
-		: utils::ui::node(nullptr)
-		, base(argc, argv)
+		: base(argc, argv)
 		, utils::ui::user_input(this)
 	{}
 
@@ -234,7 +234,7 @@ namespace vocabulary_core
 						ask_file(
 							"Can't find words storage file '" + path_val.string() + "'. Please, enter the path or provide another directory."
 							, path_val
-							, [=, self = this](const opt_path_t& path) {
+							, [self = this, on_result](const opt_path_t& path) {
 								self->on_path_selected(path, on_result);
 							}
 						);
@@ -265,7 +265,7 @@ namespace vocabulary_core
 		utils::ui::dialog_with_buttons::actions_t actions = {
 			{
 				"Choose another path"
-				, [=, self = this] (bool up) {
+				, [self = this, callback, path, d] (bool up) {
 					self->choose_directory(callback, path.string());
 					d->close();
 				}
@@ -280,9 +280,7 @@ namespace vocabulary_core
 		};
 		d->setup_buttons(actions);
 		d->set_message(msg);
-		add_on_update([=](float dt) {
-			return d->show();
-		});
+		d->show();
 	}
 
 	void app::ask_file(const std::string &msg, const fs::path& path, const on_path_selected_t& callback)
@@ -299,7 +297,7 @@ namespace vocabulary_core
 			},
 			{
 				"Choose another path"
-				, [=, self = this](bool up) {
+				, [self = this, callback, path, d](bool up) {
 					self->choose_directory(callback, path.string());
 					d->close();
 				}
@@ -321,10 +319,7 @@ namespace vocabulary_core
 
 		d->set_message(msg);
 		d->setup_buttons(actions);
-		
-		add_on_update([=](float dt) {
-			return d->show();
-		});
+		d->show();	
 	}
 
 	void app::init_words(const void_int_cb& on_result)
@@ -334,7 +329,7 @@ namespace vocabulary_core
 		if (!m_cfg_model.Load(cfg_path.string()))
 			m_cfg_model.Store(cfg_path.string(), { true });
 
-		auto on_selected_result = [=, self = this](const opt_path_t& path) {
+		auto on_selected_result = [self = this, on_result](const opt_path_t& path) {
 			auto path_val = path.value();
 			self->update_words_dir(path_val.string());
 			g_words_fpath = path_val;
@@ -397,6 +392,7 @@ namespace vocabulary_core
 		try
 		{
 			m_window_ctrl = std::make_unique<play_random_word_controller>(*this);
+			m_window_ctrl->show();
 		}
 		catch (std::exception& ex)
 		{
@@ -429,7 +425,7 @@ namespace vocabulary_core
 			});
 		};
 
-		get_identity([=, self = this](bool ok, std::string, std::string) {
+		get_identity([self = this, after_auth](bool ok, std::string, std::string) {
 			if (!ok)
 			{
 				MSG("No login information has been provided. Exit.");
@@ -439,17 +435,14 @@ namespace vocabulary_core
 			auth([=](int result) {
 				if (result == 0)
 				{
-					add_on_update([=](float dt) {
-						show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
-						after_auth();
-						return false;
-					});
+					self->show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
+					after_auth();
 				}
 				else
 				{
 					utils::file::remove(identity_path);
 					identity_model_ptr.reset(nullptr);
-					app::ask_user("Authentication error. Continue in offline mode?", [=](bool yes) {
+					self->app::ask_user("Authentication error. Continue in offline mode?", [=](bool yes) {
 						if (yes)
 						{
 							self->set_offline_mode(true);
@@ -465,8 +458,16 @@ namespace vocabulary_core
 		return 0;
 	}
 
+	bool app::core_update(float dt)
+	{
+		if (!m_window_ctrl->update(dt))
+			return false;
+		return on_core_update(dt);
+	}
+
 	bool app::on_update(float dt) {
-		m_window_ctrl->show();
-		return true;
+		if (!base::update(dt))
+			return false;
+		return core_update(dt);
 	}
 }

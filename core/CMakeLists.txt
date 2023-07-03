@@ -74,6 +74,7 @@ macro(setup_module)
 	# Assign all the headers to ${HEADERS} variable and use it in add_src() macro
 	set_headers()
 	add_src(
+		${UTILS_DIR}/src/ui/app.cpp
 		${UTILS_DIR}/src/ui/node.cpp
 		${UTILS_DIR}/src/ui/helpers/user_input.cpp
 		${UTILS_DIR}/src/ui/window_controller.cpp
@@ -84,6 +85,8 @@ macro(setup_module)
 		${UTILS_DIR}/src/file_utils.cpp
 		${UTILS_DIR}/src/io_utils.cpp
 		${UTILS_DIR}/src/datetime.cpp
+		# TODO: remove this and fix dmg::~Model() unresolved symbol error
+		${DEPS}/DataModelBuilder/Core/src/DMBCore.cpp
 		${HEADERS} # for IDE
 		# uncomment if want to use lua scenario
 		# main_lua.cpp

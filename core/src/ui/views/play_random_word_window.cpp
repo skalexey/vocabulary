@@ -8,11 +8,26 @@
 
 namespace vocabulary_core
 {
-	play_random_word_window::play_random_word_window(node* parent)
-		: base(parent)
-	{}
+	play_random_word_window::play_random_word_window()
+	{
+		// set_auto_resize(true);
+		set_size({ 500, 700 });
+		set_title("Random Word Game");
+		set_on_show([this]() {
+			m_word_label->show();
+			m_example_label->show();
+			m_translation_label->show();
+			m_show_example_button->show();
+			m_show_translation_button->show();
+			m_i_know_it_button->show();
+			m_skip_button->show();
+		});
+		do_on_post_construct([self = this]() {
+			return self->this_on_post_construct();
+		});
+	}
 
-	int play_random_word_window::post_construct()
+	int play_random_word_window::this_on_post_construct()
 	{
 		using namespace utils::ui;
 		m_show_example_button = get_factory().create<button>(this);
@@ -26,19 +41,6 @@ namespace vocabulary_core
 		m_word_label = get_factory().create<label>(this);
 		m_example_label = get_factory().create<text>(this);
 		m_translation_label = get_factory().create<text>(this);
-		// set_modal(false);
-		// set_auto_resize(true);
-		set_size({ 500, 700 });
-		set_title("Random Word Game");
-		set_on_show([this]() {
-			m_word_label->show();
-			m_example_label->show();
-			m_translation_label->show();
-			m_show_example_button->show();
-			m_show_translation_button->show();
-			m_i_know_it_button->show();
-			m_skip_button->show();
-		});
 		return 0;
 	}
 }
