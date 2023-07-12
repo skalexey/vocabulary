@@ -7,7 +7,7 @@ function file_insert_before() {
 	#sed -i "" "s/$2/$3$2/" "$1"
 	# Use python due to platform independence
 	# use relative paths due to platform independence
-	local fpath=$(realpath --relative-to="${PWD}" "$1")
+	local fpath=$(realpath --relative-to="$(to_win_path "${PWD}")" "$1")
 	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 	local ret=$(python $THIS_DIR/file_utils.py insert_before "$fpath" "$2" "$3")
 	local res=$?
@@ -38,7 +38,7 @@ function file_replace() {
 	# [ -f "$1.bac" ] && rm $1.bac
 	# Use python due to platform independence
 	# use relative paths due to platform independence
-	local fpath=$(realpath --relative-to="${PWD}" "$1")
+	local fpath=$(realpath --relative-to="$(to_win_path "${PWD}")" "$1")
 	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 	local ret=$(python $THIS_DIR/file_utils.py replace "$fpath" "$2" "$3")
 	local res=$?
@@ -62,7 +62,7 @@ function file_search() {
 }
 
 function file_regex() {
-	fpath=$(realpath --relative-to="${PWD}" "$1")
+	fpath=$(realpath --relative-to="$(to_win_path "${PWD}")" "$1")
 	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 	local ret=$(python $THIS_DIR/file_utils.py search "$fpath" "$2" "$3")
 	local res=$?
@@ -118,4 +118,8 @@ function file_newer() {
 	[ -z "$1" ] && echo "No file 1 provided" && return 1 || local file1="$1"
 	[ -z "$2" ] && echo "No file 2 provided" && return 2 || local file2="$2"
 	[ "$file2" -ot "$file1" ] && true || false
+}
+
+function to_win_path() {
+	echo "$1" | sed -e 's/^\///' -e 's/\//\\/g' -e 's/^./\0:/'
 }

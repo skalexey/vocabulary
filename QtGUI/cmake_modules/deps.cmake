@@ -23,6 +23,7 @@ macro(setup_deps)
 endmacro(setup_deps)
 
 macro(add_dependency_module dir name)
+	module_message("BUILD_DIR_NAME: ${BUILD_DIR_NAME}")
 	add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME})
 	module_add_includes(${${name}_INCLUDES})
 	set(DEPENDENCY_LIBRARIES ${DEPENDENCY_LIBRARIES} ${name})
