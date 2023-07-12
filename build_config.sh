@@ -6,4 +6,4 @@ buildFolderPrefix="Build"
 extraArg=" "
 extraArgWin=$extraArg
 extraArgMac=$extraArg
-logArg=" -DLOG_ON=ON"
+logArg=" -DLOG_ON=ON -DLOG_LEVEL_VERBOSE=ON"

@@ -1,14 +1,52 @@
 cmake_minimum_required(VERSION 3.21.1)
 
+project(QtGUIApp LANGUAGES CXX)
+# set(CMAKE_PROJECT_NAME QtGUIApp) #TODO: remove this
 set(BUILD_QDS_COMPONENTS ON CACHE BOOL "Build design studio components")
 
-set(CMAKE_PREFIX_PATH "I:/Dev/Qt/6.5.0/android_arm64_v8a")
-set(QT_HOST_PATH "I:/Dev/Qt/6.5.0/msvc2019_64")
+message("CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
+message("CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
+
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
+# set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "I:/Dev/Qt/6.5.0/android_arm64_v8a")
+# set(QT_HOST_PATH "I:/Dev/Qt/6.5.0/msvc2019_64")
+
+
+# set(QT_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake")
+# set(Qt6_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake")
+# set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake")
+# message("CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
+# list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # message("CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
 
-project(QtGUIApp LANGUAGES CXX)
+# set(Qt6_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6")
+# set(Qt6Core_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6Core")
+# set(Qt6Qml_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6Qml")
+# set(Qt6QmlIntegration_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6QmlIntegration")
+# set(Qt6Network_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6Network")
+# set(Qt6Quick_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6Quick")
+# set(Qt6Gui_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6Gui")
+# set(Qt6QmlModels_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6QmlModels")
+# set(Qt6OpenGL_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6OpenGL")
+# set(Qt6Widgets_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6Widgets")
+
+
+
+# set(Qt6QuickControls2_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6QuickControls2")
+# set(Qt6QuickTemplates2_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6QuickTemplates2")
+# set(Qt6QuickControls2Models_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6QuickControls2Models")
+# set(Qt6QuickControls2Utils_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6QuickControls2Utils")
+# set(Qt6QuickWidgets_DIR "I:/Dev/Qt/6.5.0/android_arm64_v8a/lib/cmake/Qt6QuickWidgets")
+
+
+#
+
+
+enable_language(CXX)
 
 #find_package(Threads REQUIRED)
+# find_package(GLESv2 REQUIRED)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
@@ -25,11 +63,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # include(D:/Content/Dev/Qt/6.5.1/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake)
 # set(CMAKE_PREFIX_PATH "i:/Dev/Qt/6.5.0/msvc2019_64")
 
-
-find_package(QT NAMES Qt6 COMPONENTS Gui Qml Quick)
-find_package(Qt6 REQUIRED COMPONENTS Core Qml Quick Widgets)
+# include(i:/Dev/Qt/Tools/QtCreator/share/qtcreator/package-manager/auto-setup.cmake)
+find_package(QT NAMES Qt6 COMPONENTS Gui Qml Quick Widgets QuickControls2)
+find_package(Qt6 COMPONENTS Core Gui Qml Quick Widgets QuickControls2 REQUIRED)
 
 # To build this application you need Qt 6.2.0 or higher
+message("Qt6_VERSION: ${Qt6_VERSION}")
+
 if (Qt6_VERSION VERSION_LESS 6.2.0)
     message(FATAL_ERROR "You need Qt 6.2.0 or newer to build the application.")
 endif()
@@ -43,9 +83,11 @@ macro(setup_module)
 	# Core dependency
 	add_dependency_module(${CMAKE_SOURCE_DIR}/../core vocabulary_core)
 	module_message("vocabulary_core_INCLUDES: ${vocabulary_core_INCLUDES}")
-	module_add_includes(${vocabulary_core_INCLUDES})
+    module_add_includes(
+        ${vocabulary_core_INCLUDES}
+        ${CMAKE_CURRENT_SOURCE_DIR}/..
+    )
     # make available includes like core/include/something
-	module_add_includes(${CMAKE_CURRENT_SOURCE_DIR}/..)
     setup_module_includes()
     set_headers()
     add_src(
@@ -69,9 +111,10 @@ macro(setup_module)
         ${HEADERS} # for IDE
     )
     setup_src()
+    module_message("CMAKE_PROJECT_NAME: '${CMAKE_PROJECT_NAME}'")
     qt_add_executable(${CMAKE_PROJECT_NAME} ${SRC})
     module_message("DEPENDENCY_LIBRARIES: ${DEPENDENCY_LIBRARIES}")
-    target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${DEPENDENCY_LIBRARIES})
+    target_link_libraries(QtGUIApp PRIVATE ${DEPENDENCY_LIBRARIES})
 	# copy_runtime_deps()
 
     if (${QT_VERSION_MINOR} GREATER_EQUAL 3)
@@ -92,6 +135,7 @@ macro(setup_module)
         Qt${QT_VERSION_MAJOR}::Quick
         Qt${QT_VERSION_MAJOR}::Qml
         Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::QuickControls2 
     )
 
     if (${BUILD_QDS_COMPONENTS})
@@ -101,6 +145,7 @@ macro(setup_module)
     include(${CMAKE_CURRENT_SOURCE_DIR}/qmlmodules)
 
     if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+        module_message("Enable QML Debugging")
 		target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE QT_QML_DEBUG)
 	endif()
     
