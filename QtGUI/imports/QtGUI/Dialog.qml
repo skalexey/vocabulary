@@ -5,8 +5,6 @@ import QtQuick.Layouts
 Dialog {
 	id: dialog
 	title: qsTr("Title")
-    property int originalHeight
-    property int originalWidth
 
     property var onShow: function() {
         console.log("Dialog.onShow default handler");
@@ -28,34 +26,14 @@ Dialog {
     modal: true // Default value. Overridden from C++.
     anchors.centerIn: parent
     
-    Item {
-        id: test
-        height: childrenRect.height
-        width: childrenRect.width
+    height: childrenRect.height
+    width: childrenRect.width
 
-        ColumnLayout {
-            id: mainLayout
-            objectName: "content"
-            Layout.maximumWidth: 400
-        
-        }
-        property int previousWidth: 0
-        property int previousHeight: 0
+    ColumnLayout {
+        id: mainLayout
+        objectName: "content"
+        Layout.maximumWidth: 400
 
-        onHeightChanged: function() {
-            var deltaHeight = height - previousHeight;
-            previousHeight = height
-            dialog.height += deltaHeight
-        }
-        onWidthChanged: function() {
-            var deltaWidth = width - previousWidth
-            dialog.width += deltaWidth
-            previousWidth = width
-        } 
-    }
-    Component.onCompleted : {
-        originalWidth = width;
-        originalHeight = height;
     }
 }
 

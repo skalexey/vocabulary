@@ -4,4 +4,3 @@
 
 std::string android_get_temp_dir();
 std::string android_get_resources_dir();
-void android_copy_assets();
