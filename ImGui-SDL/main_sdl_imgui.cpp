@@ -1,4 +1,4 @@
-// TODO: figure out why SDL.h include is needed on Android (it just a stuck without it)
+// TODO: figure out why SDL.h include is needed on Android (it just stucks without it)
 #include <string>
 #include "ImGui-SDL/include/app.h"
 

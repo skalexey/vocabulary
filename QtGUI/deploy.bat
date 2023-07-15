@@ -14,7 +14,7 @@ set dir=%CD%
 set buildDir=%CD%\Build-cmake\%destinationFolder%
 set homeDir=%CD%
 
-cd /D i:\Dev\Qt\6.5.0\msvc2019_64\bin\
+cd /D I:\Dev\Qt\6.5.1\msvc2019_64\bin\
 
 call windeployqt.exe %buildDir%\QtGUIApp.exe --qmldir %homeDir%
 cd %dir%

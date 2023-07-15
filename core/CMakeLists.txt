@@ -11,12 +11,11 @@ macro(setup_module)
 	# Utils dependency
 	set(UTILS_DIR "${DEPS}/Utils")
 	file(GLOB_RECURSE UTILS_HEADERS "${UTILS_DIR}/include/*")
-	set(EXTERNAL_HEADERS ${EXTERNAL_HEADERS}
-		${UTILS_HEADERS}
-	)
+	# set(EXTERNAL_HEADERS ${EXTERNAL_HEADERS}
+	# 	${UTILS_HEADERS}
+	# )
 	GROUP_SRC("${UTILS_HEADERS}" "${UTILS_DIR}/include")
 	module_message("UTILS_DIR: ${UTILS_DIR}")
-	module_add_includes(${UTILS_DIR}/include)
 
 	# DMBCore dependency
 	add_dependency_module(${DEPS}/DataModelBuilder/Core DMBCore)
@@ -85,8 +84,6 @@ macro(setup_module)
 		${UTILS_DIR}/src/file_utils.cpp
 		${UTILS_DIR}/src/io_utils.cpp
 		${UTILS_DIR}/src/datetime.cpp
-		# TODO: remove this and fix dmg::~Model() unresolved symbol error
-		${DEPS}/DataModelBuilder/Core/src/DMBCore.cpp
 		${HEADERS} # for IDE
 		# uncomment if want to use lua scenario
 		# main_lua.cpp
@@ -99,8 +96,8 @@ macro(setup_module)
 
 	# setup all sources target just for visibility of all the files used in IDE
 	if (NOT "${EXTERNAL_HEADERS}" STREQUAL "")
-		message("EXTERNAL_HEADERS: ${EXTERNAL_HEADERS}")
-		message("Create a separate target for external headers called 'external_headers'")
+		module_message("EXTERNAL_HEADERS: ${EXTERNAL_HEADERS}")
+		module_message("Create a separate target for external headers called 'external_headers'")
 		add_library(external_headers ${EXTERNAL_HEADERS})
 	endif()
 	

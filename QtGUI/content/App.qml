@@ -11,6 +11,8 @@ Window {
     visible: true
     title: "QtGUI"
 
+    color: Constants.backgroundColor
+
     Screen01 {
         id: mainScreen
     }

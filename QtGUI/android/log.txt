@@ -1,0 +1,1369 @@
+ANDROID_HOME before: 
+ANDROID_NDK_HOME before: 
+JAVA_HOME before: 
+ANDROID_HOME after: /c/Users/skoro/bin/android/sdk
+ANDROID_NDK_HOME after: /c/Users/skoro/bin/android/sdk/ndk/25.1.8937393
+JAVA_HOME after: C:/Program Files/Java/jdk-11.0.16.1
+[0;36m-- [ android build script]: Start building the project[0m
+/c/Users/skoro/Projects/vocabulary/QtGUI/android/configure_cmake.sh
+configure_cmake.sh: ANDROID_NDK_HOME: '/c/Users/skoro/bin/android/sdk/ndk/25.1.8937393'
+configure_cmake.sh: ANDROID_HOME: '/c/Users/skoro/bin/android/sdk'
+-- Android toolchain file within NDK detected: D:\Content\android-sdk\ndk\25.2.9519653/build/cmake/android.toolchain.cmake
+-- PROJECT_SOURCE_DIR="I:/Dev/Projects/vocabulary/QtGUI"
+-- PROJECT_VERSION_MAJOR="6"
+-- Configuring 'QtGUIApp' for the following Android ABIs: arm64-v8a (default)
+-- Found android platform plugin at: I:/Dev/Qt/6.5.0/android_arm64_v8a/./plugins/platforms/libplugins_platforms_qtforandroid_arm64-v8a.so
+-- Configuring done
+-- Generating done
+-- Build files have been written to: I:/Dev/Projects/vocabulary/QtGUI/Build-cmake-android
+[0;32m-- [android/build.sh]: configure_cmake.sh succeeded.[0m
+[0/2] Re-checking globbed directories...
+[1/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/C_/Users/skoro/Projects/Utils/src/ui/node.cpp.o
+FAILED: I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/C_/Users/skoro/Projects/Utils/src/ui/node.cpp.o 
+D:\Content\android-sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DLOG_LEVEL_VERBOSE -DLOG_ON -II:/Dev/Projects/vocabulary/core/Build-cmake-android -II:/Dev/Projects/vocabulary/core -II:/Dev/Projects/vocabulary/core/Build-cmake-android/vocabulary_core_autogen/include -IC:/Users/skoro/Projects/VL/include -IC:/Users/skoro/Projects/Utils/include -IC:/Users/skoro/Projects/rapidjson/include -IC:/Users/skoro/Projects/VL/JSONConverter/include -IC:/Users/skoro/Projects/DataModelBuilder/Core/include -IC:/Users/skoro/Projects/Networking/http -IC:/Users/skoro/Projects/asio-1.22.1/include -IC:/Users/skoro/Projects/Networking/netlib -IC:/Users/skoro/Projects/Networking/netlib/common -IC:/Users/skoro/Projects/Networking/http/../netlib/.. -IC:/Users/skoro/Projects/lua-5.4.4/src -IC:/Users/skoro/Projects/boost_1_81_0 -II:/Dev/Projects/vocabulary/core/include -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -DQT_QML_DEBUG -g  -fno-limit-debug-info -fPIC -std=gnu++17 -MD -MT I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/C_/Users/skoro/Projects/Utils/src/ui/node.cpp.o -MF I:\Dev\Projects\vocabulary\core\Build-cmake-android\CMakeFiles\vocabulary_core.dir\C_\Users\skoro\Projects\Utils\src\ui\node.cpp.o.d -o I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/C_/Users/skoro/Projects/Utils/src/ui/node.cpp.o -c C:/Users/skoro/Projects/Utils/src/ui/node.cpp
+C:/Users/skoro/Projects/Utils/src/ui/node.cpp:12:17: error: too many arguments provided to function-like macro invocation
+                        assert(node, "Adding a null node");
+                                     ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/assert.h:55:11: note: macro 'assert' defined here
+#  define assert(e) ((e) ? __assert_no_op : __assert2(__FILE__, __LINE__, __PRETTY_FUNCTION__, #e))
+          ^
+C:/Users/skoro/Projects/Utils/src/ui/node.cpp:12:4: error: use of undeclared identifier 'assert'; did you mean '__assert'?
+                        assert(node, "Adding a null node");
+                        ^~~~~~
+                        __assert
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/assert.h:78:6: note: '__assert' declared here
+void __assert(const char* __file, int __line, const char* __msg) __noreturn;
+     ^
+C:/Users/skoro/Projects/Utils/src/ui/node.cpp:13:23: error: too many arguments provided to function-like macro invocation
+                        assert(node.get(), "Adding a half-null node");
+                                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/assert.h:55:11: note: macro 'assert' defined here
+#  define assert(e) ((e) ? __assert_no_op : __assert2(__FILE__, __LINE__, __PRETTY_FUNCTION__, #e))
+          ^
+C:/Users/skoro/Projects/Utils/src/ui/node.cpp:13:4: error: use of undeclared identifier 'assert'; did you mean '__assert'?
+                        assert(node.get(), "Adding a half-null node");
+                        ^~~~~~
+                        __assert
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/assert.h:78:6: note: '__assert' declared here
+void __assert(const char* __file, int __line, const char* __msg) __noreturn;
+     ^
+C:/Users/skoro/Projects/Utils/src/ui/node.cpp:12:4: warning: expression result unused [-Wunused-value]
+                        assert(node, "Adding a null node");
+                        ^~~~~~
+C:/Users/skoro/Projects/Utils/src/ui/node.cpp:13:4: warning: expression result unused [-Wunused-value]
+                        assert(node.get(), "Adding a half-null node");
+                        ^~~~~~
+2 warnings and 4 errors generated.
+[2/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/C_/Users/skoro/Projects/Utils/src/string_utils.cpp.o
+[3/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/src/ui/views/play_random_word_window.cpp.o
+In file included from I:/Dev/Projects/vocabulary/core/src/ui/views/play_random_word_window.cpp:2:
+C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:6:10: warning: non-portable path to file '<utils/ui/Window.h>'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+#include <utils/ui/window.h>
+         ^~~~~~~~~~~~~~~~~~~
+         <utils/ui/Window.h>
+C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:37:80: warning: non-void function does not return a value [-Wreturn-type]
+                        bool set_close_button_enabled(bool enabled) { m_use_close_button = enabled; }
+                                                                                                    ^
+2 warnings generated.
+[4/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/src/words.cpp.o
+[5/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_DisplaceEffect_qml.cpp.o
+[6/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/src/word.cpp.o
+I:/Dev/Projects/vocabulary/core/src/word.cpp:108:12: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+                while (w = w->previous())
+                       ~~^~~~~~~~~~~~~~~
+I:/Dev/Projects/vocabulary/core/src/word.cpp:108:12: note: place parentheses around the assignment to silence this warning
+                while (w = w->previous())
+                         ^
+                       (                )
+I:/Dev/Projects/vocabulary/core/src/word.cpp:108:12: note: use '==' to turn this assignment into an equality comparison
+                while (w = w->previous())
+                         ^
+                         ==
+1 warning generated.
+[7/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_GlowEffect_qml.cpp.o
+[8/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_InnerShadowEffect_qml.cpp.o
+[9/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_FastBlurEffect_qml.cpp.o
+[10/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/C_/Users/skoro/Projects/Utils/src/io_utils.cpp.o
+[11/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_DirectionalBlurEffect_qml.cpp.o
+[12/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_ZoomBlurEffect_qml.cpp.o
+[13/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_GammaAdjustEffect_qml.cpp.o
+[14/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_DropShadowEffect_qml.cpp.o
+[15/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_LevelAdjustEffect_qml.cpp.o
+[16/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_GaussianBlurEffect_qml.cpp.o
+[17/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_MaskedBlurEffect_qml.cpp.o
+[18/191] Building CXX object _deps/ds-build/src/imports/effects_qt6/CMakeFiles/QuickStudioEffects.dir/.rcc/qmlcache/QuickStudioEffects_HueSaturationEffect_qml.cpp.o
+[19/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/src/ui/controllers/play_random_word_controller.cpp.o
+In file included from I:/Dev/Projects/vocabulary/core/src/ui/controllers/play_random_word_controller.cpp:11:
+In file included from I:/Dev/Projects/vocabulary/core/include/ui/controllers/play_random_word_controller.h:8:
+In file included from I:/Dev/Projects/vocabulary/core/include/ui/views/play_random_word_window.h:3:
+C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:6:10: warning: non-portable path to file '<utils/ui/Window.h>'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+#include <utils/ui/window.h>
+         ^~~~~~~~~~~~~~~~~~~
+         <utils/ui/Window.h>
+C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:37:80: warning: non-void function does not return a value [-Wreturn-type]
+                        bool set_close_button_enabled(bool enabled) { m_use_close_button = enabled; }
+                                                                                                    ^
+2 warnings generated.
+[20/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/C_/Users/skoro/Projects/DataModelBuilder/Core/src/DMBCore.cpp.o
+[21/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/C_/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp.o
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:18:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_allocator.hpp:100:49: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+template <typename T, typename Allocator = std::allocator<void> >
+                                                ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_executor.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_executor.hpp:20:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/execution.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/execution/any_executor.hpp:611:47: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+          function(ASIO_MOVE_CAST(F)(f), std::allocator<void>()));
+                                              ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_executor.hpp:24:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_executor.hpp:171:54: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  basic_system_executor<Blocking, Relationship, std::allocator<void> >
+                                                     ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_executor.hpp:24:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_executor.hpp:175:28: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        Relationship, std::allocator<void> >();
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_executor.hpp:24:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_executor.hpp:444:45: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    execution::relationship_t::fork_t, std::allocator<void> >
+                                            ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_executor.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_executor.hpp:682:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/system_executor.hpp:21:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_context.hpp:39:12: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+      std::allocator<void>
+           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_datagram_socket.hpp:20:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_socket.hpp:22:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/io_object_impl.hpp:23:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/io_context.hpp:231:36: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  typedef basic_executor_type<std::allocator<void>, 0> executor_type;
+                                   ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_datagram_socket.hpp:20:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_socket.hpp:22:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/io_object_impl.hpp:23:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/io_context.hpp:856:43: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  ASIO_CONSTEXPR basic_executor_type<std::allocator<void>, Bits>
+                                          ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_datagram_socket.hpp:20:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_socket.hpp:22:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/io_object_impl.hpp:23:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/io_context.hpp:859:37: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    return basic_executor_type<std::allocator<void>, Bits>(
+                                    ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_datagram_socket.hpp:20:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_socket.hpp:22:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/io_object_impl.hpp:23:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/io_context.hpp:860:29: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        context_ptr(), std::allocator<void>(), bits());
+                            ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:47:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/buffer_registration.hpp:61:31: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    typename Allocator = std::allocator<void> >
+                              ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:60:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/compose.hpp:134:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/compose.hpp:358:12: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+      std::allocator<void> >::type allocator_type;
+           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:60:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/compose.hpp:134:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/compose.hpp:362:56: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+      return (get_associated_allocator)(handler_, std::allocator<void>());
+                                                       ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:99:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/executor.hpp:340:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/executor.hpp:167:55: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    return &detail::global<impl<system_executor, std::allocator<void> > >();
+                                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:99:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/executor.hpp:340:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/executor.hpp:202:14: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        std::allocator<void>());
+             ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:99:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/executor.hpp:340:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/executor.hpp:208:14: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        std::allocator<void>());
+             ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:99:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/executor.hpp:340:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/executor.hpp:214:14: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        std::allocator<void>());
+             ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:99:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/executor.hpp:340:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/executor.hpp:243:31: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  : impl_(impl<Executor, std::allocator<void> >::create(e))
+                              ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:172:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/static_thread_pool.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/thread_pool.hpp:85:36: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  typedef basic_executor_type<std::allocator<void>, 0> executor_type;
+                                   ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:172:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/static_thread_pool.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/thread_pool.hpp:88:36: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  typedef basic_executor_type<std::allocator<void>, 0> scheduler_type;
+                                   ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:172:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/static_thread_pool.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/thread_pool.hpp:392:43: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  ASIO_CONSTEXPR basic_executor_type<std::allocator<void>, Bits>
+                                          ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:172:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/static_thread_pool.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/thread_pool.hpp:395:37: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    return basic_executor_type<std::allocator<void>, Bits>(
+                                    ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:172:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/static_thread_pool.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/thread_pool.hpp:396:21: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        pool_, std::allocator<void>(), bits_);
+                    ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:174:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/strand.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/strand_executor_service.hpp:168:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/impl/strand_executor_service.hpp:222:12: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+      std::allocator<void>());
+           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:186:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/use_future.hpp:132:19: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    operator std::allocator<void>() const
+                  ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:186:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/use_future.hpp:139:18: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    is_same<std::allocator<void>, Allocator>::value,
+                 ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:186:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/use_future.hpp:134:19: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+      return std::allocator<void>();
+                  ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:186:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/use_future.hpp:57:37: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+template <typename Allocator = std::allocator<void> >
+                                    ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+C:/Users/skoro/Projects/Networking/http/http_client.h:88:8: warning: 'remove_received_file' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                bool remove_received_file();
+                     ^
+C:/Users/skoro/Projects/Networking/http/http_client_interface.h:91:16: note: overridden virtual function is here
+                virtual bool remove_received_file() = 0;
+                             ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:16:7: warning: 'request' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                int request(
+                    ^
+C:/Users/skoro/Projects/Networking/http/http_client_interface.h:48:15: note: overridden virtual function is here
+                virtual int request(
+                            ^
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/downloader_with_version_control.h:9:
+In file included from C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:7:
+C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:25:8: warning: 'request_async' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                void request_async(
+                     ^
+C:/Users/skoro/Projects/Networking/http/http_client_interface.h:54:16: note: overridden virtual function is here
+                virtual void request_async(
+                             ^
+C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:8:10: warning: non-portable path to file '<utils/Log.h>'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+#include <utils/log.h>
+         ^~~~~~~~~~~~~
+         <utils/Log.h>
+In file included from C:/Users/skoro/Projects/Utils/src/networking/downloader_with_version_control.cpp:4:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/file_utils.h:4:
+In file included from C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/fstream:183:
+In file included from C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/ostream:138:
+In file included from C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/ios:215:
+In file included from C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__locale:14:
+In file included from C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/string:504:
+In file included from C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/string_view:175:
+In file included from C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__string:57:
+In file included from C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/algorithm:643:
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:2427:5: warning: delete called on 'anp::downloader_interface' that is abstract but has non-virtual destructor [-Wdelete-abstract-non-virtual-dtor]
+    delete __ptr;
+    ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:2682:7: note: in instantiation of member function 'std::default_delete<anp::downloader_interface>::operator()' requested here
+      __ptr_.second()(__tmp);
+      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:2636:19: note: in instantiation of member function 'std::unique_ptr<anp::downloader_interface>::reset' requested here
+  ~unique_ptr() { reset(); }
+                  ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:3993:21: note: in instantiation of member function 'std::unique_ptr<anp::downloader_interface>::~unique_ptr' requested here
+    unique_ptr<_Yp> __hold(__p);
+                    ^
+C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:22:16: note: in instantiation of function template specialization 'std::shared_ptr<anp::downloader_interface>::shared_ptr<anp::downloader_interface>' requested here
+                                m_object = downloader_interface_ptr(object);
+                                           ^
+33 warnings generated.
+[22/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/src/app.cpp.o
+I:/Dev/Projects/vocabulary/core/src/app.cpp:1:9: warning: #pragma once in main file [-Wpragma-once-outside-header]
+#pragma once
+        ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:18:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_allocator.hpp:100:49: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+template <typename T, typename Allocator = std::allocator<void> >
+                                                ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_executor.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_executor.hpp:20:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/execution.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/execution/any_executor.hpp:611:47: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+          function(ASIO_MOVE_CAST(F)(f), std::allocator<void>()));
+                                              ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_executor.hpp:24:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_executor.hpp:171:54: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  basic_system_executor<Blocking, Relationship, std::allocator<void> >
+                                                     ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_executor.hpp:24:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_executor.hpp:175:28: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        Relationship, std::allocator<void> >();
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_executor.hpp:24:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_executor.hpp:444:45: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    execution::relationship_t::fork_t, std::allocator<void> >
+                                            ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/associated_executor.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_executor.hpp:682:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/system_executor.hpp:21:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/system_context.hpp:39:12: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+      std::allocator<void>
+           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_datagram_socket.hpp:20:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_socket.hpp:22:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/io_object_impl.hpp:23:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/io_context.hpp:231:36: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  typedef basic_executor_type<std::allocator<void>, 0> executor_type;
+                                   ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_datagram_socket.hpp:20:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_socket.hpp:22:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/io_object_impl.hpp:23:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/io_context.hpp:856:43: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  ASIO_CONSTEXPR basic_executor_type<std::allocator<void>, Bits>
+                                          ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_datagram_socket.hpp:20:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_socket.hpp:22:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/io_object_impl.hpp:23:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/io_context.hpp:859:37: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    return basic_executor_type<std::allocator<void>, Bits>(
+                                    ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:24:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_datagram_socket.hpp:20:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/basic_socket.hpp:22:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/io_object_impl.hpp:23:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/io_context.hpp:860:29: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        context_ptr(), std::allocator<void>(), bits());
+                            ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:47:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/buffer_registration.hpp:61:31: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    typename Allocator = std::allocator<void> >
+                              ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:60:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/compose.hpp:134:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/compose.hpp:358:12: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+      std::allocator<void> >::type allocator_type;
+           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:60:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/compose.hpp:134:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/compose.hpp:362:56: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+      return (get_associated_allocator)(handler_, std::allocator<void>());
+                                                       ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:99:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/executor.hpp:340:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/executor.hpp:167:55: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    return &detail::global<impl<system_executor, std::allocator<void> > >();
+                                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:99:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/executor.hpp:340:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/executor.hpp:202:14: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        std::allocator<void>());
+             ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:99:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/executor.hpp:340:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/executor.hpp:208:14: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        std::allocator<void>());
+             ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:99:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/executor.hpp:340:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/executor.hpp:214:14: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        std::allocator<void>());
+             ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:99:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/executor.hpp:340:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/impl/executor.hpp:243:31: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  : impl_(impl<Executor, std::allocator<void> >::create(e))
+                              ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:172:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/static_thread_pool.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/thread_pool.hpp:85:36: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  typedef basic_executor_type<std::allocator<void>, 0> executor_type;
+                                   ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:172:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/static_thread_pool.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/thread_pool.hpp:88:36: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  typedef basic_executor_type<std::allocator<void>, 0> scheduler_type;
+                                   ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:172:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/static_thread_pool.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/thread_pool.hpp:392:43: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+  ASIO_CONSTEXPR basic_executor_type<std::allocator<void>, Bits>
+                                          ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:172:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/static_thread_pool.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/thread_pool.hpp:395:37: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    return basic_executor_type<std::allocator<void>, Bits>(
+                                    ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:172:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/static_thread_pool.hpp:19:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/thread_pool.hpp:396:21: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+        pool_, std::allocator<void>(), bits_);
+                    ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:174:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/strand.hpp:19:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/strand_executor_service.hpp:168:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/detail/impl/strand_executor_service.hpp:222:12: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+      std::allocator<void>());
+           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:186:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/use_future.hpp:132:19: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    operator std::allocator<void>() const
+                  ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:186:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/use_future.hpp:139:18: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+    is_same<std::allocator<void>, Allocator>::value,
+                 ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:186:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/use_future.hpp:134:19: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+      return std::allocator<void>();
+                  ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client.h:12:
+In file included from C:/Users/skoro/Projects/Networking/netlib/common/common.h:7:
+In file included from C:/Users/skoro/Projects/asio-1.22.1/include/asio.hpp:186:
+C:/Users/skoro/Projects/asio-1.22.1/include/asio/use_future.hpp:57:37: warning: 'allocator<void>' is deprecated [-Wdeprecated-declarations]
+template <typename Allocator = std::allocator<void> >
+                                    ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:717:28: note: 'allocator<void>' has been explicitly marked deprecated here
+class _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 allocator<void>
+                           ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:1001:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+In file included from C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:6:
+C:/Users/skoro/Projects/Networking/http/http_client.h:88:8: warning: 'remove_received_file' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                bool remove_received_file();
+                     ^
+C:/Users/skoro/Projects/Networking/http/http_client_interface.h:91:16: note: overridden virtual function is here
+                virtual bool remove_received_file() = 0;
+                             ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:16:7: warning: 'request' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                int request(
+                    ^
+C:/Users/skoro/Projects/Networking/http/http_client_interface.h:48:15: note: overridden virtual function is here
+                virtual int request(
+                            ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:10:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/networking/uploader_with_auth.h:7:
+In file included from C:/Users/skoro/Projects/Networking/http/uploader_decorator.h:6:
+C:/Users/skoro/Projects/Networking/http/http_client_decorator.h:25:8: warning: 'request_async' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+                void request_async(
+                     ^
+C:/Users/skoro/Projects/Networking/http/http_client_interface.h:54:16: note: overridden virtual function is here
+                virtual void request_async(
+                             ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:16:
+C:/Users/skoro/Projects/Utils/include/utils/Log.h:57:10: warning: 'LOG_ERROR' macro redefined [-Wmacro-redefined]
+        #define LOG_ERROR(msg) log_stream::instance() << logPrefix << "Error! " << msg << (logPostfix.empty() ? "\n" : logPostfix)
+                ^
+C:/Users/skoro/Projects/Utils/include/utils/print_defs.h:13:10: note: previous definition is here
+        #define LOG_ERROR(msg) MSG("ERROR: " << msg)
+                ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:18:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialogs/dialog_with_buttons.h:6:
+In file included from C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialogs/modal_dialog.h:3:
+C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:6:10: warning: non-portable path to file '<utils/ui/Window.h>'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+#include <utils/ui/window.h>
+         ^~~~~~~~~~~~~~~~~~~
+         <utils/ui/Window.h>
+C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:37:80: warning: non-void function does not return a value [-Wreturn-type]
+                        bool set_close_button_enabled(bool enabled) { m_use_close_button = enabled; }
+                                                                                                    ^
+In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:3:
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:2427:5: warning: delete called on 'anp::downloader_interface' that is abstract but has non-virtual destructor [-Wdelete-abstract-non-virtual-dtor]
+    delete __ptr;
+    ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:2682:7: note: in instantiation of member function 'std::default_delete<anp::downloader_interface>::operator()' requested here
+      __ptr_.second()(__tmp);
+      ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:2636:19: note: in instantiation of member function 'std::unique_ptr<anp::downloader_interface>::reset' requested here
+  ~unique_ptr() { reset(); }
+                  ^
+C:/Users/skoro/bin/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/memory:3993:21: note: in instantiation of member function 'std::unique_ptr<anp::downloader_interface>::~unique_ptr' requested here
+    unique_ptr<_Yp> __hold(__p);
+                    ^
+C:/Users/skoro/Projects/Networking/http/../netlib/../http/downloader_decorator.h:22:16: note: in instantiation of function template specialization 'std::shared_ptr<anp::downloader_interface>::shared_ptr<anp::downloader_interface>' requested here
+                                m_object = downloader_interface_ptr(object);
+                                           ^
+36 warnings generated.
+ninja: build stopped: subcommand failed.
+[0;31m-- [android/build.sh]: build_cmake.sh failed.[0m
+[0;31m-- [ android build script]: Error while building[0m

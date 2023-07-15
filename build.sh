@@ -48,7 +48,7 @@ build()
 	for arg in "$@" 
 	do
 		echo "arg[$argIndex]: '$arg'"
-		
+		arg=${arg,,}
 		if [[ $argIndex -eq 0 ]]; then
 			local rootDirectory=$arg
 		else

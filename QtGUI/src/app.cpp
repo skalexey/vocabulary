@@ -8,9 +8,12 @@
 #include <utils/io_utils.h>
 #include <utils/print_defs.h>
 #include <utils/common.h>
-#include <utils/Log.h>
 #ifdef LOG_ON
-    #include <QDebug>
+	#include <QDebug>
+	// #include <utils/log_stream.h>
+	// LOG_STREAM(qDebug());
+	#include <utils/Log.h>
+	// LOG_STREAM(qDebug());
 #endif
 #include "QtGUI/include/app.h"
 
@@ -31,6 +34,7 @@ app::app(int argc, char* argv[])
 {
 	// Create a new log file
 	std::ofstream f(utils::file::temp_directory_path() / log_fname);
+	GLOBAL_LOG_STREAM(qDebug().noquote());
 }
 
 int app::init()

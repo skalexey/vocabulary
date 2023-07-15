@@ -261,7 +261,7 @@ namespace vocabulary_core
 
 	void app::ask_directory(const std::string &msg, const fs::path &path, const on_path_selected_t& callback)
 	{
-		auto d = get_factory().create<utils::ui::dialog_with_buttons>(this);
+		auto d = get_factory().create<utils::ui::dialog_with_buttons>(this).get();
 		utils::ui::dialog_with_buttons::actions_t actions = {
 			{
 				"Choose another path"
@@ -285,7 +285,8 @@ namespace vocabulary_core
 
 	void app::ask_file(const std::string &msg, const fs::path& path, const on_path_selected_t& callback)
 	{
-		auto d = get_factory().create<utils::ui::dialog_with_buttons>(this);
+		auto d = get_factory().create<utils::ui::dialog_with_buttons>(this).get();
+		// d is alive until it is closed
 		utils::ui::dialog_with_buttons::actions_t actions = {
 			{
 				"Create"
