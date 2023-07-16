@@ -20,6 +20,9 @@
 		},
 		{
 			"path": "../../Templates/CMake/Modules"
+		},
+		{
+			"path": "../../abstract_ui"
 		}
 	],
 	"settings": {

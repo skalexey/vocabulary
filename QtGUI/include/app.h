@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <utils/ui/qt/app.h>
+#include <abstract_ui/qt/app.h>
 #include <core/include/app.h>
 
 class app : public utils::ui::qt::app, public vocabulary_core::app

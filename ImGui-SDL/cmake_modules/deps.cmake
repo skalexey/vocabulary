@@ -23,11 +23,55 @@ macro(setup_deps)
 endmacro(setup_deps)
 
 macro(add_dependency_module dir name)
-	module_message("BUILD_DIR_NAME: ${BUILD_DIR_NAME}")
-	add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME})
+	module_message("ARGV: ${ARGV}")
+	module_message("ARGV2: '${ARGV2}'")
+	if("${ARGV2}" STREQUAL "LINK_ONLY")
+		# target_link_directories(${MODULE_NAME} PRIVATE ${dir})
+	elseif("${ARGV2}" STREQUAL "INCLUDE_ONLY")
+		# add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME} EXCLUDE_FROM_ALL)
+		execute_process(
+			COMMAND ${CMAKE_COMMAND} -S ${dir} -B ${dir}/${BUILD_DIR_NAME}
+		)
+	else()
+		#add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME})
+
+		include(FetchContent)
+		FetchContent_Declare(
+			${name}
+			SOURCE_DIR ${dir}
+		)
+		FetchContent_GetProperties(${name})
+		if(NOT ${name}_POPULATED)
+			module_message("FetchContent_Populate(${name})")
+			FetchContent_Populate(${name})
+			add_subdirectory(${${name}_SOURCE_DIR} ${${name}_BINARY_DIR})
+		endif()
+
+		# find_package(${name} QUIET)
+		# if (NOT ${name}_FOUND)
+		# 	# Include the ExternalProject module
+		# 	include(ExternalProject)
+		# 	ExternalProject_Add(
+		# 		${name}
+		# 		SOURCE_DIR ${dir}
+		# 		BINARY_DIR ${dir}/${BUILD_DIR_NAME}
+		# 		# CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/my_dependency_install
+		# 		# You can add other CMake arguments as needed
+		# 	)
+		# else()
+		# 	message("${MODULE_NAME}: Module '${name}' already added")
+		# endif()		
+	endif()
+	get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
+	if ("${${name}_INCLUDES}" STREQUAL "")
+		message(SEND_ERROR "${MODULE_NAME}: ERROR: ${name}_INCLUDES is not specified")
+	endif()
 	module_add_includes(${${name}_INCLUDES})
 	set(DEPENDENCY_LIBRARIES ${DEPENDENCY_LIBRARIES} ${name})
 	module_message("add_dependency_module: ${name} located in ${dir}")
 	module_message("dependency includes: ${${name}_INCLUDES}")
 endmacro(add_dependency_module)
 
+macro(add_dependency_library name)
+	set(DEPENDENCY_LIBRARIES ${DEPENDENCY_LIBRARIES} ${name})
+endmacro(add_dependency_library)

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <utils/ui/widgets/dialog.h>
-#include <utils/ui/fwd.h>
+#include <abstract_ui/widgets/dialog.h>
+#include <abstract_ui/fwd.h>
 
 namespace vocabulary_core
 {

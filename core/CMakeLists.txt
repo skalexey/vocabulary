@@ -17,6 +17,9 @@ macro(setup_module)
 	GROUP_SRC("${UTILS_HEADERS}" "${UTILS_DIR}/include")
 	module_message("UTILS_DIR: ${UTILS_DIR}")
 
+	# abstract_ui dependency
+	add_dependency_module(${DEPS}/abstract_ui abstract_ui)
+
 	# DMBCore dependency
 	add_dependency_module(${DEPS}/DataModelBuilder/Core DMBCore)
 
@@ -73,10 +76,6 @@ macro(setup_module)
 	# Assign all the headers to ${HEADERS} variable and use it in add_src() macro
 	set_headers()
 	add_src(
-		${UTILS_DIR}/src/ui/app.cpp
-		${UTILS_DIR}/src/ui/node.cpp
-		${UTILS_DIR}/src/ui/helpers/user_input.cpp
-		${UTILS_DIR}/src/ui/window_controller.cpp
 		${UTILS_DIR}/src/networking/uploader_with_auth.cpp
 		${UTILS_DIR}/src/networking/downloader_with_auth.cpp
 		${UTILS_DIR}/src/networking/downloader_with_version_control.cpp
@@ -92,7 +91,8 @@ macro(setup_module)
 	# add library
 	module_add_library()
 
-	set_target_properties(${MODULE_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+
+	# set_target_properties(${MODULE_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
 	# setup all sources target just for visibility of all the files used in IDE
 	if (NOT "${EXTERNAL_HEADERS}" STREQUAL "")

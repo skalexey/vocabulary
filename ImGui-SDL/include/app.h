@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <utils/ui/imgui/sdl_app.h>
+#include <abstract_ui/imgui/sdl_app.h>
 #include <core/include/app.h>
 
 class app : public utils::ui::imgui::sdl_app, public vocabulary_core::app

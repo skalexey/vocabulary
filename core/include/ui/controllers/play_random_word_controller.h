@@ -4,7 +4,7 @@
 #include <deque>
 #include <string>
 #include <memory>
-#include <utils/ui/window_controller.h>
+#include <abstract_ui/window_controller.h>
 #include "ui/views/play_random_word_window.h"
 
 class word;

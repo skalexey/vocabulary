@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include <utils/ui/qt/fwd.h>
-#include <utils/ui/qt/widgets/dialog.h>
+#include <abstract_ui/qt/fwd.h>
+#include <abstract_ui/qt/widgets/dialog.h>
 #include <core/include/ui/views/play_random_word_window.h>
 
 class play_random_word_window : public utils::ui::qt::dialog, public vocabulary_core::play_random_word_window, public std::enable_shared_from_this<play_random_word_window>

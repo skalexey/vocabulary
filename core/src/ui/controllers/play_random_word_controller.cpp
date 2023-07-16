@@ -2,10 +2,10 @@
 #include <random>
 #include <algorithm>
 #include <utils/Log.h>
-#include <utils/ui/widget_factory.h>
-#include <utils/ui/widgets/button.h>
-#include <utils/ui/widgets/label.h>
-#include <utils/ui/app.h>
+#include <abstract_ui/widget_factory.h>
+#include <abstract_ui/widgets/button.h>
+#include <abstract_ui/widgets/label.h>
+#include <abstract_ui/app.h>
 #include "words.h"
 #include "word.h"
 #include "ui/controllers/play_random_word_controller.h"

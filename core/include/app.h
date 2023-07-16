@@ -3,8 +3,8 @@
 #include <memory>
 #include <optional>
 #include <utils/terminator.h>
-#include <utils/ui/app.h>
-#include <utils/ui/helpers/user_input.h>
+#include <abstract_ui/app.h>
+#include <abstract_ui/helpers/user_input.h>
 #include <utils/filesystem.h>
 #include <utils/common.h>
 #include <DMBCore.h>
