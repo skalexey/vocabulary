@@ -6,6 +6,8 @@ function update_scripts()
 	cd "$THIS_DIR"
 	
 	source automation_config.sh
+	source $automation_dir/templates/templates_config.sh
+
 	[ $? -ne 0 ] && echo "Get automation_config.sh manually for the first time. It contains paths to dependent directories" && return 3
 	
 	cp "$automation_dir/automation_config.sh" .
@@ -16,6 +18,7 @@ function update_scripts()
 	cp "$scripts_dir/include/file_utils.py" .
 	cp "$scripts_dir/include/net_utils.sh" .
 	cp "$scripts_dir/include/ssh.sh" serverside/
+	cp "$templates_dir/Scripts/update_cmake_modules.sh" .
 
 	source log.sh
 	local log_prefix="[update_scripts]: "

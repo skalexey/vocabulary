@@ -18,7 +18,7 @@ function update_cmake_modules()
 	[ $? -ne 0 ] && echo "Get automation_config.sh manually for the first time. It contains paths to dependent directories" && return 3
 	source $automation_dir/templates/templates_config.sh
 	[ $? -ne 0 ] && echo "Get automation_config.sh manually for the first time. It contains paths to dependent directories" && return 3
-	local templates_modules_dir=$templates_dir/CMake/Modules/
+	local templates_modules_dir=$templates_dir/CMake/Modules/modules
 	local target_modules_dir=$dir/cmake_modules
 	local list=$(ls $templates_modules_dir)
 	if [ ! -d $dir/cmake_modules ]; then
