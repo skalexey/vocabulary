@@ -12,7 +12,6 @@ function parse_activity_name()
 function get_app_activity_name()
 {
 	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-	cd "$THIS_DIR/$root_dir"
 
 	source log.sh
 	local log_prefix="-- [android_config.sh]: "
@@ -20,6 +19,8 @@ function get_app_activity_name()
 	# Include before switching the directory
 	source file_utils.sh
 
+	cd "$THIS_DIR/$root_dir"
+	
 	# Get the package name
 	if [ -d "$android_dir/app" ]; then
 		local appdir="${app//"."/"/"}" 

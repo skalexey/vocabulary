@@ -11,7 +11,7 @@ macro(setup_module)
 
 	# option(LOG_ON "Turn on logging" ON)
 	# Core dependency
-	add_dependency_module(${CMAKE_SOURCE_DIR}/../core vocabulary_core)
+	add_dependency_module(${CMAKE_CURRENT_SOURCE_DIR}/../core vocabulary_core)
 	module_message("vocabulary_core_INCLUDES: ${vocabulary_core_INCLUDES}")
 	module_add_includes(${vocabulary_core_INCLUDES})
 

@@ -7,7 +7,7 @@ job()
 
 	local folderName=${PWD##*/}
 	source config.sh
-	source "$root_dir/log.sh"
+	source log.sh
 	
 	local log_prefix="-- [${folderName} android build and run script]: "
 

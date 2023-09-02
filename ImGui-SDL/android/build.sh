@@ -14,9 +14,6 @@ job()
 	# Load environment variables
 	source set_android_environment.sh
 	
-	# Go to the root directory
-	cd "$root_dir"
-
 	source file_utils.sh
 
 	# Setup logger
@@ -26,7 +23,11 @@ job()
 	local log_prefix="-- [${folderName} android build script]: "
 
 	# Set project's environment variables
-	source external_config.sh
+	
+	# Go to the root directory
+	cd "$root_dir"
+	
+	source ../external_config.sh
 
 	# Uninstall the app first
 	# adb uninstall "$app"

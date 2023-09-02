@@ -5,9 +5,9 @@ function job()
 	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 	cd "$THIS_DIR"
 	source android_config.sh
-	cd "$root_dir"
-
 	source os.sh
+	
+	cd "$root_dir"
 
 	echo "ANDROID_HOME before: $ANDROID_HOME"
 	echo "ANDROID_NDK_HOME before: $ANDROID_NDK_HOME"
