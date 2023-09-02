@@ -23,18 +23,10 @@ macro(setup_deps)
 endmacro(setup_deps)
 
 macro(add_dependency_module dir name)
-	module_message("ARGV: ${ARGV}")
-	module_message("ARGV2: '${ARGV2}'")
 	if("${ARGV2}" STREQUAL "LINK_ONLY")
 		# target_link_directories(${MODULE_NAME} PRIVATE ${dir})
 	elseif("${ARGV2}" STREQUAL "INCLUDE_ONLY")
 		# add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME} EXCLUDE_FROM_ALL)
-		execute_process(
-			COMMAND ${CMAKE_COMMAND} -S ${dir} -B ${dir}/${BUILD_DIR_NAME}
-		)
-	else()
-		#add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME})
-
 		include(FetchContent)
 		FetchContent_Declare(
 			${name}
@@ -45,24 +37,17 @@ macro(add_dependency_module dir name)
 			module_message("FetchContent_Populate(${name})")
 			FetchContent_Populate(${name})
 			add_subdirectory(${${name}_SOURCE_DIR} ${${name}_BINARY_DIR})
+		else()
+		get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
 		endif()
-
-		# find_package(${name} QUIET)
-		# if (NOT ${name}_FOUND)
-		# 	# Include the ExternalProject module
-		# 	include(ExternalProject)
-		# 	ExternalProject_Add(
-		# 		${name}
-		# 		SOURCE_DIR ${dir}
-		# 		BINARY_DIR ${dir}/${BUILD_DIR_NAME}
-		# 		# CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/my_dependency_install
-		# 		# You can add other CMake arguments as needed
-		# 	)
-		# else()
-		# 	message("${MODULE_NAME}: Module '${name}' already added")
-		# endif()		
+	elseif("${ARGV2}" STREQUAL "EXECUTE_SEPARATELY")
+		execute_process(
+			COMMAND ${CMAKE_COMMAND} -S ${dir} -B ${dir}/${BUILD_DIR_NAME}
+		)
+		get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
+	else()
+		add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME})
 	endif()
-	get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
 	if ("${${name}_INCLUDES}" STREQUAL "")
 		message(SEND_ERROR "${MODULE_NAME}: ERROR: ${name}_INCLUDES is not specified")
 	endif()
