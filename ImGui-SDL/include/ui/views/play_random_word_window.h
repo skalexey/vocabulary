@@ -10,6 +10,5 @@ public:
 	using base = vocabulary_core::play_random_word_window;
 	
 private:
-	WIDGET_REGISTRATOR(utils::ui::imgui::widget_factory, play_random_word_window);
 	std::shared_ptr<play_random_word_window> m_ptr;
 };

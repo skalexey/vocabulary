@@ -15,8 +15,5 @@ public:
 	}
 
 private:
-	WIDGET_REGISTRATOR(utils::ui::qt::widget_factory, play_random_word_window);
-
-private:
 	std::shared_ptr<play_random_word_window> m_ptr;
 };
