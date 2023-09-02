@@ -14,8 +14,8 @@
 #include <utils/print_defs.h>
 #include <utils/common.h>
 #include <utils/Log.h>
-#include <utils/ui/widget_factory.h>
-#include <utils/ui/widgets/dialogs/dialog_with_buttons.h>
+#include <abstract_ui/widget_factory.h>
+#include <abstract_ui/widgets/dialogs/dialog_with_buttons.h>
 #include <http/http_client.h>
 #include <http/uploader.h>
 #include <http/authenticator.h>

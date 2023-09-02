@@ -1,9 +1,9 @@
-#include <utils/ui/app.h>
-#include <utils/ui/widgets/dialog.h>
-#include <utils/ui/widgets/button.h>
-#include <utils/ui/widgets/label.h>
-#include <utils/ui/widgets/text.h>
-#include <utils/ui/widget_factory.h>
+#include <abstract_ui/app.h>
+#include <abstract_ui/widgets/dialog.h>
+#include <abstract_ui/widgets/button.h>
+#include <abstract_ui/widgets/label.h>
+#include <abstract_ui/widgets/text.h>
+#include <abstract_ui/widget_factory.h>
 #include "ui/views/play_random_word_window.h"
 
 namespace vocabulary_core

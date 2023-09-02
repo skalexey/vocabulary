@@ -58,7 +58,7 @@ C:/Users/skoro/Projects/Utils/src/ui/node.cpp:13:4: warning: expression result u
 [3/191] Building CXX object I:/Dev/Projects/vocabulary/core/Build-cmake-android/CMakeFiles/vocabulary_core.dir/src/ui/views/play_random_word_window.cpp.o
 In file included from I:/Dev/Projects/vocabulary/core/src/ui/views/play_random_word_window.cpp:2:
 C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:6:10: warning: non-portable path to file '<utils/ui/Window.h>'; specified path differs in case from file name on disk [-Wnonportable-include-path]
-#include <utils/ui/window.h>
+#include <abstract_ui/window.h>
          ^~~~~~~~~~~~~~~~~~~
          <utils/ui/Window.h>
 C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:37:80: warning: non-void function does not return a value [-Wreturn-type]
@@ -97,7 +97,7 @@ In file included from I:/Dev/Projects/vocabulary/core/src/ui/controllers/play_ra
 In file included from I:/Dev/Projects/vocabulary/core/include/ui/controllers/play_random_word_controller.h:8:
 In file included from I:/Dev/Projects/vocabulary/core/include/ui/views/play_random_word_window.h:3:
 C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:6:10: warning: non-portable path to file '<utils/ui/Window.h>'; specified path differs in case from file name on disk [-Wnonportable-include-path]
-#include <utils/ui/window.h>
+#include <abstract_ui/window.h>
          ^~~~~~~~~~~~~~~~~~~
          <utils/ui/Window.h>
 C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:37:80: warning: non-void function does not return a value [-Wreturn-type]
@@ -1341,7 +1341,7 @@ In file included from I:/Dev/Projects/vocabulary/core/src/app.cpp:18:
 In file included from C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialogs/dialog_with_buttons.h:6:
 In file included from C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialogs/modal_dialog.h:3:
 C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:6:10: warning: non-portable path to file '<utils/ui/Window.h>'; specified path differs in case from file name on disk [-Wnonportable-include-path]
-#include <utils/ui/window.h>
+#include <abstract_ui/window.h>
          ^~~~~~~~~~~~~~~~~~~
          <utils/ui/Window.h>
 C:/Users/skoro/Projects/Utils/include/utils/ui/widgets/dialog.h:37:80: warning: non-void function does not return a value [-Wreturn-type]
