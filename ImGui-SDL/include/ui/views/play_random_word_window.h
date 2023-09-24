@@ -8,7 +8,4 @@ class play_random_word_window : public utils::ui::imgui::dialog, public vocabula
 {
 public:
 	using base = vocabulary_core::play_random_word_window;
-	
-private:
-	std::shared_ptr<play_random_word_window> m_ptr;
 };
