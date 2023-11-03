@@ -19,7 +19,7 @@ namespace vocabulary_core
 	play_random_word_controller::play_random_word_controller(utils::ui::app& app)
 		: base(app)
 	{
-		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create<vocabulary_core::play_random_word_window>(&app)));
+		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create_final<vocabulary_core::play_random_word_window>(app)));
 		view().show_example_button().set_on_click([this](bool up) {
 			LOG_DEBUG("show_example_button");
 			if (m_current_word.empty())

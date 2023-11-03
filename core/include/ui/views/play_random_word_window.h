@@ -1,16 +1,16 @@
 #pragma once
 
-#include <abstract_ui/widgets/dialog.h>
+#include <abstract_ui/final/widgets/dialog.h>
 #include <abstract_ui/fwd.h>
 
 namespace vocabulary_core
 {
-	class play_random_word_window : public virtual utils::ui::dialog
+	class play_random_word_window : public utils::ui::final::dialog
 	{
-		using base = utils::ui::dialog;
+		using base = utils::ui::final::dialog;
 
 		public:
-			play_random_word_window();
+			play_random_word_window(const utils::ui::dialog_ptr& impl);
 			utils::ui::text& example_label() { return *m_example_label; }
 			utils::ui::text& translation_label() { return *m_translation_label; }
 			utils::ui::label& word_label() { return *m_word_label; }
