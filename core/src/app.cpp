@@ -78,7 +78,7 @@ namespace
 	std::ofstream words_fo;
 	std::ifstream words_fi;
 
-	const std::string host = "skalexey.ru";
+	const std::string host = "srv.vllibrary.net";
 	const int port = 80;
 	anp::endpoint_t g_ep = { host, port };
 
