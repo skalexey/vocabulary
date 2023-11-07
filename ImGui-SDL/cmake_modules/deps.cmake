@@ -27,6 +27,12 @@ macro(add_dependency_module dir name)
 		# target_link_directories(${MODULE_NAME} PRIVATE ${dir})
 	elseif("${ARGV2}" STREQUAL "INCLUDE_ONLY")
 		# add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME} EXCLUDE_FROM_ALL)
+	elseif("${ARGV2}" STREQUAL "EXECUTE_SEPARATELY")
+		execute_process(
+			COMMAND ${CMAKE_COMMAND} -S ${dir} -B ${dir}/${BUILD_DIR_NAME}
+		)
+		get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
+	else()
 		include(FetchContent)
 		FetchContent_Declare(
 			${name}
@@ -38,15 +44,8 @@ macro(add_dependency_module dir name)
 			FetchContent_Populate(${name})
 			add_subdirectory(${${name}_SOURCE_DIR} ${${name}_BINARY_DIR})
 		else()
-		get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
+			get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
 		endif()
-	elseif("${ARGV2}" STREQUAL "EXECUTE_SEPARATELY")
-		execute_process(
-			COMMAND ${CMAKE_COMMAND} -S ${dir} -B ${dir}/${BUILD_DIR_NAME}
-		)
-		get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
-	else()
-		add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME})
 	endif()
 	if ("${${name}_INCLUDES}" STREQUAL "")
 		message(SEND_ERROR "${MODULE_NAME}: ERROR: ${name}_INCLUDES is not specified")
