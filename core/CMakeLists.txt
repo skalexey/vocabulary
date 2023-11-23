@@ -83,6 +83,7 @@ macro(setup_module)
 		${UTILS_DIR}/src/file_utils.cpp
 		${UTILS_DIR}/src/io_utils.cpp
 		${UTILS_DIR}/src/datetime.cpp
+		${UTILS_DIR}/src/envar.cpp
 		${HEADERS} # for IDE
 		# uncomment if want to use lua scenario
 		# main_lua.cpp

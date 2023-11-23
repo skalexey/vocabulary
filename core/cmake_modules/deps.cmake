@@ -31,7 +31,7 @@ macro(add_dependency_module dir name)
 		execute_process(
 			COMMAND ${CMAKE_COMMAND} -S ${dir} -B ${dir}/${BUILD_DIR_NAME}
 		)
-		get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
+		# No properties (e.g., ${name}_INCLUDES) will be available here
 	else()
 		include(FetchContent)
 		FetchContent_Declare(
