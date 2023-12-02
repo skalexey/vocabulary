@@ -19,6 +19,9 @@ namespace vocabulary_core
 			utils::ui::button& i_know_it_button() { return *m_i_know_it_button;}
 			utils::ui::button& skip_button() { return *m_skip_button; }
 
+			bool on_update(float dt) override {
+				return base::on_update(dt);
+			}
 		private:
 			int this_on_post_construct();
 			

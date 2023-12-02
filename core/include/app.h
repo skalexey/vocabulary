@@ -32,9 +32,9 @@ namespace vocabulary_core
 		virtual bool on_core_update(float dt) {
 			return true;
 		}
+		bool on_update(float dt) override; // Not final for virtual inheritance
 
 	private:
-		bool on_update(float dt) override; // Not final for virtual inheritance
 		void init_words(const utils::void_int_cb& on_result);
 		void load_words();
 		void sync_resources(const utils::void_int_cb& cb = nullptr);

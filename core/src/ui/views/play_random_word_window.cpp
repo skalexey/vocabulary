@@ -14,15 +14,6 @@ namespace vocabulary_core
 		// set_auto_resize(true);
 		set_size({ 500, 700 });
 		set_title("Random Word Game");
-		set_on_show([this]() {
-			m_word_label->show();
-			m_example_label->show();
-			m_translation_label->show();
-			m_show_example_button->show();
-			m_show_translation_button->show();
-			m_i_know_it_button->show();
-			m_skip_button->show();
-		});
 		do_on_post_construct([self = this]() {
 			return self->this_on_post_construct();
 		});
