@@ -17,6 +17,9 @@ macro(setup_module_project)
 
 	module_message("Setup project ${PROJECT_NAME}")
 	
+	# Setup helper variables
+	get_filename_component(PARENT_DIR ${PROJECT_SOURCE_DIR} DIRECTORY)
+
 	# Common setup actions
 	cpp_compile_options_fixes()
 	set_module_name(${PROJECT_NAME})

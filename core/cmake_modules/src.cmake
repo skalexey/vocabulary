@@ -13,7 +13,6 @@ endmacro(set_parent_src)
 macro(set_headers)
 	file(GLOB_RECURSE HEADERS ${HEADERS} "include/*")
 	module_message("project HEADERS: ${HEADERS}")
-	module_message("project SRC: ${SRC}")
 endmacro(set_headers)
 
 macro(set_sources)
