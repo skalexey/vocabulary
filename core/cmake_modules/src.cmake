@@ -25,3 +25,21 @@ macro(setup_src)
 	module_message("src: ${SRC}")
 	set_parent_src()
 endmacro(setup_src)
+
+macro(add_headers_to_sources)
+	set_headers()
+	add_src(${HEADERS})
+endmacro(add_headers_to_sources)
+
+macro(group_headers)
+	GROUP_SRC("${HEADERS}" "include")
+endmacro(group_headers)
+
+macro(group_sources)
+	GROUP_SRC("${SRC}" "src")
+endmacro(group_sources)
+
+macro(group_headers_and_sources)
+	group_headers()
+	group_sources()
+endmacro(group_headers_and_sources)
