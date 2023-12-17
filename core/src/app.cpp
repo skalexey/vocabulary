@@ -404,7 +404,7 @@ namespace vocabulary_core
 			LOG("Creating controller exception!");
 		}
 
-		auto after_auth = [self = this] () {
+		auto after_auth = [=, self = this] () {
 			self->init_words([=](int result_code) {
 				//upload_words();
 
@@ -419,7 +419,10 @@ namespace vocabulary_core
 								if (!yes)
 									self->exit(100 * code);
 								else
+								{
 									self->set_offline_mode(true);
+									load_words();
+								}
 							}
 						);
 				});
