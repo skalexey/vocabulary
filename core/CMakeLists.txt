@@ -79,6 +79,7 @@ macro(setup_module)
 		${UTILS_DIR}/src/networking/uploader_with_auth.cpp
 		${UTILS_DIR}/src/networking/downloader_with_auth.cpp
 		${UTILS_DIR}/src/networking/downloader_with_version_control.cpp
+		${UTILS_DIR}/include/utils/networking/sync_resources.h
 		${UTILS_DIR}/src/string_utils.cpp
 		${UTILS_DIR}/src/file_utils.cpp
 		${UTILS_DIR}/src/io_utils.cpp
