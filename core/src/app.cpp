@@ -7,7 +7,6 @@
 #include <utils/file_utils.h>
 #include <utils/string_utils.h>
 #include <utils/io_utils.h>
-#include <utils/networking/uploader_with_auth.h>
 #include <utils/dmb/auth_async.h>
 #include <utils/networking/sync_resources.h>
 #include <utils/datetime.h>
@@ -16,8 +15,6 @@
 #include <utils/Log.h>
 #include <abstract_ui/widget_factory.h>
 #include <abstract_ui/widgets/dialogs/dialog_with_buttons.h>
-#include <http/http_client.h>
-#include <http/uploader.h>
 #include <http/authenticator.h>
 #include "words.h"
 #include "ui/controllers/play_random_word_controller.h"
