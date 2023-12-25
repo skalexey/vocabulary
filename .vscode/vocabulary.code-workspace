@@ -23,6 +23,9 @@
 		},
 		{
 			"path": "../../abstract_ui"
+		},
+		{
+			"path": "../../certify"
 		}
 	],
 	"settings": {
@@ -138,7 +141,8 @@
 			"typeindex": "cpp",
 			"valarray": "cpp",
 			"variant": "cpp",
-			"*.moc": "cpp"
+			"*.moc": "cpp",
+			"*.rh": "cpp"
 		},
 		"search.exclude": {
 			"*.log": true,
