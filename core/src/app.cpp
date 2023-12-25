@@ -113,7 +113,7 @@ int upload_file(const fs::path& fpath);
 int upload_file(const fs::path& fpath)
 {
 	LOG_DEBUG("upload_file(" << fpath.string() << ")");
-	return upload_file(fpath.string(), g_ep, "/v/h.php");
+	return utils::http::upload_file(fpath.string(), g_ep, "/v/h.php");
 }
 
 auto backup_words()
