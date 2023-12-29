@@ -23,9 +23,9 @@ namespace vocabulary_core
 	{
 		using namespace utils::ui;
 		m_show_example_button = create<button>();
-		m_show_example_button->set_text("show Example");
+		m_show_example_button->set_text("Show Example");
 		m_show_translation_button = create<button>();
-		m_show_translation_button->set_text("show Translation");
+		m_show_translation_button->set_text("Show Translation");
 		m_i_know_it_button = create<button>();
 		m_i_know_it_button->set_text("I Know It");
 		m_skip_button = create<button>();
