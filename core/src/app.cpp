@@ -76,7 +76,7 @@ namespace
 	std::ifstream words_fi;
 
 	const std::string host = "srv.vllibrary.net";
-	const int port = 443;
+	const int port = 80;
 	anp::tcp::endpoint_t g_ep = { host, port };
 
 	const std::string words_location_field_name = "words_location";
