@@ -391,6 +391,8 @@ namespace vocabulary_core
 		{
 			m_window_ctrl = std::make_unique<play_random_word_controller>(*this);
 			m_window_ctrl->show();
+			m_new_word_ctrl = std::make_unique<new_word_controller>(*this);
+			m_new_word_ctrl->show();
 		}
 		catch (std::exception& ex)
 		{
@@ -462,6 +464,8 @@ namespace vocabulary_core
 	bool app::core_update(float dt)
 	{
 		if (!m_window_ctrl->update(dt))
+			return false;
+		if (!m_new_word_ctrl->update(dt))
 			return false;
 		return on_core_update(dt);
 	}

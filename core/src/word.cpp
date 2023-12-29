@@ -73,7 +73,8 @@ int word::load()
 	columns.reserve(max_column_count);
 	utils::split_repeated_delimeter(columns, m_data, '\t');
 	if (columns.size() == 1 && columns[0] == m_data)
-		return erc::invalid_column_count;
+		if (m_data.find('\t') != std::string::npos)
+			return erc::invalid_column_count;
 	// Load the columns into the word
 	if (columns.size() < 1)
 		return erc::invalid_column_count;

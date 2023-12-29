@@ -9,7 +9,7 @@
 #include <utils/common.h>
 #include <DMBCore.h>
 #include "ui/controllers/play_random_word_controller.h"
-
+#include "ui/controllers/new_word_controller.h"
 namespace vocabulary_core
 {
 	class app : public virtual utils::ui::app, public utils::ui::user_input
@@ -57,6 +57,7 @@ namespace vocabulary_core
 
 	private:
 		play_random_word_controller_ptr m_window_ctrl;
+		new_word_controller_ptr m_new_word_ctrl;
 		dmb::Model m_cfg_model;
 		bool m_is_offline = false;
 		std::unique_ptr<utils::terminator> m_terminator;
