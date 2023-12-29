@@ -51,7 +51,7 @@ bool app::on_update(float dt) {
 		m_log_stream.out();
 	if (!vocabulary_core::app::core_update(dt))
 		return false;
-	return utils::ui::imgui::sdl_app::on_update(dt); // Calls ui::node::on_update that updates all the node tree.
+	return true;
 }
 
 void app::log_stringstream::out()
