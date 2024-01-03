@@ -8,4 +8,8 @@ macro(set_build_directory)
   if(ANDROID)
     set(BUILD_DIR_NAME "${BUILD_DIR_NAME}-android")
   endif()
+  # if Linux
+  if(UNIX AND NOT APPLE)
+    set(BUILD_DIR_NAME "${BUILD_DIR_NAME}-linux")
+  endif()
 endmacro(set_build_directory)
