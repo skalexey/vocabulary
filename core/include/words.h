@@ -1,4 +1,4 @@
-﻿// words.h
+// words.h
 
 #pragma once
 

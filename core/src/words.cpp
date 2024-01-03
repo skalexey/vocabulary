@@ -1,4 +1,4 @@
-﻿// words.cpp
+// words.cpp
 
 #include <fstream>
 #include <sstream>

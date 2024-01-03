@@ -1,4 +1,4 @@
-﻿// word.cpp
+// word.cpp
 
 #include <cassert>
 #include <functional>
