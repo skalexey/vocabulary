@@ -73,6 +73,16 @@ macro(setup_module)
 	)
 	message("${MODULE_NAME}: Lua src: '${LUA_SRC}'")
 
+	set(OPENCV_DIR "${DEPS}/opencv")
+	message("${MODULE_NAME}: OPENCV_DIR: ${OPENCV_DIR}")
+	module_add_includes(${OPENCV_DIR}/include)
+	# add_dependency(${OPENCV_DIR} OpenCV)
+
+	set(TESSERACT_DIR "${DEPS}/tesseract")
+	message("${MODULE_NAME}: TESSERACT_DIR: ${TESSERACT_DIR}")
+	module_add_includes(${TESSERACT_DIR}/include)
+	add_dependency(${TESSERACT_DIR} tesseract)
+
 	# Assign all the headers to ${HEADERS} variable and use it in add_src() macro
 	set_headers()
 	add_src(

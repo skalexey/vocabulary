@@ -26,6 +26,12 @@
 		},
 		{
 			"path": "../../certify"
+		},
+		{
+			"path": "../../tesseract"
+		},
+		{
+			"path": "../../opencv"
 		}
 	],
 	"settings": {

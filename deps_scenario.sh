@@ -16,6 +16,8 @@ function deps_scenario()
     download_dependency "lua-5.4.4" "$depsLocation" "http://www.lua.org/ftp/lua-5.4.4.tar.gz"
     download_dependency "boost_1_81_0" "$depsLocation" "https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.bz2"
     download_dependency "abstract_ui" "$depsLocation" "git@github.com:skalexey/abstract_ui.git"
+    download_dependency "tesseract" "$depsLocation" "git@github.com:tesseract-ocr/tesseract.git"
+    download_dependency "opencv" "$depsLocation" "git@github.com:opencv/opencv.git"
 }
 
 deps_scenario $@
