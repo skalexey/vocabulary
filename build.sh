@@ -48,10 +48,10 @@ build()
 	for arg in "$@" 
 	do
 		echo "arg[$argIndex]: '$arg'"
-		arg=${arg,,}
 		if [[ $argIndex -eq 0 ]]; then
 			local rootDirectory=$arg
 		else
+			arg=${arg,,}
 			if [[ "$arg" == "only-lib" ]]; then
 				log "'only-lib' option passed. Build only library without tests" " --"
 				local onlyLibArg=" only-lib"
