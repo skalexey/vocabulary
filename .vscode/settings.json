@@ -113,13 +113,11 @@
         "variant": "cpp"
     },
     "cmake.useCMakePresets": "auto",
-    "cmake.environment": {
-        "build_deps": "${env:USERPROFILE}/Projects"
-    },
     "cmake.configureSettings": {
         "LOG_ON": "ON",
         "LOG_LEVEL_DEBUG": "ON",
         "LOG_LEVEL_VERBOSE": "ON"
     },
-    "cmake.sourceDirectory": "${workspaceFolder}"
+    "cmake.sourceDirectory": "${workspaceRoot}/ImGui-SDL",
+    "cmake.buildDirectory": "${workspaceFolder}/ImGui-SDL/Build-cmake-vs"
 }
