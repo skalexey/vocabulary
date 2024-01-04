@@ -142,7 +142,9 @@
 			"valarray": "cpp",
 			"variant": "cpp",
 			"*.moc": "cpp",
-			"*.rh": "cpp"
+			"*.rh": "cpp",
+			"rope": "cpp",
+			"slist": "cpp"
 		},
 		"search.exclude": {
 			"*.log": true,
