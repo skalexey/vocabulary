@@ -45,7 +45,7 @@ std::pair<std::reference_wrapper<word>, int> words::new_word(const std::string& 
 {
 	auto it = list.find(w);
 	if (it != list.end())
-		return std::make_pair(std::reference_wrapper<word>(it->second), int(add_word_erc::word_exists));
+		return std::make_pair(std::reference_wrapper<word>((*it).second), int(add_word_erc::word_exists));
 	word& added_word = list.add(w, word(*this, m_lines.emplace_back(w)));
 	if (added_word.load() != word::erc::no_error)
 		return std::make_pair(std::reference_wrapper<word>(added_word), add_word_erc::load_error);

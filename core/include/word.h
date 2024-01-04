@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <limits>
+#include <climits>
 #include <string>
 #include <string_view>
 
