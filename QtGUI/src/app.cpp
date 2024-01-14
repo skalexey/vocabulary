@@ -8,11 +8,11 @@
 #include <utils/io_utils.h>
 #include <utils/print_defs.h>
 #include <utils/common.h>
+#include <utils/Log.h>
+#include <utils/log_stream.h>
 #ifdef LOG_ON
 	#include <QDebug>
-	// #include <utils/log_stream.h>
 	// LOG_STREAM(qDebug());
-	#include <utils/Log.h>
 	// LOG_STREAM(qDebug());
 #endif
 #include "QtGUI/include/app.h"
