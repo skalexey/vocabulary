@@ -9,7 +9,7 @@ endmacro(set_module_name)
 
 macro(setup_module_includes)
 	set(${MODULE_NAME}_INCLUDES
-		${CUSTOM_INCLUDES}
+		${${MODULE_NAME}_CUSTOM_INCLUDES}
 		${INCLUDES}
 		"${CMAKE_CURRENT_SOURCE_DIR}/include"
 	)
@@ -44,12 +44,22 @@ macro(module_add_library_or_executable)
 		module_message("BUILD_SHARED_LIBRARY")
 		add_library(${MODULE_NAME} SHARED ${SRC})
 	else()
-		module_message("BUILD_EXECUTABLE")
+		module_message("BUILD_EXECUTABLE '${MODULE_NAME}' with sources '${SRC}'")
 		add_executable(${MODULE_NAME} ${SRC})
 	endif()
 	target_link_libraries(${MODULE_NAME} PUBLIC ${DEPENDENCY_LIBRARIES})
 	module_message("target_link_libraries(${MODULE_NAME} PUBLIC ${DEPENDENCY_LIBRARIES}")
-	if(BUILD_SHARED_LIBRARY OR NOT BUILD_LIBRARY)
+	include(FetchContent)
+	FetchContent_Declare(
+		${MODULE_NAME}
+		SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+	)
+	FetchContent_GetProperties(${MODULE_NAME})
+	string(TOLOWER ${MODULE_NAME} _module_name_lower)
+	if(NOT ${_module_name_lower}_POPULATED)
+		FetchContent_Populate(${MODULE_NAME})
+	endif()
+	if(BUILD_SHARED_LIBRARY)
 		copy_runtime_deps()
 	endif()
 endmacro(module_add_library_or_executable)

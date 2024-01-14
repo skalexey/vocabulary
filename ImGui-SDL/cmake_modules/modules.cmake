@@ -8,6 +8,8 @@ macro(modules_include_all dir)
 	include(${dir}/log.cmake)
 	include(${dir}/module.cmake)
 	include(${dir}/src.cmake)
+	include(${dir}/qt.cmake)
+	include(${dir}/platforms.cmake)
 endmacro(modules_include_all)
 
 macro(setup_module_project)

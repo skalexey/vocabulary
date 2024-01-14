@@ -49,6 +49,16 @@ macro(module_add_library_or_executable)
 	endif()
 	target_link_libraries(${MODULE_NAME} PUBLIC ${DEPENDENCY_LIBRARIES})
 	module_message("target_link_libraries(${MODULE_NAME} PUBLIC ${DEPENDENCY_LIBRARIES}")
+	include(FetchContent)
+	FetchContent_Declare(
+		${MODULE_NAME}
+		SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+	)
+	FetchContent_GetProperties(${MODULE_NAME})
+	string(TOLOWER ${MODULE_NAME} _module_name_lower)
+	if(NOT ${_module_name_lower}_POPULATED)
+		FetchContent_Populate(${MODULE_NAME})
+	endif()
 	if(BUILD_SHARED_LIBRARY)
 		copy_runtime_deps()
 	endif()

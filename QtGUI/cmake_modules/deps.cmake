@@ -22,7 +22,25 @@ macro(setup_deps)
 	set(DEPS ${DEPS} PARENT_SCOPE)
 endmacro(setup_deps)
 
+macro(add_dependency dir name)
+	include(FetchContent)
+	FetchContent_Declare(
+		${name}
+		SOURCE_DIR ${dir}
+	)
+	FetchContent_GetProperties(${name})
+	string(TOLOWER ${name} _name_lower)
+	if(NOT ${_name_lower}_POPULATED)
+		module_message("FetchContent_Populate(${name})")
+		FetchContent_Populate(${name})
+		add_subdirectory(${dir} ${dir}/${BUILD_DIR_NAME})
+	else()
+		get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
+	endif()
+endmacro(add_dependency)
+
 macro(add_dependency_module dir name)
+	module_message("add_dependency_module: ${name} located in ${dir}")
 	if("${ARGV2}" STREQUAL "LINK_ONLY")
 		# target_link_directories(${MODULE_NAME} PRIVATE ${dir})
 	elseif("${ARGV2}" STREQUAL "INCLUDE_ONLY")
@@ -31,28 +49,16 @@ macro(add_dependency_module dir name)
 		execute_process(
 			COMMAND ${CMAKE_COMMAND} -S ${dir} -B ${dir}/${BUILD_DIR_NAME}
 		)
-		get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
+		# No properties (e.g., ${name}_INCLUDES) will be available here
 	else()
-		include(FetchContent)
-		FetchContent_Declare(
-			${name}
-			SOURCE_DIR ${dir}
-		)
-		FetchContent_GetProperties(${name})
-		if(NOT ${name}_POPULATED)
-			module_message("FetchContent_Populate(${name})")
-			FetchContent_Populate(${name})
-			add_subdirectory(${${name}_SOURCE_DIR} ${${name}_BINARY_DIR})
-		else()
-			get_directory_property(${name}_INCLUDES DIRECTORY ${${name}_SOURCE_DIR} DEFINITION ${name}_INCLUDES)
-		endif()
+		add_dependency(${dir} ${name})
+		module_message("${name} variables: ${name}_SOURCE_DIR=${${name}_SOURCE_DIR}, ${name}_BINARY_DIR=${${name}_BINARY_DIR}, ${name}_INCLUDES=${${name}_INCLUDES}")
 	endif()
 	if ("${${name}_INCLUDES}" STREQUAL "")
 		message(SEND_ERROR "${MODULE_NAME}: ERROR: ${name}_INCLUDES is not specified")
 	endif()
 	module_add_includes(${${name}_INCLUDES})
 	set(DEPENDENCY_LIBRARIES ${DEPENDENCY_LIBRARIES} ${name})
-	module_message("add_dependency_module: ${name} located in ${dir}")
 	module_message("dependency includes: ${${name}_INCLUDES}")
 endmacro(add_dependency_module)
 
