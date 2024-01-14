@@ -144,7 +144,9 @@
 			"*.moc": "cpp",
 			"*.rh": "cpp",
 			"rope": "cpp",
-			"slist": "cpp"
+			"slist": "cpp",
+			"hash_map": "cpp",
+			"hash_set": "cpp"
 		},
 		"search.exclude": {
 			"*.log": true,
