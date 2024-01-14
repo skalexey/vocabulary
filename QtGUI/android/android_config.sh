@@ -7,3 +7,4 @@ classname=""
 appname="Vocabulary"
 proj="QtGUI/android" # temporarily set to the control directory
 key="my-release-key.jks"
+build_folder="Build-cmake-android"

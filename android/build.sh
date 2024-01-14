@@ -9,10 +9,8 @@ job()
 	source android_config.sh
 
 	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-	cd "$THIS_DIR"
-
 	# Load environment variables
-	source set_android_environment.sh
+	source $THIS_DIR/set_android_environment.sh
 	
 	# Go to the root directory
 	cd "$root_dir"

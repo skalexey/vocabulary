@@ -11,9 +11,9 @@ function job()
 	echo "ANDROID_HOME before: $ANDROID_HOME"
 	echo "ANDROID_NDK_HOME before: $ANDROID_NDK_HOME"
 	echo "JAVA_HOME before: $JAVA_HOME"
-	export ANDROID_HOME=~/bin/android/sdk
+	export ANDROID_HOME=~/android-sdk
 	# ndkPath is used instead of ANDROID_NDK_HOME
-	export ANDROID_NDK_HOME=~/bin/android/sdk/ndk/25.1.8937393
+	export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/25.1.8937393
 	if is_windows; then
 		export JAVA_HOME="C:/Program Files/Java/jdk-11.0.16.1"
 	else
