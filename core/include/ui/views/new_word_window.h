@@ -10,6 +10,7 @@ namespace vocabulary_core
 		using base = utils::ui::final::dialog;
 
 		public:
+			new_word_window();
 			new_word_window(const utils::ui::dialog_ptr& impl);
 			utils::ui::text_input& example_input() { return *m_example_input; }
 			utils::ui::text_input& translation_input() { return *m_translation_input; }
@@ -18,6 +19,7 @@ namespace vocabulary_core
 
 		private:
 			int this_on_post_construct();
+			void construct();
 			
 		private:
 			utils::ui::text_input_ptr m_word_input;

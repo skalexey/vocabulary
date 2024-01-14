@@ -8,12 +8,20 @@
 
 namespace vocabulary_core
 {
+	play_random_word_window::play_random_word_window()
+		: base()
+	{
+		construct();
+	}
+	
 	play_random_word_window::play_random_word_window(const utils::ui::dialog_ptr& impl)
 		: base(impl)
 	{
-		// set_auto_resize(true);
-		set_size({ 500, 700 });
-		set_title("Random Word Game");
+		construct();
+	}
+
+	void play_random_word_window::construct()
+	{
 		do_on_post_construct([self = this]() {
 			return self->this_on_post_construct();
 		});
@@ -22,6 +30,12 @@ namespace vocabulary_core
 	int play_random_word_window::this_on_post_construct()
 	{
 		using namespace utils::ui;
+		// Let the implementation decide how to manage the size
+		set_size_policy(size_policy::type::automatic, size_policy::type::automatic);
+		// Not every implementation support automatic resize properly
+		set_size({ 500, 700 });
+		set_modal(false);
+		set_title("Random Word Game");
 		m_show_example_button = create<button>();
 		m_show_example_button->set_text("Show Example");
 		m_show_translation_button = create<button>();
@@ -33,6 +47,12 @@ namespace vocabulary_core
 		m_word_label = create<label>();
 		m_example_label = create<text>();
 		m_translation_label = create<text>();
+		// Center dialog manually on first 2 frames while we are temporarily using dragging
+		app().add_on_update([self = this](float dt) {
+			static int cnt = 0;
+			self->set_position_relative({ 0.5f, 0.5f }, { 0.5f, 0.5f });
+			return cnt++ < 1;
+		});
 		return 0;
 	}
 }
