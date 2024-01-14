@@ -33,13 +33,27 @@ if (-not (Test-Path -Path $deploy_dir -PathType Container)) {
 }
 
 # Specify the source directory based on the argument
-$build_dir = Join-Path "Build-cmake" ($build_type.Substring(0, 1).ToUpper() + $build_type.Substring(1))
+$buld_folder_suffix = $build_type.Substring(0, 1).ToUpper() + $build_type.Substring(1)
+$build_dir = Join-Path "Build-cmake-$buld_folder_suffix" "Debug"
 
 # Check if the source directory exists
 if (Test-Path -Path $build_dir -PathType Container) {
+	# Deploy Qt DLLs
+	$scriptDirectory = Split-Path -Parent $MyInvocation.MyCommand.Definition
+	$batFilePath = Join-Path $scriptDirectory "deploy.bat"
+	$processStartInfo = @{
+		FilePath = $batFilePath
+		NoNewWindow = $true
+		Wait = $true
+	}
+	if ($args) {
+		$processStartInfo['ArgumentList'] = $args
+	}
+	Start-Process @processStartInfo
 	# Run windeployqt.exe to copy the required Qt DLLs
-	$THIS_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
-	windeployqt.exe Join-Path $build_dir "QtGUIApp.exe" --qmldir $THIS_DIR
+	# $THIS_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
+	# $appLocation = Join-Path $build_dir ($executable_name + ".exe")
+	# $Env:QT_DIR\\msvc2019_64\\bin\\windeployqt.exe $appLocation --qmldir $THIS_DIR
 	if ($?) {
 		Write-Host "Qt DLLs copied from '$build_dir' to '$deploy_dir'"
 	} else {

@@ -11,10 +11,10 @@ for %%x in (%*) do (
 )
 
 set dir=%CD%
-set buildDir=%CD%\Build-cmake\%destinationFolder%
+set buildDir=%CD%\Build-cmake-%destinationFolder%\Debug
 set homeDir=%CD%
 
-cd /D I:\Dev\Qt\6.5.1\msvc2019_64\bin\
+cd /D %QT_DIR%\msvc2019_64\bin\
 
 call windeployqt.exe %buildDir%\QtGUIApp.exe --qmldir %homeDir%
 cd %dir%
