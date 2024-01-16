@@ -32,7 +32,7 @@ function download_dependency()
 		local cur_path=$(pwd)
 		cd "$deps_path"
 		download ${@:3}
-		erc=$?
+		local erc=$?
 		if [ $erc -ne 0 ]; then
 			log_error "Dependency '${dep_dir_name}' download error: $erc" " ---"
 			return 1
