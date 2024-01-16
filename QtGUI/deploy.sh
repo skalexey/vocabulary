@@ -17,7 +17,7 @@ function job()
 		fi
 		exit $?
 	elif is_mac; then
-		local deploy_dir="/usr/local/bin"
+		local deploy_dir="/Applications"
 	else
 		local deploy_dir="/usr/bin"
 	fi
