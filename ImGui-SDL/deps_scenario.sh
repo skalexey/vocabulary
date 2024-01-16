@@ -10,7 +10,7 @@ function deps_scenario()
     [ $? -ne 0 ] && log_error "Error occured during the parent deps_scenario.sh execution " " -" && return 1
     log_success "Parent deps_scenario.sh work done" " -"
 
-    source $THIS_DIR/deps_config.sh
+    source $THIS_DIR/../deps_config.sh
     source $THIS_DIR/../dependencies.sh
 
     download_dependency "imgui" "$depsLocation" "https://github.com/ocornut/imgui.git"
