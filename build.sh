@@ -51,7 +51,8 @@ build()
 		if [[ $argIndex -eq 0 ]]; then
 			local rootDirectory=$arg
 		else
-			arg=${arg,,}
+			arg=$(echo $arg | tr '[:upper:]' '[:lower:]')
+			[ $? -ne 0 ] && log_error "Error in tr command" " --" && return 1
 			if [[ "$arg" == "only-lib" ]]; then
 				log "'only-lib' option passed. Build only library without tests" " --"
 				local onlyLibArg=" only-lib"
