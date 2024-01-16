@@ -32,7 +32,17 @@ function job()
 		mkdir -p "$deploy_dir"
 	fi
 
-	cp Build-cmake-Release/Debug/vocabulary "$deploy_dir"
+	local build_dir_postfix="Release"
+	# iterate arguments case-insensitive
+	for arg in "$@"; do
+		arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
+		if [ "$arg" == "debug" ]; then
+			log_info "debug argument passed"
+			build_dir_postfix="Debug"
+		fi
+	done
+
+	cp Build-cmake-$build_dir_postfix/Debug/QtGUIApp "$deploy_dir"
 	[ $? -ne 0 ] && log_error " --- Errors during deploying at '$deploy_dir'" || log_success " --- Deployed successfully at '$deploy_dir'"
 }
 
