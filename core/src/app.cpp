@@ -171,6 +171,9 @@ namespace vocabulary_core
 		LOG("load_words()");
 		g_words.load(g_words_fpath);
 		m_window_ctrl->show_random_word();
+		set_timer(1, [self = this](const timer_ptr& timer) {
+			self->upload_changes_job();
+		});
 	}
 
 	void app::update_words_dir(const std::string& new_dir)
@@ -356,6 +359,32 @@ namespace vocabulary_core
 				if (cb)
 					cb(code);
 			});
+	}
+
+	void app::upload_changes(const void_int_cb& cb)
+	{
+		LOG("upload_changes()");
+		return utils::networking::upload_changes(g_ep, "/v/h.php", g_resources_list
+			, [=](int code) {
+				if (code != 0)
+					show_message("upload_changes() failed with error code: " + std::to_string(code));
+				if (cb)
+					cb(code);
+			});
+	}
+
+	void app::upload_changes_job()
+	{
+		upload_changes([self = this](int code) {
+			if (code != 0)
+				LOG("upload_changes() failed with error code: " << code);
+			else
+			{
+				g_app->set_timer(1, [self](const vocabulary_core::app::timer_ptr& timer) {
+					self->upload_changes_job();
+				});
+			}
+		});
 	}
 
 	int app::init()
