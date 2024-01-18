@@ -4,6 +4,7 @@ source ../os.sh
 
 function job()
 {
+	local executable_name="vocabulary"
 	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 	cd "$THIS_DIR"
 	source ../log.sh
@@ -42,7 +43,7 @@ function job()
 		fi
 	done
 
-	cp Build-cmake-$build_dir_postfix/Debug/QtGUIApp "$deploy_dir"
+	cp Build-cmake-$build_dir_postfix/Debug/vocabulary "$deploy_dir"
 	[ $? -ne 0 ] && log_error " --- Errors during deploying at '$deploy_dir'" || log_success " --- Deployed successfully at '$deploy_dir'"
 }
 

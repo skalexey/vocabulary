@@ -11,7 +11,7 @@ if (-not (Test-Admin)) {
 	Exit
 }
 
-$executable_name = "QtGUIApp"
+$executable_name = "vocabulary"
 $app_folder = "vocabulary\Qt"
 $deploy_dir = $Env:PROGRAMFILES + "\" + $app_folder
 # Check if the directory already exists

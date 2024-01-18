@@ -2,7 +2,7 @@
 
 root_dir="$(cd ../.. && pwd)"
 android_dir="QtGUI/android"
-app=org.qtproject.example.QtGUIApp
+app=org.qtproject.example.vocabulary
 classname=""
 appname="Vocabulary"
 proj="QtGUI/android" # temporarily set to the control directory

@@ -1,5 +1,6 @@
 @echo off
 
+set executableName=vocabulary.exe
 set destinationFolder=Release
 set argCount=0
 for %%x in (%*) do (
@@ -16,7 +17,7 @@ set homeDir=%CD%
 
 cd /D %QT_DIR%\msvc2019_64\bin\
 
-call windeployqt.exe %buildDir%\QtGUIApp.exe --qmldir %homeDir%
+call windeployqt.exe %buildDir%\%executableName% --qmldir %homeDir%
 cd %dir%
 echo All is done
 

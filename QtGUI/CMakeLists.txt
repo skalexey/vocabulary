@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21.1)
 
-project(QtGUIApp LANGUAGES CXX)
+project(vocabulary LANGUAGES CXX)
 
 set(BUILD_QDS_COMPONENTS ON CACHE BOOL "Build design studio components")
 
