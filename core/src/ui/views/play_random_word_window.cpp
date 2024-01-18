@@ -48,7 +48,7 @@ namespace vocabulary_core
 		m_example_label = create<text>();
 		m_translation_label = create<text>();
 		// Center dialog on the second half of the screen
-		app().add_on_update([self = this](float dt) {
+		add_on_update([self = this](float dt) {
 			auto screen_size = self->get_screen_size();
 			auto size = self->get_size();
 			if (screen_size.x > screen_size.y)

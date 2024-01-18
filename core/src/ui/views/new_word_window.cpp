@@ -45,7 +45,7 @@ namespace vocabulary_core
 		m_store_button = create<button>();
 		m_store_button->set_text("Store");
 		// Center dialog on the first half of the screen
-		app().add_on_update([self = this](float dt) {
+		add_on_update([self = this](float dt) {
 			auto screen_size = self->get_screen_size();
 			auto size = self->get_size();
 			if (screen_size.x > screen_size.y)
