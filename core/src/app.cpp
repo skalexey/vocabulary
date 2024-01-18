@@ -467,7 +467,7 @@ namespace vocabulary_core
 			auth([=](int result) {
 				if (result == 0)
 				{
-					self->show_message(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
+					self->show_hint(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
 					after_auth();
 				}
 				else
