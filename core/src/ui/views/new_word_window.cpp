@@ -44,11 +44,15 @@ namespace vocabulary_core
 		m_translation_input->set_label("Translation");
 		m_store_button = create<button>();
 		m_store_button->set_text("Store");
-		// Center dialog manually on first 2 frames while we are temporarily using dragging
+		// Center dialog on the first half of the screen
 		app().add_on_update([self = this](float dt) {
-			static int cnt = 0;
-			self->set_position_relative({ 0.5f, 0.5f }, { 0.5f, 0.5f });
-			return cnt++ < 1;
+			auto screen_size = self->get_screen_size();
+			auto size = self->get_size();
+			if (screen_size.x > screen_size.y)
+				self->set_position({(screen_size.x / 2 - size.x) / 2, screen_size.y / 2 - size.y / 2});
+			else
+				self->set_position({screen_size.x / 2 - size.x / 2, (screen_size.y / 2 - size.y) / 2});
+			return true;
 		});
 		
 		return 0;
