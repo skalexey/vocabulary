@@ -40,7 +40,7 @@ Item {
 		ColumnLayout {
 			id: mainLayout
 			objectName: "content"
-			Layout.maximumWidth: 400
+			Layout.maximumWidth: 250
 		}
 	}
 
