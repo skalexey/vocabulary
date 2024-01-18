@@ -15,7 +15,7 @@ Rectangle {
     height: Constants.height
 
     color: Constants.backgroundColor
-
+/* // Left for tests 
     Button {
         id: button
         text: qsTr("Press me")
@@ -57,6 +57,7 @@ Rectangle {
             }
         }
     }
+*/
     states: [
         State {
             name: "clicked"
