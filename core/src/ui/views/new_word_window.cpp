@@ -4,7 +4,8 @@
 #include <abstract_ui/widgets/text_input.h>
 #include <abstract_ui/widget_factory.h>
 #include "ui/views/new_word_window.h"
-
+#include <utils/Log.h>
+LOG_TITLE("vocabulary_core::new_word_window");
 namespace vocabulary_core
 {
 	new_word_window::new_word_window()
