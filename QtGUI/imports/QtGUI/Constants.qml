@@ -18,11 +18,6 @@ QtObject {
                                                   pixelSize: Qt.application.font.pixelSize * 1.6
                                               })
 
-    readonly property color backgroundColorLight: "#c2c2c2"
-    readonly property color backgroundColorDark: "#333333"
-    readonly property color backgroundColor: backgroundColorDark
-
-
     property StudioApplication application: StudioApplication {
         fontPath: Qt.resolvedUrl("../../content/" + relativeFontDirectory)
     }

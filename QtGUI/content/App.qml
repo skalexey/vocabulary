@@ -2,20 +2,16 @@
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR GPL-3.0-only
 
 import QtQuick 6.2
+import QtQuick.Controls 6.2
 import QtGUI
 
 Window {
-    width: mainScreen.width
-    height: mainScreen.height
+    width: Constants.width
+    height: Constants.height
 
     visible: true
-    title: "QtGUI"
+    title: "vocabulary"
 
-    color: Constants.backgroundColor
-
-    Screen01 {
-        id: mainScreen
-    }
-
+    color: palette.base
 }
 
