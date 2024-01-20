@@ -36,6 +36,7 @@ namespace vocabulary_core
 		set_size({ 500, 700 });
 		set_modal(false);
 		set_title("Random Word Game");
+		set_max_width(250);
 		m_show_example_button = create<button>();
 		m_show_example_button->set_text("Show Example");
 		m_show_translation_button = create<button>();
