@@ -3,7 +3,7 @@
 
 import QtQuick 6.2
 import QtQuick.Controls 6.2
-import QtGUI
+import abstract_ui_qml
 
 Window {
     width: Constants.width

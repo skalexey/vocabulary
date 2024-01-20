@@ -16,6 +16,8 @@
 	// LOG_STREAM(qDebug());
 #endif
 #include "QtGUI/include/app.h"
+#include "QtGUI/include/import_qml_plugins.h"
+#include "QtGUI/include/import_qml_components_plugins.h"
 
 LOG_POSTFIX("\n");
 LOG_PREFIX("[qtgui-app]: ");
