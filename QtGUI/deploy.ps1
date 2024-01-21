@@ -6,8 +6,9 @@ function Test-Admin {
 
 # Prompt for elevation if not already running as administrator
 if (-not (Test-Admin)) {
-	$scriptPath = $MyInvocation.MyCommand.Path
-	Start-Process powershell.exe -Verb RunAs -ArgumentList "-File $scriptPath"
+	Write-Host "This script needs to be run as administrator. Restarting with elevated privileges..."	$scriptPath = $MyInvocation.MyCommand.Path
+	$scriptArguments = $MyInvocation.MyCommand.Definition
+	Start-Process powershell.exe -Verb RunAs -ArgumentList "-File `"$scriptPath`" $scriptArguments"
 	Exit
 }
 

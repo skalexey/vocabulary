@@ -4,14 +4,14 @@ import sys
 
 args = ""
 if (len(sys.argv) > 1):
-    args = " " + sys.argv[1]
+	args = " " + sys.argv[1]
 
 status = 0
 
 if os.name == 'nt':
-    status = os.system("powershell.exe deploy.ps1" + args)
+	p = subprocess.Popen(["powershell.exe", "deploy.ps1"], stdout=sys.stdout)
+	status = p.communicate()
 else:
-    status = os.system("./deploy.sh" + args)
+	status = os.system("./deploy.sh" + args)
 
 sys.exit(status)
-
