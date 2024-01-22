@@ -40,7 +40,8 @@ job()
 	for arg in "$@" 
 	do
 		echo "arg[$argIndex]: '$arg'"
-		if [[ "${arg,,}" == "release" ]]; then
+		arg=$(echo $arg | tr '[:upper:]' '[:lower:]')
+		if [[ "$arg" == "release" ]]; then
 			log "'release' option passed. Set Release build type" " --"
 			local build_config="Release"
 		fi

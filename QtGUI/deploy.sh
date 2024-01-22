@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source ../os.sh
-
 function job()
 {
 	local executable_name="vocabulary"
@@ -9,6 +7,7 @@ function job()
 	cd "$THIS_DIR"
 	source ../log.sh
 	local log_prefix="[deploy.sh]: "
+	source ../os.sh
 	if is_windows; then
 		# Run deploy.ps1
 		powershell.exe -ExecutionPolicy Bypass -File "deploy.ps1"
@@ -44,7 +43,7 @@ function job()
 	done
 
 	cp Build-cmake-$build_dir_postfix/Debug/vocabulary "$deploy_dir"
-	[ $? -ne 0 ] && log_error " --- Errors during deploying at '$deploy_dir'" || log_success " --- Deployed successfully at '$deploy_dir'"
+	[ $? -ne 0 ] && log_error " --- Errors during deploying at '$deploy_dir'" || log_success " --- Deployed successfully $build_dir_postfix at '$deploy_dir'"
 }
 
 job $@

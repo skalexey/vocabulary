@@ -3,14 +3,14 @@
 build()
 {
 	local folderName=${PWD##*/}
-
-	source log.sh
+	local THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+	source $THIS_DIR/log.sh
 	local log_prefix="-- [${folderName} build script]: "
 
 	log "Build for OS: $OSTYPE" " -" " ---"
 
-	if [ -f "deps_config.sh" ]; then
-		source deps_config.sh
+	if [ -f "$THIS_DIR/deps_config.sh" ]; then
+		source $THIS_DIR/deps_config.sh
 	fi
 
 	local buildFolderPrefix="Build"
@@ -27,7 +27,7 @@ build()
 	local extraArgWin=$extraArg
 	local extraArgMac=$extraArg
 	
-	source os.sh
+	source $THIS_DIR/os.sh
 
 	if is_windows; then
 		local generatorArg=" "
@@ -47,11 +47,12 @@ build()
 
 	for arg in "$@" 
 	do
-		echo "arg[$argIndex]: '$arg'"
+		log "arg[$argIndex]: '$arg'"
 		if [[ $argIndex -eq 0 ]]; then
 			local rootDirectory=$arg
 		else
 			arg=$(echo $arg | tr '[:upper:]' '[:lower:]')
+			log "Transformed arg: '$arg'" " --"
 			[ $? -ne 0 ] && log_error "Error in tr command" " --" && return 1
 			if [[ "$arg" == "only-lib" ]]; then
 				log "'only-lib' option passed. Build only library without tests" " --"
@@ -68,9 +69,9 @@ build()
 			elif [[ "$arg" == "release" ]]; then
 				log "'release' option passed. Set Release build type" " --"
 				local buildConfig="Release"
-				if [ -f "build_config_release.sh" ]; then
+				if [ -f "$THIS_DIR/build_config_release.sh" ]; then
 					log "Load build_config_release.sh"
-					source build_config_release.sh
+					source $THIS_DIR/build_config_release.sh
 					local custom_config=true
 				else
 					log "build_config_release.sh was not found. You can create it and override settings for release build"
@@ -92,13 +93,13 @@ build()
 
 	if ! $custom_config; then
 		log "Load build_config.sh"
-		source build_config.sh
+		source $THIS_DIR/build_config.sh
 	fi
 
 	# check for dependencies
 	local enterDirectory=${PWD}
-	if [ -f "get_dependencies.sh" ]; then
-		source get_dependencies.sh $@
+	if [ -f "$THIS_DIR/get_dependencies.sh" ]; then
+		source $THIS_DIR/get_dependencies.sh $@
 		local retval=$?
 		if [ $retval -ne 0 ]; then
 			log_error "Dependencies resolution error" " --"
@@ -119,8 +120,8 @@ build()
 	local build_cmd="cmake --build . --config=$buildConfig"
 	local build="$rootDirectory/${buildFolderPrefix}-cmake"
 
-	if [ -f "pre_build.sh" ]; then
-		./pre_build.sh $@
+	if [ -f "$THIS_DIR/pre_build.sh" ]; then
+		$THIS_DIR/pre_build.sh $@
 		[ $? -ne 0 ] && log_error "pre_build.sh error" " -" && return 6
 	fi
 
