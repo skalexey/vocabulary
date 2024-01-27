@@ -40,6 +40,14 @@ void ask_user(
 		g_app->ask_user(question, on_answer, yes_btn_text_ptr, no_btn_text_ptr);
 }
 
+void upload_changes(
+	const utils::void_int_cb& on_result
+	, bool force
+) {
+	if (g_app)
+		g_app->upload_changes(on_result, force);
+}
+
 void ask_line(
 	const std::string& msg
 	, const utils::void_string_bool_cb& on_answer
@@ -361,23 +369,48 @@ namespace vocabulary_core
 			});
 	}
 
-	void app::upload_changes(const void_int_cb& cb)
+	void app::upload_changes(const void_int_cb& cb, bool force)
 	{
 		LOG("upload_changes()");
 		return utils::networking::upload_changes(g_ep, "/v/h.php", g_resources_list
-			, [=](int code) {
+			, [=, self = this](int code) {
 				if (code != 0)
-					show_message("upload_changes() failed with error code: " + std::to_string(code));
-				if (cb)
-					cb(code);
-			});
+				{
+					if (code == anp::http_client_interface::erc::newer_version_on_server)
+					{
+						self->ask_user(
+							"Couldn't upload your changes because there is a newer version on the server. Would you still like to upload your version and overwrite the changes on the server?"
+							, [=](bool yes) {
+								if (yes)
+									self->upload_changes(cb, true);
+								else
+								{
+									if (cb)
+										cb(code);
+								}
+							}
+						);
+					}
+					else
+					{
+						show_message("upload_changes() failed with error code: " + std::to_string(code));
+					}
+				}
+				else
+				{
+					if (cb)
+						cb(code);
+				}
+			}, force);
 	}
 
 	void app::upload_changes_job()
 	{
 		upload_changes([self = this](int code) {
 			if (code != 0)
+			{
 				LOG("upload_changes() failed with error code: " << code);
+			}
 			else
 			{
 				g_app->set_timer(1, [self](const vocabulary_core::app::timer_ptr& timer) {
@@ -444,13 +477,13 @@ namespace vocabulary_core
 						self->ask_user(
 							"Errors while syncing resources. Continue in offline mode?"
 							, [=](bool yes) {
-								if (!yes)
-									self->exit(100 * code);
-								else
+								if (yes)
 								{
 									self->set_offline_mode(true);
 									load_words();
 								}
+								else
+									self->exit(100 * code);
 							}
 						);
 				});
