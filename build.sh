@@ -52,7 +52,6 @@ build()
 			local rootDirectory=$arg
 		else
 			arg=$(echo $arg | tr '[:upper:]' '[:lower:]')
-			log "Transformed arg: '$arg'" " --"
 			[ $? -ne 0 ] && log_error "Error in tr command" " --" && return 1
 			if [[ "$arg" == "only-lib" ]]; then
 				log "'only-lib' option passed. Build only library without tests" " --"
