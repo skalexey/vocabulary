@@ -13,7 +13,11 @@ function deps_scenario()
     source $THIS_DIR/../deps_config.sh
     source $THIS_DIR/../dependencies.sh
 
+    # ImGui
+    # 5a2b1e84828f192d30c91cdd210db41de8ad3236 - before January 28
+    # 96839b445e32e46d87a44fd43a9cdd60c806f7e1 - after January 28
     download_dependency "imgui" "$depsLocation" "https://github.com/ocornut/imgui.git"
+    # SDL
     download_dependency "SDL" "$depsLocation" "https://github.com/libsdl-org/SDL.git"
 
     if [ ! -f "$THIS_DIR/main_sdl_imgui.cpp" ]; then
