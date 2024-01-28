@@ -10,5 +10,7 @@ macro(setup_generator_short_name)
 			# Check the toolset version for MSVC 2019
 			set(GENERATOR_SHORT_NAME "msvc20${_MSVC_VERSION}_64")
 		endif()
+	elseif(CMAKE_GENERATOR MATCHES "Xcode")
+		set(GENERATOR_SHORT_NAME "macos")
 	endif()
 endmacro(setup_generator_short_name)
