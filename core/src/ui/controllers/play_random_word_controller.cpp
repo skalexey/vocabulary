@@ -19,40 +19,48 @@ namespace vocabulary_core
 	play_random_word_controller::play_random_word_controller(utils::ui::app& app)
 		: base(app)
 	{
-		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create_final<vocabulary_core::play_random_word_window>(app)));
-		view().show_example_button().set_on_click([this](bool up) {
+		do_on_post_construct([&, self = this]() {
+			return self->this_on_post_construct();
+		});
+	}
+
+	int play_random_word_controller::this_on_post_construct()
+	{
+		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create_final<vocabulary_core::play_random_word_window>(app())));
+		view().show_example_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("show_example_button");
-			if (m_current_word.empty())
+			if (self->m_current_word.empty())
 				return;
-			view().example_label().set_text(current_word().get_example());
-			m_example_shown = true;
+			self->view().example_label().set_text(self->current_word().get_example());
+			self->m_example_shown = true;
 		});
-		view().show_translation_button().set_on_click([this](bool up) {
+		view().show_translation_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("show_translation_button");
-			if (m_current_word.empty())
+			if (self->m_current_word.empty())
 				return;
-			auto& w = current_word();
-			view().translation_label().set_text(!w.get_translation().empty() ? std::string(w.get_translation().begin(), w.get_translation().end()) : "no translation");
-			m_translation_shown = true;
+			auto& w = self->current_word();
+			self->view().translation_label().set_text(!w.get_translation().empty() ? std::string(w.get_translation().begin(), w.get_translation().end()) : "no translation");
+			self->m_translation_shown = true;
 		});
-		view().i_know_it_button().set_on_click([this](bool up) {
+		view().i_know_it_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("i_know_it_button");
-			if (m_current_word.empty())
+			if (self->m_current_word.empty())
 				return;
-			auto& w = current_word();
-			float example_cost = m_example_shown ? 0.5f : 0.0f;
-			float translation_cost = m_translation_shown ? 1.f : 0.f;
+			auto& w = self->current_word();
+			float example_cost = self->m_example_shown ? 0.5f : 0.0f;
+			float translation_cost = self->m_translation_shown ? 1.f : 0.f;
 			auto m = std::max(0.f, (1.0f - example_cost - translation_cost));
 			w.set_level(char(word::level_max * m));
 			g_words.update_local_storage();
-			m_example_shown = false;
-			m_translation_shown = false;
-			show_random_word();
+			self->m_example_shown = false;
+			self->m_translation_shown = false;
+			self->show_random_word();
 		});
-		view().skip_button().set_on_click([this](bool up) {
+		view().skip_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("skip_button");
-			show_random_word();
+			self->show_random_word();
 		});
+		return 0;
 	}
 
 	void play_random_word_controller::show_random_word()

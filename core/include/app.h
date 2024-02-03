@@ -28,13 +28,6 @@ namespace vocabulary_core
 		
 	protected:
 		int init() override;
-		bool core_update(float dt);
-
-	protected:
-		virtual bool on_core_update(float dt) {
-			return true;
-		}
-		bool on_update(float dt) override; // Not final for virtual inheritance
 
 	private:
 		void init_words(const utils::void_int_cb& on_result);

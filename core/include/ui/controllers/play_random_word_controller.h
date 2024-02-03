@@ -24,6 +24,7 @@ namespace vocabulary_core
 
 	protected:
 		word& current_word();
+		int this_on_post_construct();
 
 	private:
 		std::deque<std::string> m_words_queue;

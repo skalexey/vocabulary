@@ -49,8 +49,6 @@ SDL_Window* app::create_window()
 bool app::on_update(float dt) {
 	if (!m_log_stream.str().empty())
 		m_log_stream.out();
-	if (!vocabulary_core::app::core_update(dt))
-		return false;
 	return true;
 }
 

@@ -25,6 +25,9 @@ namespace vocabulary_core
 
 		vocabulary_core::app& app();
 		const vocabulary_core::app& get_app() const;
+
+	protected:
+		int this_on_post_construct();
 	};
 	using new_word_controller_ptr = std::shared_ptr<new_word_controller>;
 }

@@ -451,10 +451,10 @@ namespace vocabulary_core
 		
 		try
 		{
-			m_window_ctrl = std::make_unique<play_random_word_controller>(*this);
-			m_window_ctrl->show();
-			m_new_word_ctrl = std::make_unique<new_word_controller>(*this);
-			m_new_word_ctrl->show();
+			m_window_ctrl = std::make_shared<play_random_word_controller>(*this);
+			m_window_ctrl->post_construct();
+			m_new_word_ctrl = std::make_shared<new_word_controller>(*this);
+			m_new_word_ctrl->post_construct();
 		}
 		catch (std::exception& ex)
 		{
@@ -521,20 +521,5 @@ namespace vocabulary_core
 		});
 
 		return 0;
-	}
-
-	bool app::core_update(float dt)
-	{
-		if (!m_window_ctrl->update(dt))
-			return false;
-		if (!m_new_word_ctrl->update(dt))
-			return false;
-		return on_core_update(dt);
-	}
-
-	bool app::on_update(float dt) {
-		if (!base::update(dt))
-			return false;
-		return core_update(dt);
 	}
 }
