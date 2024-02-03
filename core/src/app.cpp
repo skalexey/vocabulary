@@ -451,10 +451,8 @@ namespace vocabulary_core
 		
 		try
 		{
-			m_window_ctrl = std::make_shared<play_random_word_controller>(*this);
-			m_window_ctrl->post_construct();
-			m_new_word_ctrl = std::make_shared<new_word_controller>(*this);
-			m_new_word_ctrl->post_construct();
+			m_window_ctrl = utils::ui::widget_factory::create_abstract<play_random_word_controller>(this);
+			m_new_word_ctrl = utils::ui::widget_factory::create_abstract<new_word_controller>(this);
 		}
 		catch (std::exception& ex)
 		{

@@ -17,10 +17,9 @@ extern words g_words;
 
 namespace vocabulary_core
 {
-	new_word_controller::new_word_controller(utils::ui::app& app)
-		: base(app)
+	new_word_controller::new_word_controller()
 	{
-		do_on_post_construct([&, self = this]() {
+		do_on_post_construct([self = this]() {
 			return self->this_on_post_construct();
 		});
 	}

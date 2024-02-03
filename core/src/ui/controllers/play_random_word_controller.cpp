@@ -16,10 +16,9 @@ extern words g_words;
 
 namespace vocabulary_core
 {
-	play_random_word_controller::play_random_word_controller(utils::ui::app& app)
-		: base(app)
+	play_random_word_controller::play_random_word_controller()
 	{
-		do_on_post_construct([&, self = this]() {
+		do_on_post_construct([self = this]() {
 			return self->this_on_post_construct();
 		});
 	}

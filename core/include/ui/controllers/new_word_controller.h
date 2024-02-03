@@ -18,7 +18,7 @@ namespace vocabulary_core
 		using base = utils::ui::window_controller;
 
 	public:
-		new_word_controller(utils::ui::app& app);
+		new_word_controller();
 		new_word_window& view() {
 			return *std::dynamic_pointer_cast<new_word_window>(get_view());
 		}
