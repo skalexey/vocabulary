@@ -70,9 +70,9 @@ namespace vocabulary_core
 			return;
 		}
 		if (m_words_queue.empty()) {
-			std::for_each(g_words.list.begin(), g_words.list.end(), [this](const auto& pair) {
+			std::for_each(g_words.list.begin(), g_words.list.end(), [self = this](const auto& pair) {
 				if (pair.second.get_level() < word::level_max)
-					m_words_queue.push_back(pair.first);
+					self->m_words_queue.push_back(pair.first);
 			});
 			std::shuffle(m_words_queue.begin(), m_words_queue.end(), std::random_device());
 		}
