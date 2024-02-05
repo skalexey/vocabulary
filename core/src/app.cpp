@@ -15,9 +15,11 @@
 #include <utils/Log.h>
 #include <abstract_ui/widget_factory.h>
 #include <abstract_ui/widgets/dialogs/dialog_with_buttons.h>
+#include <abstract_ui/menu_manager.h>
 #include <http/authenticator.h>
 #include "words.h"
 #include "ui/controllers/play_random_word_controller.h"
+#include "ui/controllers/main_menu_controller.h"
 #include "app.h"
 
 LOG_POSTFIX("\n");
@@ -178,7 +180,7 @@ namespace vocabulary_core
 	{
 		LOG("load_words()");
 		g_words.load(g_words_fpath);
-		m_window_ctrl->show_random_word();
+		menu_manager().open_menu("main_menu");
 		set_timer(1, [self = this](const timer_ptr& timer) {
 			self->upload_changes_job();
 		});
@@ -420,6 +422,12 @@ namespace vocabulary_core
 		});
 	}
 
+	void app::register_menus()
+	{
+		auto mm = menu_manager();
+		mm.register_menu<main_menu_controller>("main_menu");
+	}
+
 	int app::init()
 	{
 		using namespace anp;
@@ -449,19 +457,7 @@ namespace vocabulary_core
 			// TODO: pause?
 		});
 		
-		try
-		{
-			m_window_ctrl = utils::ui::widget_factory::create_abstract<play_random_word_controller>(this);
-			m_new_word_ctrl = utils::ui::widget_factory::create_abstract<new_word_controller>(this);
-		}
-		catch (std::exception& ex)
-		{
-			LOG("Creating controller exception: " << ex.what());
-		}
-		catch (...)
-		{
-			LOG("Creating controller exception!");
-		}
+		register_menus();
 
 		auto after_auth = [=, self = this] () {
 			self->init_words([=](int result_code) {

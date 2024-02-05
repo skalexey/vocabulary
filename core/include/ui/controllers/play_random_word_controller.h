@@ -4,16 +4,16 @@
 #include <deque>
 #include <string>
 #include <memory>
-#include <abstract_ui/window_controller.h>
+#include <abstract_ui/node_controller.h>
 #include "ui/views/play_random_word_window.h"
 
 class word;
 
 namespace vocabulary_core
 {
-	class play_random_word_controller : public utils::ui::window_controller
+	class play_random_word_controller : public utils::ui::node_controller
 	{
-		using base = utils::ui::window_controller;
+		using base = utils::ui::node_controller;
 
 	public:
 		play_random_word_controller();

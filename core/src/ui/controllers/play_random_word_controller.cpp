@@ -59,6 +59,7 @@ namespace vocabulary_core
 			LOG_DEBUG("skip_button");
 			self->show_random_word();
 		});
+		show_random_word(); // Assuming the words have been loaded
 		return 0;
 	}
 

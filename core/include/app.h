@@ -51,6 +51,8 @@ namespace vocabulary_core
 			return m_is_offline;
 		}
 
+		void register_menus();
+
 	private:
 		play_random_word_controller_ptr m_window_ctrl;
 		new_word_controller_ptr m_new_word_ctrl;
