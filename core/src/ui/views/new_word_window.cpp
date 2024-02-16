@@ -8,26 +8,7 @@
 LOG_TITLE("vocabulary_core::new_word_window");
 namespace vocabulary_core
 {
-	new_word_window::new_word_window()
-		: base()
-	{
-		construct();
-	}
-
-	new_word_window::new_word_window(const utils::ui::dialog_ptr& impl)
-		: base(impl)
-	{
-		construct();
-	}
-
-	void new_word_window::construct()
-	{
-		do_on_post_construct([self = this]() {
-			return self->this_on_post_construct();
-		});
-	}
-
-	int new_word_window::this_on_post_construct()
+	int new_word_window::on_post_construct()
 	{
 		using namespace utils::ui;
 		// Let the implementation decide how to manage the size

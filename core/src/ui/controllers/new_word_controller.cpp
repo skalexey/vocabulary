@@ -17,14 +17,7 @@ extern words g_words;
 
 namespace vocabulary_core
 {
-	new_word_controller::new_word_controller()
-	{
-		do_on_post_construct([self = this]() {
-			return self->this_on_post_construct();
-		});
-	}
-
-	int new_word_controller::this_on_post_construct()
+	int new_word_controller::on_post_construct()
 	{
 		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create_final<vocabulary_core::new_word_window>(app())));
 		view().store_button().set_on_click([self = this](bool up) {

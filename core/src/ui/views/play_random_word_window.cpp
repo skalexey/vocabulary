@@ -8,26 +8,7 @@
 
 namespace vocabulary_core
 {
-	play_random_word_window::play_random_word_window()
-		: base()
-	{
-		construct();
-	}
-	
-	play_random_word_window::play_random_word_window(const utils::ui::dialog_ptr& impl)
-		: base(impl)
-	{
-		construct();
-	}
-
-	void play_random_word_window::construct()
-	{
-		do_on_post_construct([self = this]() {
-			return self->this_on_post_construct();
-		});
-	}
-
-	int play_random_word_window::this_on_post_construct()
+	int play_random_word_window::on_post_construct()
 	{
 		using namespace utils::ui;
 		// Let the implementation decide how to manage the size

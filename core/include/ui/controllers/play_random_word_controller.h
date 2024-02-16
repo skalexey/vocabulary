@@ -4,19 +4,18 @@
 #include <deque>
 #include <string>
 #include <memory>
-#include <abstract_ui/node_controller.h>
+#include <abstract_ui/view_controller.h>
 #include "ui/views/play_random_word_window.h"
 
 class word;
 
 namespace vocabulary_core
 {
-	class play_random_word_controller : public utils::ui::node_controller
+	class play_random_word_controller : public utils::ui::view_controller
 	{
-		using base = utils::ui::node_controller;
+		using base = utils::ui::view_controller;
 
 	public:
-		play_random_word_controller();
 		play_random_word_window& view() {
 			return *std::dynamic_pointer_cast<play_random_word_window>(get_view());
 		}
@@ -24,7 +23,7 @@ namespace vocabulary_core
 
 	protected:
 		word& current_word();
-		int this_on_post_construct();
+		int on_post_construct() override;
 
 	private:
 		std::deque<std::string> m_words_queue;

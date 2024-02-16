@@ -7,26 +7,7 @@ LOG_TITLE("vocabulary_core::main_menu");
 
 namespace vocabulary_core
 {
-	main_menu::main_menu()
-		: base()
-	{
-		construct();
-	}
-
-	main_menu::main_menu(const utils::ui::menu_ptr& impl)
-		: base(impl)
-	{
-		construct();
-	}
-
-	void main_menu::construct()
-	{
-		do_on_post_construct([self = this]() {
-			return self->this_on_post_construct();
-		});
-	}
-
-	int main_menu::this_on_post_construct()
+	int main_menu::on_post_construct()
 	{
 		using namespace utils::ui;
 		set_title("Main Menu");

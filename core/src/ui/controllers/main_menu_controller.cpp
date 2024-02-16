@@ -10,14 +10,7 @@ LOG_TITLE("main_menu_controller");
 
 namespace vocabulary_core
 {
-	main_menu_controller::main_menu_controller()
-	{
-		do_on_post_construct([self = this]() {
-			return self->this_on_post_construct();
-		});
-	}
-
-	int main_menu_controller::this_on_post_construct()
+	int main_menu_controller::on_post_construct()
 	{
 		set_view(std::dynamic_pointer_cast<utils::ui::menu>(get_factory().create_final<vocabulary_core::main_menu>(app())));
 		view().settings_button().set_on_click([self = this](bool up) {

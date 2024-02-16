@@ -18,7 +18,6 @@ namespace vocabulary_core
 		using base = utils::ui::menu_controller;
 
 	public:
-		main_menu_controller();
 		main_menu& view() {
 			return *std::dynamic_pointer_cast<main_menu>(get_view());
 		}
@@ -27,7 +26,7 @@ namespace vocabulary_core
 		const vocabulary_core::app& get_app() const;
 
 	protected:
-		int this_on_post_construct();
+		int on_post_construct() override;
 	};
 	using main_menu_controller_ptr = std::shared_ptr<main_menu_controller>;
 }

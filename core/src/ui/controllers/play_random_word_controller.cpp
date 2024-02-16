@@ -16,14 +16,7 @@ extern words g_words;
 
 namespace vocabulary_core
 {
-	play_random_word_controller::play_random_word_controller()
-	{
-		do_on_post_construct([self = this]() {
-			return self->this_on_post_construct();
-		});
-	}
-
-	int play_random_word_controller::this_on_post_construct()
+	int play_random_word_controller::on_post_construct()
 	{
 		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create_final<vocabulary_core::play_random_word_window>(app())));
 		view().show_example_button().set_on_click([self = this](bool up) {
