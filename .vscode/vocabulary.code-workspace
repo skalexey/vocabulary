@@ -146,7 +146,9 @@
 			"rope": "cpp",
 			"slist": "cpp",
 			"hash_map": "cpp",
-			"hash_set": "cpp"
+			"hash_set": "cpp",
+			"climits": "cpp",
+			"*.inc": "cpp"
 		},
 		"search.exclude": {
 			"*.log": true,
