@@ -17,6 +17,7 @@ namespace vocabulary_core
 			int on_post_construct() override;
 			
 		private:
+			utils::ui::horizontal_layout_ptr m_layout;
 			utils::ui::button_ptr m_actions_button;
 			utils::ui::button_ptr m_settings_button;
 	};

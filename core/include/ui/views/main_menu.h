@@ -20,6 +20,7 @@ namespace vocabulary_core
 			int on_post_construct() override;
 			
 		private:
+			utils::ui::vertical_layout_ptr m_layout;
 			utils::ui::button_ptr m_settings_button;
 			utils::ui::button_ptr m_new_word_button;
 			utils::ui::button_ptr m_play_random_word_button;
