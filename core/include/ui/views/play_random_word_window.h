@@ -20,7 +20,6 @@ namespace vocabulary_core
 
 		private:
 			int on_post_construct() override;
-			void construct();
 			
 		private:
 			utils::ui::label_ptr m_word_label;

@@ -10,10 +10,13 @@ namespace vocabulary_core
 		using base = utils::ui::final::menu;
 
 		public:
+			main_menu() {
+				set_back_button_enabled(false);
+			}
+			
 			utils::ui::button& settings_button() { return *m_settings_button; }
 			utils::ui::button& new_word_button() { return *m_new_word_button; }
 			utils::ui::button& play_random_word_button() { return *m_play_random_word_button; }
-			utils::ui::button& add_word_button() { return *m_add_word_button; }
 			utils::ui::button& library_button() { return *m_library_button; }
 
 		protected:
@@ -24,7 +27,6 @@ namespace vocabulary_core
 			utils::ui::button_ptr m_settings_button;
 			utils::ui::button_ptr m_new_word_button;
 			utils::ui::button_ptr m_play_random_word_button;
-			utils::ui::button_ptr m_add_word_button;
 			utils::ui::button_ptr m_library_button;
 	};
 }

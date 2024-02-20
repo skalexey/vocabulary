@@ -19,8 +19,6 @@ namespace vocabulary_core
 		m_new_word_button->set_text("New Word");
 		m_play_random_word_button = create<button>(m_layout.get());
 		m_play_random_word_button->set_text("Play Random Word");
-		m_add_word_button = create<button>(m_layout.get());
-		m_add_word_button->set_text("Add Word");
 		m_library_button = create<button>(m_layout.get());
 		m_library_button->set_text("Library");
 		return 0;

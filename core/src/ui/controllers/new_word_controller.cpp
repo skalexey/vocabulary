@@ -19,7 +19,7 @@ namespace vocabulary_core
 {
 	int new_word_controller::on_post_construct()
 	{
-		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create_final<vocabulary_core::new_word_window>(app())));
+		set_view<vocabulary_core::new_word_window>();
 		view().store_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("store_button clicked");
 			auto& word_value = self->view().word_input().get_value();

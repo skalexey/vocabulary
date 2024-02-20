@@ -10,7 +10,7 @@ namespace vocabulary_core
 {
 	int workspace_menu_controller::on_post_construct()
 	{
-		set_view(std::dynamic_pointer_cast<utils::ui::menu>(get_factory().create_final<vocabulary_core::workspace_menu>(app())));
+		set_view<vocabulary_core::workspace_menu>();
 		return 0;
 	}
 }

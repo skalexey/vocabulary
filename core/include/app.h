@@ -8,8 +8,6 @@
 #include <utils/filesystem.h>
 #include <utils/common.h>
 #include <DMBCore.h>
-#include "ui/controllers/play_random_word_controller.h"
-#include "ui/controllers/new_word_controller.h"
 namespace vocabulary_core
 {
 	class app : public virtual utils::ui::app, public utils::ui::user_input
@@ -20,10 +18,6 @@ namespace vocabulary_core
 		app(int argc, char* argv[]);
 		void request_auth(const std::string& user_name, const std::string& token, const utils::void_int_cb& on_result);
 
-		play_random_word_controller& get_play_random_word_controller() {
-			return *m_window_ctrl;
-		}
-		
 		void upload_changes(const utils::void_int_cb& cb = nullptr, bool force = false); // Keep "force" the last argument for safety
 		
 	protected:
@@ -54,8 +48,6 @@ namespace vocabulary_core
 		void register_menus();
 
 	private:
-		play_random_word_controller_ptr m_window_ctrl;
-		new_word_controller_ptr m_new_word_ctrl;
 		dmb::Model m_cfg_model;
 		bool m_is_offline = false;
 		std::unique_ptr<utils::terminator> m_terminator;

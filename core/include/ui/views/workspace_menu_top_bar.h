@@ -10,6 +10,7 @@ namespace vocabulary_core
 		using base = utils::ui::final::widget;
 
 		public:
+			utils::ui::horizontal_layout& layout() { return *m_layout; }
 			utils::ui::button& actions_button() { return *m_actions_button; }
 			utils::ui::button& settings_button() { return *m_settings_button; }
 

@@ -17,7 +17,6 @@ namespace vocabulary_core
 
 		private:
 			int on_post_construct() override;
-			void construct();
 			
 		private:
 			utils::ui::text_input_ptr m_word_input;
