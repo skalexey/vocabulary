@@ -148,7 +148,8 @@
 			"hash_map": "cpp",
 			"hash_set": "cpp",
 			"climits": "cpp",
-			"*.inc": "cpp"
+			"*.inc": "cpp",
+			"cassert": "cpp"
 		},
 		"search.exclude": {
 			"*.log": true,
