@@ -9,8 +9,7 @@
 #include "words.h"
 #include "word.h"
 #include "ui/controllers/play_random_word_controller.h"
-LOG_PREFIX("[play_random_word_controller]: ");
-LOG_POSTFIX("\n");
+LOG_TITLE("play_random_word_controller");
 
 extern words g_words;
 

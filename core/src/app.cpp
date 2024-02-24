@@ -18,13 +18,11 @@
 #include <abstract_ui/menu_manager.h>
 #include <http/authenticator.h>
 #include "words.h"
-#include "ui/controllers/play_random_word_controller.h"
 #include "ui/controllers/main_menu_controller.h"
 #include "ui/controllers/workspace_menu_controller.h"
 #include "app.h"
 
-LOG_POSTFIX("\n");
-LOG_PREFIX("[vocabulary_core::app]: ");
+LOG_TITLE("vocabulary_core::app");
 
 words g_words;
 vocabulary_core::app* g_app = nullptr;

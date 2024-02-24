@@ -12,8 +12,7 @@
 #include <utils/Log.h>
 #include "ImGui-SDL/include/app.h"
 
-LOG_POSTFIX("\n");
-LOG_PREFIX("[app]: ");
+LOG_TITLE("app");
 
 using utils::void_int_cb;
 

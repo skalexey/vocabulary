@@ -10,8 +10,7 @@
 #include "words.h"
 #include "word.h"
 
-LOG_PREFIX("[word]: ");
-LOG_POSTFIX("\n");
+LOG_TITLE("word");
 
 const int max_column_count = 4;
 

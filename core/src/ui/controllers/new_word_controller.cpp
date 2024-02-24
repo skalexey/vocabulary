@@ -10,8 +10,7 @@
 #include "words.h"
 #include "word.h"
 #include "ui/controllers/new_word_controller.h"
-LOG_PREFIX("[new_word_controller]: ");
-LOG_POSTFIX("\n");
+LOG_TITLE("new_word_controller");
 
 extern words g_words;
 

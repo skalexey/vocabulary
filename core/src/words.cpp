@@ -7,8 +7,7 @@
 #include <utils/file_utils.h>
 #include "words.h"
 
-LOG_PREFIX("[words]: ");
-LOG_POSTFIX("\n");
+LOG_TITLE("words");
 
 int words::load(const fs::path& fpath)
 {

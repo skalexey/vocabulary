@@ -19,8 +19,7 @@
 #include "QtGUI/include/import_qml_plugins.h"
 #include "QtGUI/include/import_qml_components_plugins.h"
 
-LOG_POSTFIX("\n");
-LOG_PREFIX("[qtgui-app]: ");
+LOG_TITLE("qtgui-app");
 
 using utils::void_int_cb;
 
