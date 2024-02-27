@@ -48,14 +48,4 @@ namespace vocabulary_core
 		});
 		return 0;
 	}
-
-	vocabulary_core::app& new_word_controller::app()
-	{
-		return dynamic_cast<vocabulary_core::app&>(base::app());
-	}
-
-	const vocabulary_core::app& new_word_controller::get_app() const
-	{
-		return dynamic_cast<const vocabulary_core::app&>(base::get_app());
-	}
 }

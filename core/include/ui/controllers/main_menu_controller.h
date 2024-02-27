@@ -19,7 +19,7 @@ namespace vocabulary_core
 
 	public:
 		main_menu& view() {
-			return *std::dynamic_pointer_cast<main_menu>(get_view());
+			return dynamic_cast<main_menu&>(base::view());
 		}
 
 		vocabulary_core::app& app();

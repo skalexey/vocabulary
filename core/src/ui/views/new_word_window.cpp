@@ -25,17 +25,6 @@ namespace vocabulary_core
 		m_translation_input->set_label("Translation");
 		m_store_button = create<button>();
 		m_store_button->set_text("Store");
-		// Center dialog on the first half of the screen
-		add_on_update([self = this](float dt) {
-			auto screen_size = self->get_screen_size();
-			auto size = self->get_size();
-			if (screen_size.x > screen_size.y)
-				self->set_position({(screen_size.x / 2 - size.x) / 2, screen_size.y / 2 - size.y / 2});
-			else
-				self->set_position({screen_size.x / 2 - size.x / 2, (screen_size.y / 2 - size.y) / 2});
-			return true;
-		});
-		
 		return 0;
 	}
 }

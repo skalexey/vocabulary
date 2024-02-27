@@ -29,16 +29,6 @@ namespace vocabulary_core
 		m_word_label = create<label>();
 		m_example_label = create<text>();
 		m_translation_label = create<text>();
-		// Center dialog on the second half of the screen
-		add_on_update([self = this](float dt) {
-			auto screen_size = self->get_screen_size();
-			auto size = self->get_size();
-			if (screen_size.x > screen_size.y)
-				self->set_position({(screen_size.x / 2 - size.x) / 2 + screen_size.x / 2, screen_size.y / 2 - size.y / 2});
-			else
-				self->set_position({screen_size.x / 2 - size.x / 2, (screen_size.y / 2 - size.y) / 2 + screen_size.y / 2});
-			return true;
-		});
 		return 0;
 	}
 }

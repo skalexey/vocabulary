@@ -4,8 +4,8 @@
 #include <abstract_ui/menu_manager.h>
 #include <utils/Log.h>
 #include "ui/views/main_menu.h"
-#include "ui/views/workspace_menu.h"
 #include "app.h"
+#include "ui/controllers/workspace_menu_controller.h"
 #include "ui/controllers/main_menu_controller.h"
 LOG_TITLE("main_menu_controller");
 
@@ -13,22 +13,22 @@ namespace vocabulary_core
 {
 	int main_menu_controller::on_post_construct()
 	{
-		set_view<vocabulary_core::main_menu>();
+		set_view<vocabulary_core::main_menu>(&app());
 		view().settings_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("settings_button clicked");
-			workspace_menu::open(self->app(), {"settings"});
+			workspace_menu_controller::open(self->app(), {"settings"});
 		});
 		view().new_word_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("new_word_button clicked");
-			workspace_menu::open(self->app(), {"new_word"});
+			workspace_menu_controller::open(self->app(), {"new_word"});
 		});
 		view().play_random_word_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("play_random_word_button clicked");
-			workspace_menu::open(self->app(), {"random_word_game"});
+			workspace_menu_controller::open(self->app(), {"random_word_game"});
 		});
 		view().library_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("library_button clicked");
-			workspace_menu::open(self->app(), {"library"});
+			workspace_menu_controller::open(self->app(), {"library"});
 		});
 		return 0;
 	}
