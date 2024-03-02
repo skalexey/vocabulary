@@ -11,7 +11,6 @@ namespace vocabulary_core
 		base::on_post_construct();
 		using namespace utils::ui;
 		m_top_bar = create_final<workspace_menu_top_bar>();
-		create_back_button(m_top_bar->layout().get());
 		m_content_layout = create<auto_layout>();
 		set_title("Workspace Menu");
 		return 0;

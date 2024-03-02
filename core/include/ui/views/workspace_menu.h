@@ -14,7 +14,7 @@ namespace vocabulary_core
 
 		public:
 			workspace_menu() {
-				set_back_button_enabled(true);
+				set_back_button_enabled(false);
 			}
 			workspace_menu_top_bar& top_bar() { return *m_top_bar; }
 			utils::ui::auto_layout& content_layout() {

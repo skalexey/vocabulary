@@ -1,5 +1,6 @@
 #include <abstract_ui/app.h>
 #include <abstract_ui/widgets/layouts/vertical_layout.h>
+#include <abstract_ui/widgets/layouts/auto_layout.h>
 #include <abstract_ui/widgets/button.h>
 #include <abstract_ui/widget_factory.h>
 #include "ui/views/main_menu.h"
@@ -12,7 +13,9 @@ namespace vocabulary_core
 	{
 		using namespace utils::ui;
 		set_title("Main Menu");
-		m_layout = create<vertical_layout>();
+		auto center_layout = create<auto_layout>();
+		auto main_node = create<utils::ui::widget>(center_layout.get());
+		m_layout = create<vertical_layout>(center_layout.get());
 		m_settings_button = create<button>(m_layout.get());
 		m_settings_button->set_text("Settings");
 		m_new_word_button = create<button>(m_layout.get());

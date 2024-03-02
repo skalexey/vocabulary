@@ -29,33 +29,40 @@ namespace vocabulary_core
 		options["view_parent"] = view_parent;
 		auto child_controller = self.create_child_view_controller<T>(options);
 		if (on_top)
-			child_controller->view().set_modal(true);
+		{
+			auto& child_view = child_controller->view();
+			child_view.set_modal(true);
+			child_view.set_vertical_alignment(utils::ui::widget::alignment::center);
+			child_view.set_horizontal_alignment(utils::ui::widget::alignment::center);
+		}
 	}
 
 	void workspace_menu_controller::process_open_options(const vl::Object& options)
 	{
 		if (options.Has("open_list"))
 		{
+			bool on_top = options.Has("on_top") && options["on_top"].AsBool().Val();
 			auto open_list = options["open_list"].AsList();
 			for (int i = 0; i < open_list.Size(); i++)
 			{
-				auto&& what_to_open = open_list[i].AsString().Val();
+				auto&& element = open_list[i];
+				auto&& what_to_open = element.AsString().Val();
 				LOG_DEBUG("Open '" << what_to_open << "'");
 				if (what_to_open == "new_word")
 				{
-					create_view_controller<new_word_controller>(*this);
+					create_view_controller<new_word_controller>(*this, on_top);
 				}
 				else if (what_to_open == "random_word_game")
 				{
-					create_view_controller<play_random_word_controller>(*this);
+					create_view_controller<play_random_word_controller>(*this, on_top);
 				}
 				else if (what_to_open == "library")
 				{
-					create_view_controller<library_controller>(*this);
+					create_view_controller<library_controller>(*this, on_top);
 				}
 				else if (what_to_open == "settings")
 				{
-					create_view_controller<settings_controller>(*this);
+					create_view_controller<settings_controller>(*this, on_top);
 				}
 				else
 				{
@@ -66,7 +73,7 @@ namespace vocabulary_core
 		}
 	}
 
-	void workspace_menu_controller::open(utils::ui::app& app, const std::vector<std::string>& open_list)
+	void workspace_menu_controller::open(utils::ui::app& app, const std::vector<std::string>& open_list, bool add)
 	{
 		vl::Object options;
 		if (!open_list.empty())
@@ -76,7 +83,19 @@ namespace vocabulary_core
 				open_list_vl.Add(what_to_open);
 			options["open_list"] = open_list_vl;
 		}
-		app.menu_manager().open_menu("workspace_menu", options);
+		if (add)
+		{
+			auto& stack_top = app.menu_manager().get_menu_stack().back();
+			assert(stack_top.name == "workspace_menu");
+			app.menu_manager().current_menu().process_event("open", options);
+		}
+		else
+			app.menu_manager().open_menu("workspace_menu", options);
+	}
+
+	void workspace_menu_controller::add(utils::ui::app& app, const std::vector<std::string>& add_list)
+	{
+		open(app, add_list, true);
 	}
 
 	void workspace_menu_controller::open_on_top(utils::ui::app& app, const std::string& what)

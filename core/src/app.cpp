@@ -20,6 +20,7 @@
 #include "words.h"
 #include "ui/controllers/main_menu_controller.h"
 #include "ui/controllers/workspace_menu_controller.h"
+#include "ui/controllers/test_menu_controller.h"
 #include "app.h"
 
 LOG_TITLE("vocabulary_core::app");
@@ -426,6 +427,7 @@ namespace vocabulary_core
 		auto mm = menu_manager();
 		mm.register_menu<main_menu_controller>("main_menu");
 		mm.register_menu<workspace_menu_controller>("workspace_menu");
+		mm.register_menu<test_menu_controller>("test_menu");
 	}
 
 	int app::init()

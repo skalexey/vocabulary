@@ -17,7 +17,8 @@ namespace vocabulary_core
 			return dynamic_cast<workspace_menu&>(base::view());
 		}
 
-		static void open(utils::ui::app& app, const std::vector<std::string>& open_list = {});
+		static void open(utils::ui::app& app, const std::vector<std::string>& open_list = {}, bool add = false);
+		static void add(utils::ui::app& app, const std::vector<std::string>& add_list = {});
 		static void open_on_top(utils::ui::app& app, const std::string& what);
 		bool process_event(const std::string& name, const vl::Object& data) override;
 
