@@ -31,12 +31,13 @@ int words::update_local_storage()
 	std::ofstream ofs(m_fpath, std::ios::binary);
 	if (!ofs.is_open())
 		return erc::cant_open;
-	std::for_each(list.begin(), list.end(), [&](auto entry) {
+	for (auto& entry : list)
+	{
 		auto& word = entry.second;
 		if (word.is_changed())
 			word.write();
 		ofs << word.get_data() << std::endl;
-	});
+	}
 	return 0;
 }
 
