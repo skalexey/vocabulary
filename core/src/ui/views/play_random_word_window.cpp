@@ -13,7 +13,7 @@ namespace vocabulary_core
 		using namespace utils::ui;
 		// Let the implementation decide how to manage the size
 		set_size_policy(size_policy::type::automatic, size_policy::type::automatic);
-		// Not every implementation support automatic resize properly
+		// Not every implementation supports automatic resize properly
 		set_size({ 500, 700 });
 		set_modal(false);
 		set_title("Random Word Game");
