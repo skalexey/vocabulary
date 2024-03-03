@@ -22,7 +22,7 @@ struct words
 		word_exists,
 		load_error,
 	};
-	utils::ordered_map<std::string, word> list;
+	utils::ordered_hashmap<std::string, word> list;
 	int load(const fs::path& path);
 	int update_local_storage();
 	std::pair<std::reference_wrapper<word>, int> new_word(const std::string& w);

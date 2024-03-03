@@ -16,9 +16,9 @@ const int max_column_count = 4;
 
 int word::load()
 {
-	if (m_data.empty())
+	if (data().empty())
 		return erc::invalid_column_count;
-	//m_data.erase(std::remove(str.begin(), str.end(), '\n'), str.cend());
+	//data().erase(std::remove(str.begin(), str.end(), '\n'), str.cend());
 	auto load_columns = [self = this](const std::vector<std::string_view>& columns)
 	{
 		bool level_is_present = true;
@@ -70,9 +70,9 @@ int word::load()
 	std::vector<std::string_view> columns;
 	std::vector<std::string> columns2;
 	columns.reserve(max_column_count);
-	utils::split_repeated_delimeter(columns, m_data, '\t');
-	if (columns.size() == 1 && columns[0] == m_data)
-		if (m_data.find('\t') != std::string::npos)
+	utils::split_repeated_delimeter(columns, data(), '\t');
+	if (columns.size() == 1 && columns[0] == data())
+		if (data().find('\t') != std::string::npos)
 			return erc::invalid_column_count;
 	// Load the columns into the word
 	if (columns.size() < 1)
@@ -83,7 +83,7 @@ int word::load()
 
 int word::write()
 {
-	m_data = serialize();
+	data() = serialize();
 	return erc::no_error;
 }
 
@@ -130,18 +130,23 @@ void word::set_translation(const std::string &translation)
 	m_is_changed = true;
 }
 
-word* word::previous() const
+const word* word::previous() const
 {
-	auto index = m_parent.list.get_index(m_value);
+	auto index = get_parent().list.get_index(m_value);
 	assert(index >= 0);
 	if (index == 0)
 		return nullptr;
-	return &m_parent.list.at(index - 1);
+	return &get_parent().list.get_at(index - 1);
 }
 
-void word::set_value(const std::string &value)
+bool word::set_value(const std::string &value)
 {
-	auto index = m_parent.list.rename(m_value, value);
+	if (value == m_value)
+		return true;
+	auto result = parent().list.rename(m_value, value);
+	if (!result.second)
+		return false;
 	m_value = value;
 	m_is_changed = true;
+	return true;
 }	
