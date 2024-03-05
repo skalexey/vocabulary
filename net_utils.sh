@@ -2,7 +2,7 @@
 
 function git_clone()
 {
-	git clone $1
+	git clone $@
 	local retval=$?
 	[[ $? -ne 0 ]] && return 1 || return 0
 }
@@ -18,7 +18,7 @@ function direct_download()
 	[ -z "$2" ] && local o="dwl" || local o="$2"
 	wget $1 -O "$o"
 	[ $? -ne 0 ] && curl -L $1 -o "$o"
-	erc=$?
+	local erc=$?
 	[ $erc -ne 0 ] && echo "Download error: $erc" && return 1
 
 	if check_download_type "tar.bz" $@ || check_download_type "tar.gz" $@; then
@@ -34,10 +34,12 @@ function direct_download()
 
 function download()
 {
-	if [[ $1 =~ .*\.git ]]; then
-		git_clone $@
-	else
-		direct_download $@
-	fi
+	for i in $@; do
+		if [[ $i =~ .*\.git ]]; then
+			git_clone $@
+			return $?
+		fi
+	done
+	direct_download $@
 	return $?
 }

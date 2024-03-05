@@ -9,7 +9,7 @@ function update_cmake_modules()
 	local log_prefix="[update_cmake_modules]: "
 
 	[ -z $1 ] && log_error "No directory provided" && return 1
-	[ ! -d $1 ] && log_error "Non-existent directory provided" && return 2
+	[ ! -d $1 ] && log_error "Non-existent directory provided: '$1'" && return 2
 
 	source file_utils.sh
 	local dir=$(full_path "$1")
