@@ -52,7 +52,6 @@ macro(setup_module)
 			COMMAND_EXPAND_LISTS
 		)
 	endif()
-	# set_target_properties(${MODULE_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 endmacro()
 
 include(cmake_modules/modules.cmake)
