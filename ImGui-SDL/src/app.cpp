@@ -3,7 +3,7 @@
 #include <memory>
 #include <stdio.h>
 #include <csignal>
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include <utils/file_utils.h>
 #include <utils/string_utils.h>
 #include <utils/io_utils.h>
@@ -41,8 +41,8 @@ int app::init()
 SDL_Window* app::create_window()
 {
 	auto& r = get_resolution();
-	SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-	return SDL_CreateWindow("Vocabulary", 30, 30, r.x, r.y, window_flags);
+	Uint32 window_flags = (Uint32)(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIDDEN);
+	return SDL_CreateWindow("Vocabulary", r.x, r.y, window_flags);
 }
 
 bool app::on_update(float dt) {

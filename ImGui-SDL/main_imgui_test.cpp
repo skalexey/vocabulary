@@ -8,11 +8,11 @@
 // For a multi-platform app consider using e.g. SDL+DirectX on Windows and SDL+OpenGL on Linux/OSX.
 
 #include <imgui.h>
-#include <imgui_impl_sdl2.h>
-#include <imgui_impl_sdlrenderer2.h>
+#include <imgui_impl_sdl3.h>
+#include <imgui_impl_sdlrenderer3.h>
 #include <utils/common.h>
 #include <stdio.h>
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 #if !SDL_VERSION_ATLEAST(2,0,17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
