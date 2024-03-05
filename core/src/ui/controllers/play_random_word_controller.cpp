@@ -9,23 +9,15 @@
 #include "words.h"
 #include "word.h"
 #include "ui/controllers/play_random_word_controller.h"
-LOG_PREFIX("[play_random_word_controller]: ");
-LOG_POSTFIX("\n");
+LOG_TITLE("play_random_word_controller");
 
 extern words g_words;
 
 namespace vocabulary_core
 {
-	play_random_word_controller::play_random_word_controller()
+	int play_random_word_controller::on_post_construct()
 	{
-		do_on_post_construct([self = this]() {
-			return self->this_on_post_construct();
-		});
-	}
-
-	int play_random_word_controller::this_on_post_construct()
-	{
-		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create_final<vocabulary_core::play_random_word_window>(app())));
+		set_view<vocabulary_core::play_random_word_window>();
 		view().show_example_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("show_example_button");
 			if (self->m_current_word.empty())
@@ -59,6 +51,7 @@ namespace vocabulary_core
 			LOG_DEBUG("skip_button");
 			self->show_random_word();
 		});
+		show_random_word(); // Assuming the words have been loaded
 		return 0;
 	}
 

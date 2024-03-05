@@ -16,6 +16,9 @@ macro(setup_module_project)
 	# Include all modules
 
 	set(CMAKE_CXX_STANDARD 17)
+	
+	# Make FetchContent_Populate work in offline
+	set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 
 	module_message("Setup project ${PROJECT_NAME}")
 	

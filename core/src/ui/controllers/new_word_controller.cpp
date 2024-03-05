@@ -10,23 +10,15 @@
 #include "words.h"
 #include "word.h"
 #include "ui/controllers/new_word_controller.h"
-LOG_PREFIX("[new_word_controller]: ");
-LOG_POSTFIX("\n");
+LOG_TITLE("new_word_controller");
 
 extern words g_words;
 
 namespace vocabulary_core
 {
-	new_word_controller::new_word_controller()
+	int new_word_controller::on_post_construct()
 	{
-		do_on_post_construct([self = this]() {
-			return self->this_on_post_construct();
-		});
-	}
-
-	int new_word_controller::this_on_post_construct()
-	{
-		set_view(std::dynamic_pointer_cast<utils::ui::window>(get_factory().create_final<vocabulary_core::new_word_window>(app())));
+		set_view<vocabulary_core::new_word_window>();
 		view().store_button().set_on_click([self = this](bool up) {
 			LOG_DEBUG("store_button clicked");
 			auto& word_value = self->view().word_input().get_value();
@@ -55,15 +47,5 @@ namespace vocabulary_core
 			return !self->view().word_input().get_value().empty() && (!self->view().example_input().get_value().empty() || !self->view().translation_input().get_value().empty());
 		});
 		return 0;
-	}
-
-	vocabulary_core::app& new_word_controller::app()
-	{
-		return dynamic_cast<vocabulary_core::app&>(base::app());
-	}
-
-	const vocabulary_core::app& new_word_controller::get_app() const
-	{
-		return dynamic_cast<const vocabulary_core::app&>(base::get_app());
 	}
 }

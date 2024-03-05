@@ -8,31 +8,12 @@
 LOG_TITLE("vocabulary_core::new_word_window");
 namespace vocabulary_core
 {
-	new_word_window::new_word_window()
-		: base()
-	{
-		construct();
-	}
-
-	new_word_window::new_word_window(const utils::ui::dialog_ptr& impl)
-		: base(impl)
-	{
-		construct();
-	}
-
-	void new_word_window::construct()
-	{
-		do_on_post_construct([self = this]() {
-			return self->this_on_post_construct();
-		});
-	}
-
-	int new_word_window::this_on_post_construct()
+	int new_word_window::on_post_construct()
 	{
 		using namespace utils::ui;
 		// Let the implementation decide how to manage the size
 		set_size_policy(size_policy::type::automatic, size_policy::type::automatic);
-		// Not every implementation support automatic resize properly
+		// Not every implementation supports automatic resize properly
 		set_size({ 500, 700 });
 		set_modal(false);
 		set_title("New word");
@@ -44,17 +25,6 @@ namespace vocabulary_core
 		m_translation_input->set_label("Translation");
 		m_store_button = create<button>();
 		m_store_button->set_text("Store");
-		// Center dialog on the first half of the screen
-		add_on_update([self = this](float dt) {
-			auto screen_size = self->get_screen_size();
-			auto size = self->get_size();
-			if (screen_size.x > screen_size.y)
-				self->set_position({(screen_size.x / 2 - size.x) / 2, screen_size.y / 2 - size.y / 2});
-			else
-				self->set_position({screen_size.x / 2 - size.x / 2, (screen_size.y / 2 - size.y) / 2});
-			return true;
-		});
-		
 		return 0;
 	}
 }

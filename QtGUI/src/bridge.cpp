@@ -4,8 +4,7 @@
 #include <utils/file_utils.h>
 
 #include <utils/Log.h>
-LOG_PREFIX("[android bridge]: ");
-LOG_POSTFIX("\n");
+LOG_TITLE("android bridge");
 
 bool create_directory_if_not_exists(const std::string& path)
 {
