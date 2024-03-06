@@ -10,6 +10,7 @@ macro(modules_include_all dir)
 	include(${dir}/src.cmake)
 	include(${dir}/qt.cmake)
 	include(${dir}/platforms.cmake)
+	include(${dir}/files.cmake)
 endmacro(modules_include_all)
 
 macro(setup_module_project)

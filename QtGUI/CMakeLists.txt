@@ -102,6 +102,7 @@ macro(setup_module)
             COMMAND_EXPAND_LISTS
         )
     endif()
+    core_copy_assets(${CMAKE_CURRENT_SOURCE_DIR}/content)
 endmacro(setup_module)
 
 include(cmake_modules/modules.cmake)

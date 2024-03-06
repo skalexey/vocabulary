@@ -23,6 +23,11 @@ function deps_scenario()
     if [ ! -f "$THIS_DIR/main_sdl_imgui.cpp" ]; then
         cp "$depsLocation/imgui/examples/example_sdl_sdlrenderer/main.cpp" "main_sdl_imgui.cpp"
     fi
+
+    source $depsLocation/abstract_ui/sdl_imgui/deps_scenario.sh
+    retcode=$?
+    [ $retcode -ne 0 ] && log_error "Error occured during the sdl_imgui deps_scenario.sh execution: $retcode " " -" && return $retcode
+    return 0
 }
 
 deps_scenario $@

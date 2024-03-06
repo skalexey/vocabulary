@@ -3,6 +3,18 @@
 
 qt_add_library(content STATIC)
 
+# Collect all the files in the assets directory
+file(GLOB_RECURSE ASSETS_FILE_LIST assets/*)
+
+# Make paths relative to this directory
+set(ASSETS_FILE_LIST_RELATIVE "")
+foreach(ASSET_FILE ${ASSETS_FILE_LIST})
+	file(RELATIVE_PATH ASSET_FILE_RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${ASSET_FILE})
+	list(APPEND ASSETS_FILE_LIST_RELATIVE ${ASSET_FILE_RELATIVE})
+endforeach()
+
+message("content: ASSETS_FILE_LIST_RELATIVE: ${ASSETS_FILE_LIST_RELATIVE}")
+
 qt6_add_qml_module(content
 	URI "content"
 	VERSION 1.0
@@ -10,4 +22,5 @@ qt6_add_qml_module(content
 		App.qml
 	RESOURCES
 		fonts/fonts.txt
+		${ASSETS_FILE_LIST_RELATIVE}
 )

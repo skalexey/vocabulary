@@ -40,7 +40,7 @@ namespace vocabulary_core
 			auto& w = self->current_word();
 			float example_cost = self->m_example_shown ? 0.5f : 0.0f;
 			float translation_cost = self->m_translation_shown ? 1.f : 0.f;
-			auto m = std::max(0.f, (1.0f - example_cost - translation_cost));
+			auto m = 0.25f + 0.75f * (std::max(0.f, (1.0f - example_cost - translation_cost)));
 			w.set_level(char(word::level_max * m));
 			g_words.update_local_storage();
 			self->m_example_shown = false;

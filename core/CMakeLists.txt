@@ -6,6 +6,9 @@ cmake_minimum_required (VERSION 3.15)
 project(vocabulary_core C CXX)
 
 macro(setup_module)
+	set(CORE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+	set(CORE_DIR ${CORE_DIR} PARENT_SCOPE)
+
 	module_message("Setting up module: ${MODULE_NAME}")
 	
 	# Utils dependency
@@ -102,10 +105,22 @@ macro(setup_module)
 		module_message("Create a separate target for external headers called 'external_headers'")
 		add_library(external_headers ${EXTERNAL_HEADERS})
 	endif()
-	
-	configure_file(assets/random_words.lua ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 endmacro()
 
 include(cmake_modules/modules.cmake)
 modules_include_all(cmake_modules)
 setup_module_project()
+
+# For calling from final (executable) projects
+macro(core_copy_assets to)
+	copy_directory(${CORE_DIR}/assets ${to})
+	add_custom_command(TARGET ${MODULE_NAME} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			"${CORE_DIR}/assets"
+			${to}/assets
+	)
+	# Uncomment to copy to the executable directory
+	# COMMAND ${CMAKE_COMMAND} -E copy_directory
+	# 	"${CORE_DIR}/assets"
+	# 	$<TARGET_FILE_DIR:${MODULE_NAME}>/assets
+endmacro()

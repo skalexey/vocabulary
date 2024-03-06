@@ -1,5 +1,9 @@
 #include <abstract_ui/app.h>
+#include <abstract_ui/widget.h>
 #include <abstract_ui/widgets/dialog.h>
+#include <abstract_ui/widgets/button.h>
+#include <abstract_ui/widgets/image.h>
+#include <abstract_ui/widgets/layouts/horizontal_layout.h>
 #include <utils/Log.h>
 #include "ui/views/library_window.h"
 
@@ -17,5 +21,20 @@ namespace vocabulary_core
 		set_title("Library");
 		set_max_width(250);
 		return 0;
+	}
+
+	void library_window::knowledge_level_struct::init(utils::ui::node* owner)
+	{
+		image_wrapper = owner->create<utils::ui::widget>();
+		root = image_wrapper;
+		image = image_wrapper->create<utils::ui::image>();
+	}
+	
+	void library_window::word_row::init(utils::ui::node* owner)
+	{
+		auto layout = owner->create<horizontal_layout>();
+		root = layout;
+		word = layout->create<button>();
+		knowledge_level.init(layout.get());
 	}
 }

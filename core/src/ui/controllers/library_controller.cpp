@@ -1,5 +1,7 @@
+#include <cmath>
 #include <utils/Log.h>
 #include <abstract_ui/widgets/button.h>
+#include <abstract_ui/widgets/image.h>
 #include <abstract_ui/widgets/text_input.h>
 #include <abstract_ui/widget_factory.h>
 #include <abstract_ui/menu_manager.h>
@@ -16,6 +18,12 @@ extern words g_words;
 
 namespace vocabulary_core
 {
+	std::string level_texture_by_level(char level)
+	{
+		const int max_levels = 4;
+		return "knowledge_level_" + std::to_string(int(std::round((float(level) / word::level_max) * (max_levels - 1)))) + ".png";
+	}
+
 	int library_controller::on_post_construct()
 	{
 		using namespace utils::ui;
@@ -29,7 +37,13 @@ namespace vocabulary_core
 			LOG_DEBUG("word: " << w.get_value());
 			if (i > 10)
 				continue;
-			auto word_button = create<button>();
+			std::string level_texture = level_texture_by_level(w.get_level());
+			auto word_row = library_window::word_row(&view());
+			word_row.knowledge_level.image->set_texture(level_texture);
+			// Image wrapper for proper size policy within the layout in Qt
+			word_row.knowledge_level.image_wrapper->set_size({16, 16});
+			word_row.knowledge_level.image->set_size({16, 16});
+			auto word_button = word_row.word;
 			word_button->set_text(w.get_value());
 			word_button->set_on_click([self = this, &w](bool up) {
 				auto dialog = self->app().menu_manager().current_menu().create<utils::ui::dialog>();
