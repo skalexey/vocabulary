@@ -77,7 +77,6 @@ macro(setup_module)
 	message("${MODULE_NAME}: Lua src: '${LUA_SRC}'")
 
 	# Assign all the headers to ${HEADERS} variable and use it in add_src() macro
-	set_headers()
 	add_src(
 		${UTILS_DIR}/src/networking/uploader_with_auth.cpp
 		${UTILS_DIR}/src/networking/downloader_with_auth.cpp
@@ -88,11 +87,13 @@ macro(setup_module)
 		${UTILS_DIR}/src/io_utils.cpp
 		${UTILS_DIR}/src/datetime.cpp
 		${UTILS_DIR}/src/envar.cpp
-		${HEADERS} # for IDE
 		# uncomment if want to use lua scenario
 		# main_lua.cpp
 	)
 
+	# For IDE
+	add_headers_to_sources()
+	
 	# add library
 	module_add_library()
 

@@ -24,15 +24,15 @@ macro(setup_module)
 		module_add_includes(${JNI_BRIDGE_DIR}/include)
 	endif()
 
-	# Assign all the headers to ${HEADERS} variable and use it in add_src() macro
-	set_headers()
 	add_src(
-		${HEADERS} # for IDE
 		main_sdl_imgui.cpp
 		# main_imgui_test.cpp
 		# uncomment if want to use lua scenario instead of SDL
 		# main_lua.cpp
 	)
+
+	# For IDE
+	add_headers_to_sources()
 
 	# make available includes like core/include/something
 	module_add_includes(${CMAKE_CURRENT_SOURCE_DIR}/..)
