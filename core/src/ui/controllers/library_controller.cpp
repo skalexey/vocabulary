@@ -50,7 +50,7 @@ namespace vocabulary_core
 				dialog->set_horizontal_alignment(utils::ui::widget::alignment::center);
 				dialog->set_vertical_alignment(utils::ui::widget::alignment::center);
 				dialog->set_title(w.get_value());
-				dialog->set_size_policy(widget::size_policy::type::automatic, widget::size_policy::type::automatic);
+				dialog->set_size_policy(widget::size_policy::automatic, widget::size_policy::automatic);
 				// TODO: use modal after supporting displaying modals on top of other modals
 				// dialog->set_modal(true);
 				auto word_input = self->create<text_input>(dialog.get());

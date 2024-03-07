@@ -12,7 +12,7 @@ namespace vocabulary_core
 	{
 		using namespace utils::ui;
 		// Let the implementation decide how to manage the size
-		set_size_policy(size_policy::type::automatic, size_policy::type::automatic);
+		set_size_policy(size_policy::automatic, size_policy::automatic);
 		// Not every implementation supports automatic resize properly
 		set_size({ 500, 700 });
 		set_modal(false);
