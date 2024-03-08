@@ -1,7 +1,7 @@
 #include <cmath>
 #include <random>
 #include <algorithm>
-#include <utils/Log.h>
+#include <utils/log.h>
 #include <abstract_ui/widget_factory.h>
 #include <abstract_ui/widgets/button.h>
 #include <abstract_ui/widgets/label.h>

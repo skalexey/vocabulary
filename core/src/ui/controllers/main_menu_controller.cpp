@@ -2,7 +2,7 @@
 #include <abstract_ui/widgets/button.h>
 #include <abstract_ui/app.h>
 #include <abstract_ui/menu_manager.h>
-#include <utils/Log.h>
+#include <utils/log.h>
 #include "ui/views/main_menu.h"
 #include "app.h"
 #include "ui/controllers/workspace_menu_controller.h"

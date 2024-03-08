@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <string_view>
-#include <utils/Log.h>
+#include <utils/log.h>
 #include <utils/file_utils.h>
 #include "words.h"
 

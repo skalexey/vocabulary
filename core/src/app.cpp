@@ -12,7 +12,7 @@
 #include <utils/datetime.h>
 #include <utils/print_defs.h>
 #include <utils/common.h>
-#include <utils/Log.h>
+#include <utils/log.h>
 #include <abstract_ui/widget_factory.h>
 #include <abstract_ui/widgets/dialogs/dialog_with_buttons.h>
 #include <abstract_ui/menu_manager.h>

@@ -5,7 +5,7 @@
 #include <string_view>
 #include <string>
 #include <vector>
-#include <utils/Log.h>
+#include <utils/log.h>
 #include <utils/string_utils.h>
 #include "words.h"
 #include "word.h"

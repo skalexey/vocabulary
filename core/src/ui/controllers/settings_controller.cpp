@@ -1,4 +1,4 @@
-#include <utils/Log.h>
+#include <utils/log.h>
 #include <abstract_ui/widget_factory.h>
 #include <abstract_ui/app.h>
 #include "app.h"

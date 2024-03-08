@@ -1,5 +1,5 @@
 #include <abstract_ui/widgets/layouts/auto_layout.h>
-#include <utils/Log.h>
+#include <utils/log.h>
 #include "ui/views/workspace_menu_top_bar.h"
 #include "ui/views/workspace_menu.h"
 LOG_TITLE("vocabulary_core::workspace_menu");

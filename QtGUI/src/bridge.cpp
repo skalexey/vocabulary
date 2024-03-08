@@ -3,7 +3,7 @@
 #include "bridge.h"
 #include <utils/file_utils.h>
 
-#include <utils/Log.h>
+#include <utils/log.h>
 LOG_TITLE("android bridge");
 
 bool create_directory_if_not_exists(const std::string& path)

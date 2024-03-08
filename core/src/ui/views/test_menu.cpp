@@ -4,7 +4,7 @@
 #include <abstract_ui/widget_factory.h>
 #include <abstract_ui/widgets/menu_bar.h>
 #include "ui/views/test_menu.h"
-#include <utils/Log.h>
+#include <utils/log.h>
 LOG_TITLE("vocabulary_core::test_menu");
 
 namespace vocabulary_core

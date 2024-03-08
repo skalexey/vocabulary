@@ -9,7 +9,7 @@
 #include "ui/controllers/library_controller.h"
 #include "ui/controllers/settings_controller.h"
 #include "app.h"
-#include <utils/Log.h>
+#include <utils/log.h>
 LOG_TITLE("workspace_menu_controller");
 
 namespace vocabulary_core

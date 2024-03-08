@@ -1,5 +1,5 @@
 #include <cmath>
-#include <utils/Log.h>
+#include <utils/log.h>
 #include <abstract_ui/widgets/button.h>
 #include <abstract_ui/widgets/image.h>
 #include <abstract_ui/widgets/text_input.h>

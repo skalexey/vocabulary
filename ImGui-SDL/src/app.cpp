@@ -9,7 +9,7 @@
 #include <utils/io_utils.h>
 #include <utils/print_defs.h>
 #include <utils/common.h>
-#include <utils/Log.h>
+#include <utils/log.h>
 #include "ImGui-SDL/include/app.h"
 
 LOG_TITLE("app");

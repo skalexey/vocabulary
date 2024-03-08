@@ -5,7 +5,7 @@
 #include <abstract_ui/widgets/button.h>
 #include <abstract_ui/widgets/layouts/horizontal_layout.h>
 #include <abstract_ui/menu_manager.h>
-#include <utils/Log.h>
+#include <utils/log.h>
 #include "ui/controllers/workspace_menu_controller.h"
 #include "ui/views/workspace_menu_top_bar.h"
 LOG_TITLE("vocabulary_core::workspace_menu_top_bar");
