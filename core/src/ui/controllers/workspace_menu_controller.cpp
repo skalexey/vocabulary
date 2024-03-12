@@ -41,12 +41,12 @@ namespace vocabulary_core
 	{
 		if (options.Has("open_list"))
 		{
-			bool on_top = options.Has("on_top") && options["on_top"].AsBool().Val();
-			auto open_list = options["open_list"].AsList();
+			bool on_top = options.Has("on_top") && options["on_top"].as<vl::Bool>().Val();
+			auto open_list = options["open_list"].as<vl::List>();
 			for (int i = 0; i < open_list.Size(); i++)
 			{
 				auto&& element = open_list[i];
-				auto&& what_to_open = element.AsString().Val();
+				auto&& what_to_open = element.as<vl::String>().Val();
 				LOG_DEBUG("Open '" << what_to_open << "'");
 				if (what_to_open == "new_word")
 				{

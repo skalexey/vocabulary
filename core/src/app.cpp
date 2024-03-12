@@ -193,7 +193,7 @@ namespace vocabulary_core
 			content_data.Set(words_location_field_name, "");
 		else
 		{
-			if (content_data.Get(words_location_field_name).AsString().Val() != new_dir)
+			if (content_data.Get(words_location_field_name).as<vl::String>().Val() != new_dir)
 			{
 				content_data.Set(words_location_field_name, new_dir);
 				m_cfg_model.Store(cfg_path.string(), { true });
@@ -350,7 +350,7 @@ namespace vocabulary_core
 			on_result(0);
 		};
 
-		auto& words_location_var = m_cfg_model.GetContent().Get(words_location_field_name).AsString();
+		auto& words_location_var = m_cfg_model.GetContent().Get(words_location_field_name).as<vl::String>();
 
 		auto words_path = get_words_path_by_string(words_location_var.Val());
 		
@@ -496,7 +496,7 @@ namespace vocabulary_core
 			auth([=](int result) {
 				if (result == 0)
 				{
-					self->show_hint(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].AsString().Val() << "!"));
+					self->show_hint(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].as<vl::String>().Val() << "!"));
 					after_auth();
 				}
 				else
