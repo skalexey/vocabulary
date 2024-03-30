@@ -30,48 +30,6 @@ vocabulary_core::app* g_app = nullptr;
 
 using utils::void_int_cb;
 
-// Used in utils/networking/sync_resources.h
-void ask_user(
-    const std::string& question
-    , const utils::void_bool_cb& on_answer
-    , const char* yes_btn_text_ptr
-    , const char* no_btn_text_ptr
-)
-{
-	if (g_app)
-		g_app->ask_user(question, on_answer, yes_btn_text_ptr, no_btn_text_ptr);
-}
-
-void upload_changes(
-	const utils::void_int_cb& on_result
-	, bool force
-) {
-	if (g_app)
-		g_app->upload_changes(on_result, force);
-}
-
-void ask_line(
-	const std::string& msg
-	, const utils::void_string_bool_cb& on_answer
-	, const std::string& default_value
-	, const char* ok_btn_text
-	, const char* cancel_btn_text
-)
-{
-    if (g_app)
-        g_app->ask_line(msg, on_answer, default_value, ok_btn_text, cancel_btn_text);
-}
-
-void request_auth(
-	const std::string& user_name
-	, const std::string& token
-	, const utils::void_int_cb& on_result
-)
-{
-	if (g_app)
-		g_app->request_auth(user_name, token, on_result);
-}
-
 namespace
 {
 	fs::path g_words_fpath;
@@ -110,53 +68,148 @@ namespace
 
 	const auto msg2_current = "Enter words file location or a directory or type 'skip' to use the "
 				"current directory or 'exit' to close the application";
-}
 
-// Declarations
-int upload_words();
-int init_words();
-auto load_words();
-auto backup_words();
-int upload_file(const fs::path& fpath);
+	// Declarations
+	int upload_words();
+	auto backup_words();
+	int upload_file(const fs::path& fpath);
 
-
-int upload_file(const fs::path& fpath)
-{
-	LOG_DEBUG("upload_file(" << fpath.string() << ")");
-	return utils::http::upload_file(fpath.string(), g_ep, "/v/h.php");
-}
-
-auto backup_words()
-{
-	auto cur_dt = utils::current_datetime("%02i-%02i-%02i-%03li");
-	auto new_fpath = fs::path(g_words_fpath.parent_path() / fs::path(utils::format_str("words-%s.txt", cur_dt.c_str())));
-	utils::file::copy(g_words_fpath, new_fpath);
-	upload_file(new_fpath);
-	return false;
-};
-
-int upload_words()
-{
-    return upload_file(g_words_fpath);
-}
-
-auto get_words_path(const fs::path& path)
-{
-	fs::path words_path = path.empty() ? utils::file::temp_directory_path() : path;
-    if (utils::file::exists(words_path))
+	void sync_resources(const void_int_cb& cb = nullptr)
 	{
-		if (utils::file::is_directory(words_path))
-			words_path /= words_fname_default;
+		LOG("sync_resources()");
+		utils::networking::sync_resources(g_ep, "/v/s.php", "/v/h.php", g_resources_list
+			, [=](int code) {
+				if (code == 0)
+				{
+					if (g_app)
+						g_app->load_words();
+				}
+				else
+					show_message("sync_resources() failed with error code: " + std::to_string(code));
+				if (cb)
+					cb(code);
+			});
 	}
-	else
-		if (!utils::file::is_file_path(words_path))
-			words_path /= words_fname_default;
-	return words_path;
-};
 
-auto get_words_path_by_string(const std::string& path_str)
+	void upload_changes_job()
+	{
+		// Actually, only one resource here
+		utils::networking::process_item_recursively(
+			[=](const utils::networking::resource_t& resource, int resource_index, const utils::void_int_cb& on_result) {
+				return upload_changes(
+					[](int code) {
+						if (code != 0)
+						{
+							LOG("upload_changes() failed with error code: " << code);
+						}
+						else
+						{
+							g_app->set_timer(1, [](const vocabulary_core::app::timer_ptr& timer) {
+								upload_changes_job();
+							});
+						}
+					}
+					, resource
+						, resource_index
+					);
+			}
+			, g_resources_list
+			, 0
+		);
+	}
+
+	int upload_file(const fs::path& fpath)
+	{
+		LOG_DEBUG("upload_file(" << fpath.string() << ")");
+		return utils::http::upload_file(fpath.string(), g_ep, "/v/h.php");
+	}
+
+	auto backup_words()
+	{
+		auto cur_dt = utils::current_datetime("%02i-%02i-%02i-%03li");
+		auto new_fpath = fs::path(g_words_fpath.parent_path() / fs::path(utils::format_str("words-%s.txt", cur_dt.c_str())));
+		utils::file::copy(g_words_fpath, new_fpath);
+		upload_file(new_fpath);
+		return false;
+	};
+
+	int upload_words()
+	{
+		return upload_file(g_words_fpath);
+	}
+
+	auto get_words_path(const fs::path& path)
+	{
+		fs::path words_path = path.empty() ? utils::file::temp_directory_path() : path;
+		if (utils::file::exists(words_path))
+		{
+			if (utils::file::is_directory(words_path))
+				words_path /= words_fname_default;
+		}
+		else
+			if (!utils::file::is_file_path(words_path))
+				words_path /= words_fname_default;
+		return words_path;
+	};
+
+	auto get_words_path_by_string(const std::string& path_str)
+	{
+		return get_words_path(fs::path(path_str));
+	}
+}
+
+// Extern function definitoins
+// Used in utils/networking/sync_resources.h
+void ask_user(
+    const std::string& question
+    , const utils::void_bool_cb& on_answer
+    , const char* yes_btn_text_ptr
+    , const char* no_btn_text_ptr
+)
 {
-	return get_words_path(fs::path(path_str));
+	if (g_app)
+		g_app->ask_user(question, on_answer, yes_btn_text_ptr, no_btn_text_ptr);
+}
+
+int upload_changes(const utils::void_int_cb& on_result, const utils::networking::resource_t& resource, int resource_index, bool async, bool force) {
+	LOG("upload_changes()");
+	return utils::networking::upload_changes(g_ep, "/v/h.php", resource, resource_index
+		, [=, &resource](int code) {
+			return utils::networking::on_upload_changes(code, resource, resource_index, async, on_result);
+		}, force
+	);
+}
+
+void ask_line(
+	const std::string& msg
+	, const utils::void_string_bool_cb& on_answer
+	, const std::string& default_value
+	, const char* ok_btn_text
+	, const char* cancel_btn_text
+)
+{
+    if (g_app)
+        g_app->ask_line(msg, on_answer, default_value, ok_btn_text, cancel_btn_text);
+}
+
+void show_message(
+	const std::string& message
+	, const utils::void_cb& on_close
+	, const char* ok_btn_text
+)
+{
+	if (g_app)
+		g_app->show_message(message, on_close, ok_btn_text);
+}
+
+void request_auth(
+	const std::string& user_name
+	, const std::string& token
+	, const utils::void_int_cb& on_result
+)
+{
+	if (g_app)
+		g_app->request_auth(user_name, token, on_result);
 }
 
 namespace vocabulary_core
@@ -181,8 +234,8 @@ namespace vocabulary_core
 		LOG("load_words()");
 		g_words.load(g_words_fpath);
 		menu_manager().open_menu("main_menu");
-		set_timer(1, [self = this](const timer_ptr& timer) {
-			self->upload_changes_job();
+		set_timer(1, [](const timer_ptr& timer) {
+			upload_changes_job();
 		});
 	}
 
@@ -357,71 +410,6 @@ namespace vocabulary_core
 		on_path_selected(words_path, on_selected_result);
 	}
 
-	void app::sync_resources(const void_int_cb& cb)
-	{
-		LOG("sync_resources()");
-		return utils::networking::sync_resources(g_ep, "/v/s.php", "/v/h.php", g_resources_list
-			, [=](int code) {
-				if (code == 0)
-					load_words();
-				else
-					show_message("sync_resources() failed with error code: " + std::to_string(code));
-				if (cb)
-					cb(code);
-			});
-	}
-
-	void app::upload_changes(const void_int_cb& cb, bool force)
-	{
-		LOG("upload_changes()");
-		return utils::networking::upload_changes(g_ep, "/v/h.php", g_resources_list
-			, [=, self = this](int code) {
-				if (code != 0)
-				{
-					if (code == anp::http_client_interface::erc::newer_version_on_server)
-					{
-						self->ask_user(
-							"Couldn't upload your changes because there is a newer version on the server. Would you still like to upload your version and overwrite the changes on the server?"
-							, [=](bool yes) {
-								if (yes)
-									self->upload_changes(cb, true);
-								else
-								{
-									if (cb)
-										cb(code);
-								}
-							}
-						);
-					}
-					else
-					{
-						show_message("upload_changes() failed with error code: " + std::to_string(code));
-					}
-				}
-				else
-				{
-					if (cb)
-						cb(code);
-				}
-			}, force);
-	}
-
-	void app::upload_changes_job()
-	{
-		upload_changes([self = this](int code) {
-			if (code != 0)
-			{
-				LOG("upload_changes() failed with error code: " << code);
-			}
-			else
-			{
-				g_app->set_timer(1, [self](const vocabulary_core::app::timer_ptr& timer) {
-					self->upload_changes_job();
-				});
-			}
-		});
-	}
-
 	void app::register_menus()
 	{
 		auto mm = menu_manager();
@@ -445,8 +433,7 @@ namespace vocabulary_core
 		std::signal(SIGINT, [] (int sig) {
 			LOG_DEBUG("SIGINT raised");
 			// TODO: maybe not to do it?
-			if (g_app) // Because we can't capture anything in the lambda for std::signal
-				g_app->sync_resources();
+				sync_resources();
 			// TODO: pause?
 			g_app = nullptr;
 		});
@@ -468,7 +455,7 @@ namespace vocabulary_core
 				if (self->is_offline_mode())
 					return;
 
-				self->sync_resources([=](int code) {
+				sync_resources([=](int code) {
 					if (code != 0)
 						self->ask_user(
 							"Errors while syncing resources. Continue in offline mode?"

@@ -17,17 +17,13 @@ namespace vocabulary_core
 	public:
 		app(int argc, char* argv[]);
 		void request_auth(const std::string& user_name, const std::string& token, const utils::void_int_cb& on_result);
+		void load_words();
 
-		void upload_changes(const utils::void_int_cb& cb = nullptr, bool force = false); // Keep "force" the last argument for safety
-		
 	protected:
 		int init() override;
 
 	private:
 		void init_words(const utils::void_int_cb& on_result);
-		void load_words();
-		void sync_resources(const utils::void_int_cb& cb = nullptr);
-		void upload_changes_job();
 		void update_words_dir(const std::string& new_dir);
 		using opt_path_t = std::optional<fs::path>;
 		using on_path_selected_t = std::function<void(const opt_path_t&)>;
