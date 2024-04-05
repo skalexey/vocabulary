@@ -38,11 +38,9 @@ namespace vocabulary_core
 			if (i > 10)
 				continue;
 			std::string level_texture = level_texture_by_level(w.get_level());
-			auto word_row = library_window::word_row(&view());
+			auto& word_row = view().words_list.add();
 			word_row.knowledge_level.image->set_texture(level_texture);
 			// Image wrapper for proper size policy within the layout in Qt
-			word_row.knowledge_level.image_wrapper->set_size({16, 16});
-			word_row.knowledge_level.image->set_size({16, 16});
 			auto word_button = word_row.word;
 			word_button->set_text(w.get_value());
 			word_button->set_on_click([self = this, &w](bool up) {
@@ -105,6 +103,70 @@ namespace vocabulary_core
 					word_button->set_text(w.get_value());
 				return true;
 			});
+
+/*
+			// Extended version:
+			auto& word_row = view().words_list.add(w.get_value(), w.get_level(), [self = this, &w](bool up) {
+				auto dialog = self->app().menu_manager().current_menu().create<utils::ui::dialog>();
+				dialog->set_horizontal_alignment(utils::ui::widget::alignment::center);
+				dialog->set_vertical_alignment(utils::ui::widget::alignment::center);
+				dialog->set_title(w.get_value());
+				dialog->set_size_policy(widget::size_policy::automatic, widget::size_policy::automatic);
+				// TODO: use modal after supporting displaying modals on top of other modals
+				// dialog->set_modal(true);
+				auto word_input = self->create<text_input>(dialog.get());
+				word_input->set_value(w.get_value());
+				auto example_input = self->create<text_input>(dialog.get());
+				example_input->set_value(w.get_example());
+				auto translation_input = self->create<text_input>(dialog.get());
+				translation_input->set_value(w.get_translation());
+				auto store_button = self->create<button>(dialog.get());
+				store_button->set_text("Store");
+				store_button->set_enable_if([example_input, translation_input, word_input, &w]() {
+					return w.get_example() != example_input->get_value() || w.get_translation() != translation_input->get_value() || w.get_value() != word_input->get_value();
+				});
+				store_button->set_on_click([self = self, &w, example_input, translation_input, word_input](bool up) {
+					w.set_example(example_input->get_value());
+					w.set_translation(translation_input->get_value());
+					if (!w.set_value(word_input->get_value()))
+					{
+						self->app().show_message("Word '" + word_input->get_value() + "' already exists.");
+						return;
+					}
+					if (g_words.update_local_storage() == 0)
+						self->app().show_message("Word stored successfully");
+					else
+						self->app().show_message("Failed to store the word");
+				});
+				auto delete_button = self->create<button>(dialog.get());
+				delete_button->set_text("Delete");
+				delete_button->set_on_click([self, &w](bool up) {
+					self->app().ask_user("Are you sure you want to delete the word '" + w.get_value() + "'?", [self, &w](bool yes) {
+						if (yes)
+						{
+							g_words.list.erase(w.get_value());
+							if (g_words.update_local_storage() == 0)
+								self->app().show_message("Word '" + w.get_value() + "' deleted successfully");
+							else
+								self->app().show_message("Failed to delete the word");
+							self->close();
+						}
+					});
+				});
+				// The buttons are added automatically through the create() method (when no parent is passed, it takes this as parent)
+				// The dialog is shown automatically when it's created
+				auto close_button = self->create<button>(dialog.get());
+				close_button->set_text("Close");
+				close_button->set_on_click([dialog_ptr = dialog.get()](bool up) {
+					dialog_ptr->close();
+				});
+			});
+			word_row.word->add_on_update([word_button = word_row.word, i, &w](float dt) {
+				if (w.get_value() != word_button->get_text())
+					word_button->set_text(w.get_value());
+				return true;
+			});
+*/
 		}
 		return 0;
 	}

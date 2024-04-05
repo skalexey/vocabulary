@@ -1,13 +1,24 @@
+#include <string>
 #include <abstract_ui/app.h>
 #include <abstract_ui/widget.h>
 #include <abstract_ui/widgets/dialog.h>
 #include <abstract_ui/widgets/button.h>
 #include <abstract_ui/widgets/image.h>
 #include <abstract_ui/widgets/layouts/horizontal_layout.h>
-#include <utils/Log.h>
+#include <utils/log.h>
+#include "word.h"
 #include "ui/views/library_window.h"
 
 LOG_TITLE("library_window");
+
+namespace
+{
+	std::string level_texture_by_level(char level)
+	{
+		const int max_levels = 4;
+		return "knowledge_level_" + std::to_string(int(std::round((float(level) / word::level_max) * (max_levels - 1)))) + ".png";
+	}
+}
 
 namespace vocabulary_core
 {
@@ -25,9 +36,10 @@ namespace vocabulary_core
 
 	void library_window::knowledge_level_struct::init(utils::ui::node* owner)
 	{
-		image_wrapper = owner->create<utils::ui::widget>();
-		root = image_wrapper;
-		image = image_wrapper->create<utils::ui::image>();
+		root = owner->create<utils::ui::widget>();
+		image = root->create<utils::ui::image>();
+		image->set_size({ 16, 16 });
+		root->set_size({ 16, 16 });
 	}
 	
 	void library_window::word_row::init(utils::ui::node* owner)
@@ -36,5 +48,13 @@ namespace vocabulary_core
 		root = layout;
 		word = layout->create<button>();
 		knowledge_level.init(layout.get());
+	}
+
+	void library_window::word_row::init(utils::ui::node* owner, const std::string& value, char level, const std::function<void(bool)>& on_click)
+	{
+		init(owner);
+		word->set_text(value);
+		knowledge_level.image->set_texture(level_texture_by_level(level));
+		word->set_on_click(on_click);
 	}
 }
