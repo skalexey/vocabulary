@@ -140,7 +140,7 @@ namespace
 
 	auto get_words_path(const fs::path& path)
 	{
-		fs::path words_path = path.empty() ? utils::file::temp_directory_path() : path;
+		fs::path words_path = path.empty() ? vocabulary_core::app::app_data_dir_path : path;
 		if (utils::file::exists(words_path))
 		{
 			if (utils::file::is_directory(words_path))
@@ -214,6 +214,8 @@ void request_auth(
 
 namespace vocabulary_core
 {
+	fs::path app::app_data_dir_path = utils::file::app_data_directory_path("vocabulary");
+
 // App Definitions
 	app::app(int argc, char* argv[])
 		: base(argc, argv)
@@ -241,12 +243,12 @@ namespace vocabulary_core
 
 	void app::update_words_dir(const std::string& new_dir)
 	{
-		auto& content_data = m_cfg_model.GetContent().GetData();
-		if (fs::path(new_dir) == utils::file::temp_directory_path())
+		auto& content_data = m_cfg_model.Content().Data();
+		if (fs::path(new_dir) == app_data_dir_path)
 			content_data.Set(words_location_field_name, "");
 		else
 		{
-			if (content_data.Get(words_location_field_name).as<vl::String>().Val() != new_dir)
+			if (content_data.Get(words_location_field_name, "").as<vl::String>().Val() != new_dir)
 			{
 				content_data.Set(words_location_field_name, new_dir);
 				m_cfg_model.Store(cfg_path.string(), { true });
@@ -334,9 +336,9 @@ namespace vocabulary_core
 				}
 			}
 			, {
-				"Default (use system temporary directory)"
+				"Default (use app data directory)"
 				, [=] (bool up) {
-					callback(get_words_path(utils::file::temp_directory_path()));
+					callback(get_words_path(app_data_dir_path));
 					d->close();
 				}
 			}
@@ -368,10 +370,10 @@ namespace vocabulary_core
 			}
 		};
 
-		if (fs::canonical(path.parent_path()) != fs::canonical(utils::file::temp_directory_path().parent_path()))
+		if (fs::canonical(path.parent_path()) != fs::canonical(app_data_dir_path.parent_path()))
 		{
 			actions.push_back({
-				"Default (create a file in temp directory)"
+				"Default (create a file in app data directory)"
 				, [=](bool up) {
 					auto new_path = utils::file::temp_directory_path() / words_fname_default;
 					utils::file::create(new_path);
@@ -403,7 +405,7 @@ namespace vocabulary_core
 			on_result(0);
 		};
 
-		auto& words_location_var = m_cfg_model.GetContent().Get(words_location_field_name).as<vl::String>();
+		auto& words_location_var = m_cfg_model.Content().Data().Get<vl::String>(words_location_field_name, "");
 
 		auto words_path = get_words_path_by_string(words_location_var.Val());
 		
@@ -424,9 +426,10 @@ namespace vocabulary_core
 
 		LOG("init()");
 
-		identity_path = utils::file::temp_directory_path() / "vocabulary_identity.json";
-		cfg_path = utils::file::temp_directory_path() / "vocabulary_config.json";
-		def_cfg_path = utils::file::temp_directory_path() / "vocabulary_config_default.json";
+		identity_path = app_data_dir_path / "vocabulary_identity.json";
+		cfg_path = app_data_dir_path / "vocabulary_config.json";
+		def_cfg_path = app_data_dir_path / "vocabulary_config_default.json";
+		
 
 		g_app = this;
 
@@ -483,7 +486,7 @@ namespace vocabulary_core
 			auth([=](int result) {
 				if (result == 0)
 				{
-					self->show_hint(STR("Hello, " << identity_model_ptr->GetContent().GetData()["user"]["name"].as<vl::String>().Val() << "!"));
+					self->show_hint(STR("Hello, " << identity_model_ptr->Content().Data()["user"]["name"].as<vl::String>().Val() << "!"));
 					after_auth();
 				}
 				else

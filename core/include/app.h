@@ -6,8 +6,10 @@
 #include <abstract_ui/app.h>
 #include <abstract_ui/helpers/user_input.h>
 #include <utils/filesystem.h>
+#include <utils/file_utils.h>
 #include <utils/common.h>
 #include <DMBCore.h>
+
 namespace vocabulary_core
 {
 	class app : public virtual utils::ui::app, public utils::ui::user_input
@@ -15,6 +17,7 @@ namespace vocabulary_core
 		using base = utils::ui::app;
 
 	public:
+		static fs::path app_data_dir_path;
 		app(int argc, char* argv[]);
 		void request_auth(const std::string& user_name, const std::string& token, const utils::void_int_cb& on_result);
 		void load_words();
