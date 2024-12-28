@@ -7,7 +7,7 @@ function pre_build()
 	local log_prefix="-- [${folderName} pre_build.sh]: "
 	log_info "Pre-configuration"
 	configure_cmd="cmake ..$generatorArg$logArg$extraArg -DCMAKE_BUILD_TYPE=$buildConfig"
-	build_cmd="cmake --build ."
+	build_cmd="cmake --build . --config $buildConfig"
 	build="$build-$buildConfig"
 }
 
